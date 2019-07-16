@@ -2,11 +2,10 @@ package com.ian.junemon.spe_learning_mvvm.data.viewmodel.movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import com.ian.app.helper.util.retryIO
 import com.ian.junemon.spe_learning_mvvm.base.BaseViewModel
 import com.ian.junemon.spe_learning_mvvm.data.repo.movie.MovieRepository
 import com.ian.junemon.spe_learning_mvvm.model.MovieData
-import com.ian.junemon.spe_learning_mvvm.util.retryIO
 import kotlinx.coroutines.launch
 
 /**
@@ -17,7 +16,7 @@ Github = https://github.com/iandamping
 class MovieViewmodel(private val repo: MovieRepository) : BaseViewModel() {
 
     init {
-        viewModelScope.launch {
+        vmScopes.launch {
             retryIO { getPopularMovieAsync() }
         }
     }

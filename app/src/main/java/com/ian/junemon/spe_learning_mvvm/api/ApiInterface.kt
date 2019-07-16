@@ -1,7 +1,6 @@
 package com.ian.junemon.spe_learning_mvvm.api
 
 import com.ian.junemon.spe_learning_mvvm.model.*
-import com.ian.junemon.spe_learning_mvvm.util.MovieConstant
 import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.airingTodayTv
 import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.detailMovie
 import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.detailTv
@@ -48,10 +47,10 @@ interface ApiInterface {
     fun getAiringTodayTvAsync(@Query("api_key") apiKey: String): Deferred<GenericMovieModel<TvData>>
 
     @GET(onAirTv)
-     fun getOnAirTvAsync(@Query("api_key") apiKey: String): Deferred<GenericMovieModel<TvData>>
+    fun getOnAirTvAsync(@Query("api_key") apiKey: String): Deferred<GenericMovieModel<TvData>>
 
     @GET(popularTv)
-     fun getPopularTvAsync(@Query("api_key") apiKey: String): Deferred<GenericMovieModel<TvData>>
+    fun getPopularTvAsync(@Query("api_key") apiKey: String): Deferred<GenericMovieModel<TvData>>
 
     @GET("$detailTv{tv_id}")
     fun getDetailTvAsync(@Path("tv_id") tvId: Int, @Query("api_key") apiKey: String): Observable<DetailTvData>

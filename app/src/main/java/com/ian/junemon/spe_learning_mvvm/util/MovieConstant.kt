@@ -1,5 +1,9 @@
 package com.ian.junemon.spe_learning_mvvm.util
 
+import androidx.recyclerview.widget.DiffUtil
+import com.ian.junemon.spe_learning_mvvm.model.MovieData
+import com.ian.junemon.spe_learning_mvvm.model.TvData
+
 
 /**
  *
@@ -22,7 +26,6 @@ object MovieConstant {
     const val topRatedMovie = "movie/top_rated"
     const val upComingMovie = "movie/upcoming"
     const val similarMovie = "movie/"
-
 
 
     const val intentToDetailFromMovie = " intent detail movie"
@@ -48,5 +51,29 @@ object MovieConstant {
     const val initialDelay: Long = 100 // 0.1 second
     const val maxDelay: Long = 1000    // 1 second
     const val factor: Double = 2.0
+
+
+    val movieDiffCallbacks = object : DiffUtil.ItemCallback<MovieData>() {
+        override fun areItemsTheSame(oldItem: MovieData, newItem: MovieData): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: MovieData, newItem: MovieData): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+
+    val tvDiffCallbacks = object : DiffUtil.ItemCallback<TvData>() {
+        override fun areItemsTheSame(oldItem: TvData, newItem: TvData): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: TvData, newItem: TvData): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+
 
 }

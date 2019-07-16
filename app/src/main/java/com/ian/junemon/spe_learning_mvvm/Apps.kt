@@ -17,7 +17,7 @@ class Apps : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@Apps)
-            modules(listOf(networkMod, repositoryModule,allVmModule))
+            modules(listOf(networkMod, repositoryModule, allVmModule))
         }
     }
 }

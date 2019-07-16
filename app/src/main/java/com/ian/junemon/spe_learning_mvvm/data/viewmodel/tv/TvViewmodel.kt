@@ -2,13 +2,12 @@ package com.ian.junemon.spe_learning_mvvm.data.viewmodel.tv
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import com.ian.app.helper.util.computeDoubleResult
+import com.ian.app.helper.util.computeTripleResult
+import com.ian.app.helper.util.extractDeferred
 import com.ian.junemon.spe_learning_mvvm.base.BaseViewModel
 import com.ian.junemon.spe_learning_mvvm.data.repo.tv.TvRepository
 import com.ian.junemon.spe_learning_mvvm.model.TvData
-import com.ian.junemon.spe_learning_mvvm.util.computePairResult
-import com.ian.junemon.spe_learning_mvvm.util.computeResult
-import com.ian.junemon.spe_learning_mvvm.util.retryIO
 import kotlinx.coroutines.launch
 
 /**
@@ -19,42 +18,51 @@ Github = https://github.com/iandamping
 class TvViewmodel(private val repo: TvRepository) : BaseViewModel() {
 
     init {
-        viewModelScope.launch {
-            retryIO {
+        vmScopes.launch {
+            /*retryIO {
                 getConcurrentData()
                 getPopularMovieAsync()
-            }
+            }*/
+            getSingleData()
         }
     }
 
     /*Backer style*/
-    private val _multipledata = MutableLiveData<Pair<Pair<List<TvData>, List<TvData>>, List<TvData>>>()
-    private val _multiplePaireddata = MutableLiveData<Pair<List<TvData>, List<TvData>>>()
-    private val _tvData = MutableLiveData<List<TvData>>()
+    private val _tripleData = MutableLiveData<Triple<List<TvData>, List<TvData>, List<TvData>>>()
+    private val _pairdata = MutableLiveData<Pair<List<TvData>, List<TvData>>>()
+    private val _singleData = MutableLiveData<List<TvData>>()
 
-    val multipleData: LiveData<Pair<Pair<List<TvData>, List<TvData>>, List<TvData>>>
-        get() = _multipledata
+    val tripleData: LiveData<Triple<List<TvData>, List<TvData>, List<TvData>>>
+        get() = _tripleData
 
-    val multiplePairredData:LiveData<Pair<List<TvData>, List<TvData>>>
-        get() = _multiplePaireddata
+    val pairData: LiveData<Pair<List<TvData>, List<TvData>>>
+        get() = _pairdata
 
-    val tvData: LiveData<List<TvData>>
-        get() = _tvData
+    val singleData: LiveData<List<TvData>>
+        get() = _singleData
 
 
     /*Coroutine way to get concurrent call*/
-    private suspend fun getConcurrentData() {
+    private suspend fun getTripleData() {
         val work1 = repo.getAiringTodayTvAsync()
         val work2 = repo.getOnAirTvAsync()
         val work3 = repo.getPopularTvAsync()
-        _multipledata.value = computeResult(work1.await().results, work2.await().results, work3.await().results)
+        _tripleData.value = computeTripleResult(work1.await().results, work2.await().results, work3.await().results)
     }
 
-    private suspend fun getPopularMovieAsync() {
+    private suspend fun getDoubleData() {
         val work1 = repo.getPopularTvAsync()
         val work2 = repo.getOnAirTvAsync()
-        _multiplePaireddata.value = computePairResult(work1.await().results, work2.await().results)
+        _pairdata.value = computeDoubleResult(work1.await().results, work2.await().results)
 
+    }
+
+    private fun getSingleData() {
+        vmScopes.extractDeferred {
+            repo.getPopularTvAsync().apply {
+                _singleData.value = this.await().results
+            }
+        }
     }
 
 
