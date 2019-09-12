@@ -11,21 +11,7 @@ Created by Ian Damping on 24/06/2019.
 Github = https://github.com/iandamping
  */
 object MovieConstant {
-    const val imageFormatter = "https://image.tmdb.org/t/p/w500"
-    const val popularMovie = "movie/popular"
-    const val searchMovie = "search/movie"
-    const val detailMovie = "movie/"
-    const val popularTv = "tv/popular"
-    const val searchTvShows = "search/tv"
-    const val detailTv = "tv/"
-    const val similarTv = "tv/"
-    const val topRatedTv = "tv/top_rated"
-    const val airingTodayTv = "tv/airing_today"
-    const val onAirTv = "tv/on_the_air"
-    const val nowPlayingMovie = "movie/now_playing"
-    const val topRatedMovie = "movie/top_rated"
-    const val upComingMovie = "movie/upcoming"
-    const val similarMovie = "movie/"
+
 
 
     const val intentToDetailFromMovie = " intent detail movie"

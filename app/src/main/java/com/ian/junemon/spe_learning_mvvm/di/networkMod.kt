@@ -3,7 +3,6 @@ package com.ian.junemon.spe_learning_mvvm.di
 import com.google.gson.GsonBuilder
 import com.ian.junemon.spe_learning_mvvm.BuildConfig.baseUrl
 import com.ian.junemon.spe_learning_mvvm.api.ApiInterface
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -44,8 +43,6 @@ private fun createOkHttpClient(): OkHttpClient {
 
 private inline fun <reified T> createClient(okHttpClient: OkHttpClient): T {
     val retrofit = Retrofit.Builder()
-        .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
-//            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
         .baseUrl(baseUrl)

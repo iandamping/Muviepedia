@@ -2,6 +2,7 @@ package com.ian.junemon.spe_learning_mvvm.data.repo.tv
 
 import com.ian.junemon.spe_learning_mvvm.BuildConfig.movieApiKey
 import com.ian.junemon.spe_learning_mvvm.api.ApiInterface
+import com.ian.junemon.spe_learning_mvvm.model.DetailTvData
 import com.ian.junemon.spe_learning_mvvm.model.GenericMovieModel
 import com.ian.junemon.spe_learning_mvvm.model.TvData
 import kotlinx.coroutines.Deferred
@@ -13,8 +14,12 @@ Github = https://github.com/iandamping
  */
 class TvRepository(private val api: ApiInterface) {
 
-    fun getPopularTvAsync(): Deferred<GenericMovieModel<TvData>> {
+    suspend fun getPopularTvAsync(): GenericMovieModel<TvData> {
         return api.getPopularTvAsync(movieApiKey)
+    }
+
+    suspend fun getDetailTvAsync(tvId:Int): DetailTvData{
+        return api.getDetailTvAsync(tvId,movieApiKey)
     }
 
     fun getOnAirTvAsync(): Deferred<GenericMovieModel<TvData>> {

@@ -1,43 +1,47 @@
 package com.ian.junemon.spe_learning_mvvm.util
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ian.junemon.spe_learning_mvvm.base.MyKotlinAdapter
+import com.ian.app.helper.util.gone
+import com.ian.app.helper.util.visible
+import com.ian.junemon.spe_learning_mvvm.base.*
+
 
 /**
  *
 Created by Ian Damping on 06/07/2019.
 Github = https://github.com/iandamping
  */
-inline fun <reified T> T.logE(msg: String?) {
-    val tag = T::class.java.simpleName
-    Log.e(tag, msg)
-}
-
-fun ViewGroup.inflates(layout: Int): View {
-    return LayoutInflater.from(context).inflate(layout, this, false)
-}
-
-fun <T> RecyclerView.setUpVertical(
+fun <T> RecyclerView.setUpVerticalListAdapterWithSlideLeft(
     items: List<T>?,
     diffUtil: DiffUtil.ItemCallback<T>,
     layoutResId: Int,
     bindHolder: View.(T) -> Unit,
     itemClick: T.() -> Unit = {},
+    blocks: (T) -> Unit = {},
     manager: RecyclerView.LayoutManager = LinearLayoutManager(this.context)
-): MyKotlinAdapter<T>? {
+): MyKotlinListWithSlideAdapter<T>? {
     return if (items != null) {
-        val adapter = MyKotlinAdapter(layoutResId, { bindHolder(it) }, diffUtil, { itemClick() }).apply {
+        val adapter = MyKotlinListWithSlideAdapter(layoutResId,
+            { bindHolder(it) }, diffUtil, blocks, { itemClick() }).apply {
             layoutManager = manager
             adapter = this
         }
+        val itemTouchHelper = ItemTouchHelper(MySwipeToDelete(this.context))
+        itemTouchHelper.attachToRecyclerView(this)
         adapter.submitList(items)
         return adapter
     } else null
 
 }
+
