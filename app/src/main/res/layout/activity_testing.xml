@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="java.util.List" />
+
+        <variable
+            name="uiState"
+            type="com.ian.junemon.spe_learning_mvvm.data.viewmodel.tv.TvViewmodel" />
+
+        <variable
+            name="listData"
+            type="List&lt;com.ian.junemon.spe_learning_mvvm.model.TvData&gt;" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.MainActivity">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:UiState="@{uiState.uiState}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <include layout="@layout/item_shimmer" />
+
+                <include layout="@layout/item_shimmer" />
+
+                <include layout="@layout/item_shimmer" />
+
+                <include layout="@layout/item_shimmer" />
+
+                <include layout="@layout/item_shimmer" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:UiState="@{uiState.uiState}"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Error boy" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            app:UiState="@{uiState.uiState}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--android:visibility="@{listData.size > 0 ? View.VISIBLE : View.GONE }"-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

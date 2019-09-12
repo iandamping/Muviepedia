@@ -7,7 +7,7 @@ Github = https://github.com/iandamping
 object ConfigKey {
     const val movie_api_key = "\"9986464dc7ff8e83569e65a98dc7b3b6\""
     const val base_url = "\"https://api.themoviedb.org/3/\""
-    const val imageFormatter = "\"https://image.tmdb.org/t/p/w500\""
+    const val imageFormatter = "\"http://image.tmdb.org/t/p/w500\""
     const val popularMovie = "\"movie/popular\""
     const val searchMovie = "\"search/movie\""
     const val detailMovie = "\"movie/\""

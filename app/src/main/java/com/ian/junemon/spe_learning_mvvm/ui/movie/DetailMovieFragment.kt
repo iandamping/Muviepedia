@@ -1,4 +1,4 @@
-package com.ian.junemon.spe_learning_mvvm.ui.detail
+package com.ian.junemon.spe_learning_mvvm.ui.movie
 
 
 import android.os.Bundle
@@ -18,7 +18,7 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class DetailFragment : Fragment() {
+class DetailMovieFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

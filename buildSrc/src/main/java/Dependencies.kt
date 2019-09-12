@@ -1,5 +1,6 @@
 import AndroidXVersions.appCompatVer
 import AndroidXVersions.buildToolsVersion
+import AndroidXVersions.cirlceIndicatorRelexVer
 import AndroidXVersions.commonHelperVer
 import AndroidXVersions.constraintLayoutVer
 import AndroidXVersions.coreVer
@@ -60,7 +61,7 @@ object AndroidXVersions {
     const val espressoCoreVer = "3.3.0-alpha02"
     const val appCompatVer = "1.1.0-rc01"
     const val coreVer = "1.2.0-alpha03"
-    const val constraintLayoutVer = "1.1.3"
+    const val constraintLayoutVer = "2.0.0-beta2"
     const val materialVer = "material:1.0.0"
     const val retrofitVer = "2.6.0"
     const val okHttp3Ver = "3.12.0"
@@ -73,6 +74,7 @@ object AndroidXVersions {
     const val lottiVer = "3.0.7"
     const val navigationVer = "2.1.0"
     const val shimmerVer = "0.5.0"
+    const val cirlceIndicatorRelexVer = "1.2.2@aar"
     const val legacySupport = "1.0.0"
 }
 
@@ -155,6 +157,7 @@ object TestLibraries {
 object CustomLibraries {
     const val recyclerHelperStdLib = "com.github.iandamping:RecyclerViewHelper:$recyckerHelperVer"
     const val commonHelperStdLib = "com.github.iandamping:CommonHelper:$commonHelperVer"
+    const val cirlceIndicatorStdLib = "me.relex:circleindicator:$cirlceIndicatorRelexVer"
 }
 
 object ShimmerLibrary{

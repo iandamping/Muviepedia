@@ -22,12 +22,16 @@ class TvRepository(private val api: ApiInterface) {
         return api.getDetailTvAsync(tvId,movieApiKey)
     }
 
-    fun getOnAirTvAsync(): Deferred<GenericMovieModel<TvData>> {
+    suspend fun getOnAirTvAsync(): GenericMovieModel<TvData> {
         return api.getOnAirTvAsync(movieApiKey)
     }
 
-    fun getAiringTodayTvAsync(): Deferred<GenericMovieModel<TvData>> {
+    suspend fun getAiringTodayTvAsync(): GenericMovieModel<TvData> {
         return api.getAiringTodayTvAsync(movieApiKey)
+    }
+
+    suspend fun getSearchTvShowAsync(query:String): GenericMovieModel<TvData> {
+        return api.getSearchTvShowAsync(movieApiKey,query)
     }
 
 

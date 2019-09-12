@@ -61,6 +61,7 @@ dependencies {
     implementation(CoroutineLibraries.coroutineStdLib)
     implementation(CustomLibraries.commonHelperStdLib)
     implementation(CustomLibraries.recyclerHelperStdLib)
+    implementation(CustomLibraries.cirlceIndicatorStdLib)
     implementation(KoinLibraries.koinStdLib)
     implementation(LifecycleLibraries.lifecycleLib)
     kapt(LifecycleLibraries.lifecycleCompilerStdLib)

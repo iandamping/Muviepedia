@@ -2,9 +2,9 @@ package com.ian.junemon.spe_learning_mvvm.data.repo.movie
 
 import com.ian.junemon.spe_learning_mvvm.BuildConfig.movieApiKey
 import com.ian.junemon.spe_learning_mvvm.api.ApiInterface
+import com.ian.junemon.spe_learning_mvvm.model.DetailMovieData
 import com.ian.junemon.spe_learning_mvvm.model.GenericMovieModel
 import com.ian.junemon.spe_learning_mvvm.model.MovieData
-import kotlinx.coroutines.Deferred
 
 /**
  *
@@ -13,8 +13,23 @@ Github = https://github.com/iandamping
  */
 class MovieRepository(private val api: ApiInterface) {
 
-    /*Coroutine way*/
-    fun getPopularMovieAsync(): Deferred<GenericMovieModel<MovieData>> {
+    suspend fun getPopularMovieAsync(): GenericMovieModel<MovieData> {
         return api.getPopularMovieAsync(movieApiKey)
+    }
+
+    suspend fun getNowPlayingMovieAsync(): GenericMovieModel<MovieData> {
+        return api.getNowPlayingMovieAsync(movieApiKey)
+    }
+
+    suspend fun getUpComingMovieAsync(): GenericMovieModel<MovieData> {
+        return api.getUpComingMovieAsync(movieApiKey)
+    }
+
+    suspend fun getDetailMovieAsync(movieId: Int): DetailMovieData {
+        return api.getDetailMovieAsync(movieId, movieApiKey)
+    }
+
+    suspend fun getSearchMovieAsync(querry: String): GenericMovieModel<MovieData> {
+        return api.getSearchMovieAsync(querry, movieApiKey)
     }
 }

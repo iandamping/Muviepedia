@@ -19,7 +19,7 @@ class TvViewmodel(private val repo: TvRepository) : BaseViewModel() {
         setBaseUiState(Loading)
     }
 
-    val singleListData = liveData {
+    val popularTv = liveData {
         try {
             val data = repo.getPopularTvAsync().results
             when (data.isEmpty()) {
@@ -37,7 +37,7 @@ class TvViewmodel(private val repo: TvRepository) : BaseViewModel() {
         }
     }
 
-    fun singleDetailData(tvId: Int?) = liveData {
+    fun detailTvData(tvId: Int?) = liveData {
         if (tvId != null) {
             try {
                 val data = repo.getDetailTvAsync(tvId)

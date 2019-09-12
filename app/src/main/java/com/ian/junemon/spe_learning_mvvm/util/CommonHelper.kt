@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.visible
 import com.ian.junemon.spe_learning_mvvm.base.*
+import com.ian.junemon.spe_learning_mvvm.model.MovieData
+import com.ian.junemon.spe_learning_mvvm.model.TvData
 
 
 /**
@@ -45,3 +47,23 @@ fun <T> RecyclerView.setUpVerticalListAdapterWithSlideLeft(
 
 }
 
+
+val movieAdapterCallback = object : DiffUtil.ItemCallback<MovieData>() {
+    override fun areItemsTheSame(oldItem: MovieData, newItem: MovieData): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: MovieData, newItem: MovieData): Boolean {
+        return oldItem == newItem
+    }
+}
+
+val tvAdapterCallback = object : DiffUtil.ItemCallback<TvData>() {
+    override fun areItemsTheSame(oldItem: TvData, newItem: TvData): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: TvData, newItem: TvData): Boolean {
+        return oldItem == newItem
+    }
+}

@@ -1,10 +1,7 @@
 package com.ian.junemon.spe_learning_mvvm.api
 
 import com.ian.junemon.spe_learning_mvvm.BuildConfig.*
-import com.ian.junemon.spe_learning_mvvm.model.DetailTvData
-import com.ian.junemon.spe_learning_mvvm.model.GenericMovieModel
-import com.ian.junemon.spe_learning_mvvm.model.MovieData
-import com.ian.junemon.spe_learning_mvvm.model.TvData
+import com.ian.junemon.spe_learning_mvvm.model.*
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -19,28 +16,27 @@ interface ApiInterface {
     /*Movie Session*/
 
     @GET(popularMovie)
-    fun getPopularMovieAsync(@Query("api_key") apiKey: String): Deferred<GenericMovieModel<MovieData>>
+    suspend fun getPopularMovieAsync(@Query("api_key") apiKey: String): GenericMovieModel<MovieData>
 
     @GET(nowPlayingMovie)
-    fun getNowPlayingMovieAsync(@Query("api_key") apiKey: String): Deferred<GenericMovieModel<MovieData>>
+    suspend fun getNowPlayingMovieAsync(@Query("api_key") apiKey: String): GenericMovieModel<MovieData>
 
     @GET(upComingMovie)
-    fun getUpComingMovieAsync(@Query("api_key") apiKey: String): Deferred<GenericMovieModel<MovieData>>
+    suspend fun getUpComingMovieAsync(@Query("api_key") apiKey: String): GenericMovieModel<MovieData>
 
+    @GET("$detailMovie{movie}")
+    suspend fun getDetailMovieAsync(@Path("movie") movieId: Int, @Query("api_key") apiKey: String): DetailMovieData
 
-//    @GET("$detailMovie{movie}")
-//    fun getDetailMovieAsync(@Path("movie") movieId: Int, @Query("api_key") apiKey: String): Observable<DetailMovieData>
-//
-//    @GET(searchMovie)
-//    fun getSearchMovieAsync(@Query("api_key") apiKey: String, @Query("query") searchMovie: String): Observable<GenericMovieModel<MovieData>>
+    @GET(searchMovie)
+    suspend fun getSearchMovieAsync(@Query("api_key") apiKey: String, @Query("query") searchMovie: String): GenericMovieModel<MovieData>
 
     /*Tv Session*/
 
     @GET(airingTodayTv)
-    fun getAiringTodayTvAsync(@Query("api_key") apiKey: String): Deferred<GenericMovieModel<TvData>>
+    suspend fun getAiringTodayTvAsync(@Query("api_key") apiKey: String): GenericMovieModel<TvData>
 
     @GET(onAirTv)
-    fun getOnAirTvAsync(@Query("api_key") apiKey: String): Deferred<GenericMovieModel<TvData>>
+    suspend fun getOnAirTvAsync(@Query("api_key") apiKey: String): GenericMovieModel<TvData>
 
     @GET(popularTv)
     suspend fun getPopularTvAsync(@Query("api_key") apiKey: String): GenericMovieModel<TvData>
@@ -48,7 +44,7 @@ interface ApiInterface {
     @GET("$detailTv{tv_id}")
     suspend fun getDetailTvAsync(@Path("tv_id") tvId: Int, @Query("api_key") apiKey: String): DetailTvData
 
-//    @GET(searchTvShows)
-//    fun getSearchTvShowAsync(@Query("api_key") apiKey: String, @Query("query") searchMovie: String): Observable<GenericMovieModel<MovieData>>
+    @GET(searchTvShows)
+    suspend fun getSearchTvShowAsync(@Query("api_key") apiKey: String, @Query("query") searchMovie: String): GenericMovieModel<TvData>
 
 }
