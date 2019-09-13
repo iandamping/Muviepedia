@@ -30,6 +30,9 @@ interface ApiInterface {
     @GET(searchMovie)
     suspend fun getSearchMovieAsync(@Query("api_key") apiKey: String, @Query("query") searchMovie: String): GenericMovieModel<MovieData>
 
+    @GET("$similarMovie{movie_id}/similar")
+    suspend fun getSimilarMovieAsync(@Path("movie_id") movieId: Int, @Query("api_key") apiKey: String): GenericMovieModel<MovieData>
+
     /*Tv Session*/
 
     @GET(airingTodayTv)

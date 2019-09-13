@@ -31,8 +31,28 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:layout_width="match_parent"
+                        app:UiState="@{movieViewmodel.uiState}"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <include layout="@layout/shimmer_recycler_bg" />
+
+
+                        </LinearLayout>
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
                     <androidx.viewpager.widget.ViewPager
                         android:id="@+id/vpNowPlaying"
+                        app:UiState="@{movieViewmodel.uiState}"
                         android:layout_width="match_parent"
                         android:layout_height="200dp" />
 

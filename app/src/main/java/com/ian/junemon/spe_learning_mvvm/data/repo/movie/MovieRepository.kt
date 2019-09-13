@@ -29,6 +29,10 @@ class MovieRepository(private val api: ApiInterface) {
         return api.getDetailMovieAsync(movieId, movieApiKey)
     }
 
+    suspend fun getSimilarMovieAsync(movieId: Int): GenericMovieModel<MovieData> {
+        return api.getSimilarMovieAsync(movieId, movieApiKey)
+    }
+
     suspend fun getSearchMovieAsync(querry: String): GenericMovieModel<MovieData> {
         return api.getSearchMovieAsync(querry, movieApiKey)
     }

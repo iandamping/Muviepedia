@@ -12,8 +12,9 @@ Github = https://github.com/iandamping
 abstract class BaseViewModel : ViewModel() {
     /*Shared viewModelScope*/
     protected val vmScopes = viewModelScope
-    protected val baseUiState:MutableLiveData<UiState> = MutableLiveData()
 
+    /*Still need to check state with livedata*/
+    protected val baseUiState:MutableLiveData<UiState> = MutableLiveData()
     protected fun setBaseUiState(state:UiState){
         baseUiState.value = state
     }

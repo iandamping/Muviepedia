@@ -6,5 +6,17 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.ui.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_detailMovieFragment"
+            app:destination="@id/detailMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailMovieFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.ui.movie.DetailMovieFragment"
+        android:label="DetailMovieFragment" >
+        <argument
+            android:name="movieID"
+            app:argType="integer" />
+    </fragment>
 </navigation>

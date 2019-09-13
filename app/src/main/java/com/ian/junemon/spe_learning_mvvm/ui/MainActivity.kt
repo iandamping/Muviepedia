@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.ian.app.helper.util.fullScreenAnimation
+import com.ian.app.helper.util.gone
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.databinding.ActivityMainBinding
 
@@ -14,7 +15,8 @@ class MainActivity : AppCompatActivity() {
         fullScreenAnimation()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
-        binding.toolbar.title = " Spe learn coroutine"
+        binding.toolbar.gone()
+//        binding.toolbar.title = " Spe learn coroutine"
     }
 
 

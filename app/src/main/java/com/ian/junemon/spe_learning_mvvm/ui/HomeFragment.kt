@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.ian.app.helper.util.loadWithGlide
 import com.ian.junemon.spe_learning_mvvm.BuildConfig.imageFormatter
 import com.ian.junemon.spe_learning_mvvm.R
@@ -22,6 +23,7 @@ class HomeFragment : Fragment() {
 
     private val vm: MovieViewmodel by viewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        vm.workConcurrents()
         val binding: FragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         consumeData(binding)
         binding.movieViewmodel = vm
@@ -30,17 +32,21 @@ class HomeFragment : Fragment() {
     }
 
     private fun consumeData(binding: FragmentHomeBinding) {
-        vm.concurentData.observe(this@HomeFragment, Observer { movieData ->
+        vm.concurentData.observe(this@HomeFragment.viewLifecycleOwner, Observer { movieData ->
             binding.apply {
                 vpNowPlaying.adapter = SliderMovieAdapter(movieData.first)
                 indicator.setViewPager(binding.vpNowPlaying)
                 rvPopularMovie.setUpHorizontal(movieData.second, R.layout.item_movie, {
                     ivHomeMovie.loadWithGlide(imageFormatter + it.poster_path)
                     tvHomeMovieName.text = it.original_title
+                },{
+                    if (id!=null) Navigation.findNavController(this@apply.root).navigate(HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(id!!))
                 })
                 rvUpComingMovie.setUpHorizontal(movieData.third, R.layout.item_movie, {
                     ivHomeMovie.loadWithGlide(imageFormatter + it.poster_path)
                     tvHomeMovieName.text = it.original_title
+                },{
+                    if (id!=null) Navigation.findNavController(this@apply.root).navigate(HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(id!!))
                 })
             }
 
