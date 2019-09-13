@@ -74,6 +74,7 @@ dependencies {
     implementation(NetworkingLibraries.gsonStdLib)
     implementation(LottieLibrary.lottieStdLib)
     implementation(ShimmerLibrary.shimmerStdLib)
+    implementation(PagingLibrary.pagingStdLib)
     implementation(NavigationLibraies.navigationStdLib)
     implementation(NavigationLibraies.navigationUiStdLib)
     implementation(NavigationLibraies.legacySupportStdLib)

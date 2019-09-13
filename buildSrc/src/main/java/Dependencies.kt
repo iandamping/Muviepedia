@@ -27,6 +27,7 @@ import AndroidXVersions.multidexVer
 import AndroidXVersions.navigationVer
 import AndroidXVersions.okHttp3LogginInterceptorVer
 import AndroidXVersions.okHttp3Ver
+import AndroidXVersions.pagingRuntimeVer
 import AndroidXVersions.recyckerHelperVer
 import AndroidXVersions.retrofitVer
 import AndroidXVersions.roomVer
@@ -43,6 +44,7 @@ Github = https://github.com/iandamping
 object AndroidXVersions {
     const val buildToolsVersion = "3.4.2"
     const val kotlinVer = "1.3.50"
+    const val pagingRuntimeVer = "1.0.1"
     const val coroutineVer = "1.1.1"
     const val commonHelperVer = "0.0.15-alpha02"
     const val recyckerHelperVer = "0.0.5-alpha02"
@@ -162,6 +164,10 @@ object CustomLibraries {
 
 object ShimmerLibrary{
     const val shimmerStdLib = "com.facebook.shimmer:shimmer:$shimmerVer"
+}
+
+object PagingLibrary{
+    const val pagingStdLib = "android.arch.paging:runtime:$pagingRuntimeVer"
 }
 
 object FirebaseLibraries{

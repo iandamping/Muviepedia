@@ -13,7 +13,7 @@ import com.ian.junemon.spe_learning_mvvm.R
 Created by Ian Damping on 30/07/2019.
 Github = https://github.com/iandamping
  */
-class MySwipeToDelete(context:Context,private val blocks:()-> Unit= {}): ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+class MySwipeToDelete(context: Context, private val blocks: () -> Unit = {}) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
     private val clearPaint = Paint().apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
     private val backgroundColor = Color.parseColor("#f44336")
     private val background = ColorDrawable()
@@ -21,22 +21,22 @@ class MySwipeToDelete(context:Context,private val blocks:()-> Unit= {}): ItemTou
     private val intrinsicWidth = deleteIcon?.intrinsicWidth
     private val intrinsicHeight = deleteIcon?.intrinsicHeight
 
-        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-            return false
-        }
+    override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+        return false
+    }
 
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            blocks.invoke()
-        }
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        blocks.invoke()
+    }
 
     override fun onChildDraw(
-        c: Canvas,
-        recyclerView: RecyclerView,
-        viewHolder: RecyclerView.ViewHolder,
-        dX: Float,
-        dY: Float,
-        actionState: Int,
-        isCurrentlyActive: Boolean
+            c: Canvas,
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            dX: Float,
+            dY: Float,
+            actionState: Int,
+            isCurrentlyActive: Boolean
     ) {
 
         val itemView = viewHolder.itemView
@@ -55,7 +55,7 @@ class MySwipeToDelete(context:Context,private val blocks:()-> Unit= {}): ItemTou
         background.draw(c)
 
         // Calculate position of delete icon
-        if (intrinsicWidth!=null &&intrinsicHeight!=null ){
+        if (intrinsicWidth != null && intrinsicHeight != null) {
             val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
             val deleteIconMargin = (itemHeight - intrinsicHeight) / 2
             val deleteIconLeft = itemView.right - deleteIconMargin - intrinsicWidth

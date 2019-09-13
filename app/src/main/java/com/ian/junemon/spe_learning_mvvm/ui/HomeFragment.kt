@@ -14,8 +14,8 @@ import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.data.viewmodel.movie.MovieViewmodel
 import com.ian.junemon.spe_learning_mvvm.databinding.FragmentHomeBinding
 import com.ian.junemon.spe_learning_mvvm.ui.slider.SliderMovieAdapter
+import com.ian.junemon.spe_learning_mvvm.util.MovieConstant
 import com.ian.recyclerviewhelper.helper.setUpHorizontal
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.item_movie.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -39,15 +39,24 @@ class HomeFragment : Fragment() {
                 rvPopularMovie.setUpHorizontal(movieData.second, R.layout.item_movie, {
                     ivHomeMovie.loadWithGlide(imageFormatter + it.poster_path)
                     tvHomeMovieName.text = it.original_title
-                },{
-                    if (id!=null) Navigation.findNavController(this@apply.root).navigate(HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(id!!))
+                }, {
+                    if (id != null) Navigation.findNavController(this@apply.root).navigate(HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(id!!))
                 })
                 rvUpComingMovie.setUpHorizontal(movieData.third, R.layout.item_movie, {
                     ivHomeMovie.loadWithGlide(imageFormatter + it.poster_path)
                     tvHomeMovieName.text = it.original_title
-                },{
-                    if (id!=null) Navigation.findNavController(this@apply.root).navigate(HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(id!!))
+                }, {
+                    if (id != null) Navigation.findNavController(this@apply.root).navigate(HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(id!!))
                 })
+
+                tvSeeAllPopularMovie.setOnClickListener {
+                    Navigation.findNavController(this@apply.root).navigate(HomeFragmentDirections.actionHomeFragmentToPaginationFragment(MovieConstant.popularPagingState))
+                }
+
+                tvSeeAllUpComingMovie.setOnClickListener {
+                    Navigation.findNavController(this@apply.root).navigate(HomeFragmentDirections.actionHomeFragmentToPaginationFragment(MovieConstant.upcomingPagingState))
+
+                }
             }
 
         })

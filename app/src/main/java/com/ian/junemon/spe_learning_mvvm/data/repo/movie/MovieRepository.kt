@@ -36,4 +36,17 @@ class MovieRepository(private val api: ApiInterface) {
     suspend fun getSearchMovieAsync(querry: String): GenericMovieModel<MovieData> {
         return api.getSearchMovieAsync(querry, movieApiKey)
     }
+
+    /*Paging session*/
+    suspend fun getNowPlayingMoviePagingAsync(pageMovie: Int): GenericMovieModel<MovieData> {
+        return api.pagingGetNowPlayingMovieMovieAsync(movieApiKey, pageMovie)
+    }
+
+    suspend fun getPopularMoviePagingAsync(pageMovie: Int): GenericMovieModel<MovieData> {
+        return api.pagingGetPopularMovieAsync(movieApiKey, pageMovie)
+    }
+
+    suspend fun getUpComingMoviePagingAsync(pageMovie: Int): GenericMovieModel<MovieData> {
+        return api.pagingGetUpComingMovieAsync(movieApiKey, pageMovie)
+    }
 }

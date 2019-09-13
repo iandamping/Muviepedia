@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 
 class MyKotlinListWithSlideAdapter<T>(layout: Int, private val bindHolder: View.(T) -> Unit,
                                       diffUtil: DiffUtil.ItemCallback<T>,
-                                      private val blocks:(T)->Unit ={},
+                                      private val blocks: (T) -> Unit = {},
                                       private val itemClicks: T.() -> Unit
 ) : MyAbstractAdapter<T>(layout, diffUtil, itemClicks) {
 

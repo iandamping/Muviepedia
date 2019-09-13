@@ -29,7 +29,7 @@ fun setUiStateForLoading(progressView: ShimmerFrameLayout, state: UiState) {
             }
         }
 
-        NoData ->{
+        NoData -> {
             if (progressView.isShimmerStarted && progressView.isShimmerVisible) {
                 progressView.stopShimmer()
                 progressView.hideShimmer()
@@ -68,6 +68,6 @@ fun setUiStateForError(view: TextView, state: UiState) {
 }
 
 @BindingAdapter("loadImageHelper")
-fun loadImageHelper(view:ImageView, url:String?){
-    if (url!=null) view.loadWithGlide(url)
+fun loadImageHelper(view: ImageView, url: String?) {
+    if (url != null) view.loadWithGlide(url)
 }

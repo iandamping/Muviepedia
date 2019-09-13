@@ -14,8 +14,10 @@ abstract class BaseViewModel : ViewModel() {
     protected val vmScopes = viewModelScope
 
     /*Still need to check state with livedata*/
-    protected val baseUiState:MutableLiveData<UiState> = MutableLiveData()
-    protected fun setBaseUiState(state:UiState){
+    protected val baseUiState: MutableLiveData<UiState> = MutableLiveData()
+
+    protected fun setBaseUiState(state: UiState) {
         baseUiState.value = state
     }
+
 }

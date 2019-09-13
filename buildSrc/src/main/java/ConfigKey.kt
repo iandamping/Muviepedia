@@ -20,6 +20,6 @@ object ConfigKey {
     const val onAirTv = "\"tv/on_the_air\""
     const val nowPlayingMovie = "\"movie/now_playing\""
     const val topRatedMovie = "\"movie/top_rated\""
-    const val upComingMovie = "\"movie/top_rated\""
+    const val upComingMovie = "\"movie/upcoming\""
     const val similarMovie = "\"movie/\""
 }

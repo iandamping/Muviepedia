@@ -14,9 +14,9 @@ Created by Ian Damping on 06/05/2019.
 Github = https://github.com/iandamping
  */
 abstract class MyAbstractAdapter<T>(
-    private val layout: Int,
-    diffUtil: DiffUtil.ItemCallback<T>,
-    private val clickListener: (T) -> Unit
+        private val layout: Int,
+        diffUtil: DiffUtil.ItemCallback<T>,
+        private val clickListener: (T) -> Unit
 ) : ListAdapter<T, MyAbstractAdapter.MyAbstractViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAbstractViewHolder {
@@ -34,7 +34,7 @@ abstract class MyAbstractAdapter<T>(
 
 
     class MyAbstractViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
-        LayoutContainer
+            LayoutContainer
 
 
 }

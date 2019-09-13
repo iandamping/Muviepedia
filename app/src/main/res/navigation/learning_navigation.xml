@@ -9,7 +9,14 @@
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_detailMovieFragment"
-            app:destination="@id/detailMovieFragment" />
+            app:destination="@id/detailMovieFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity" />
+        <action
+            android:id="@+id/action_homeFragment_to_paginationFragment"
+            app:destination="@id/paginationFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity" />
     </fragment>
     <fragment
         android:id="@+id/detailMovieFragment"
@@ -18,5 +25,25 @@
         <argument
             android:name="movieID"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_detailMovieFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity"
+            app:popUpTo="@+id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paginationFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.ui.movie.PaginationFragment"
+        android:label="PaginationFragment" >
+        <argument
+            android:name="movieType"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_paginationFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity"
+            app:popUpTo="@+id/homeFragment" />
     </fragment>
 </navigation>
