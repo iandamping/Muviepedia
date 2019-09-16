@@ -117,8 +117,8 @@ class MovieViewmodel(private val repo: MovieRepository) : BaseViewModel() {
     @ExperimentalCoroutinesApi
     @FlowPreview
     fun extractFlowData(data: String) = liveData {
-        searchKeywordFlow(data).debounce(500L).map { repo.getSearchMovieAsync(it) }.flatMapLatest {
-            resultOfFlow(it.results) }.collect{ stringFlow ->
+        searchKeywordFlow(data).debounce(200L).map { repo.getSearchMovieAsync(it) }.flatMapLatest {
+            resultOfFlow(it.results) }.collectLatest{ stringFlow ->
             emit(stringFlow)
         }
     }

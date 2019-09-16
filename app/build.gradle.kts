@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.android.build.gradle.internal.dsl.BuildType
 
 plugins {
@@ -22,20 +23,14 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-        getByName("debug") {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
+        initDebug(this@android)
+        initRelease(this@android)
         initBuildCondigField(this)
     }
 
     java {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_10
+        targetCompatibility = JavaVersion.VERSION_1_10
     }
     dataBinding {
         isEnabled = true
@@ -99,5 +94,19 @@ fun initBuildCondigField(data: NamedDomainObjectContainer<BuildType>) {
         it.buildConfigField("String", "topRatedMovie", ConfigKey.topRatedMovie)
         it.buildConfigField("String", "upComingMovie", ConfigKey.upComingMovie)
         it.buildConfigField("String", "similarMovie", ConfigKey.similarMovie)
+    }
+}
+
+fun NamedDomainObjectContainer<BuildType>.initDebug(proguard:BaseAppModuleExtension){
+    this.getByName("debug"){
+        isMinifyEnabled = false
+        proguardFiles(proguard.getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+    }
+}
+
+fun NamedDomainObjectContainer<BuildType>.initRelease(proguard:BaseAppModuleExtension){
+    this.getByName("release"){
+        isMinifyEnabled = false
+        proguardFiles(proguard.getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
 }
