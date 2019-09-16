@@ -40,9 +40,8 @@ class HomeFragment : Fragment() {
                     ivHomeMovie.loadWithGlide(imageFormatter + it.poster_path)
                     tvHomeMovieName.text = it.original_title
                 }, {
-//                    if (id != null) Navigation.findNavController(this@apply.root).navigate(HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(id!!))
-                     Navigation.findNavController(this@apply.root).navigate(HomeFragmentDirections.actionHomeFragmentToSearchFragment())
-                })
+                    if (id != null) Navigation.findNavController(this@apply.root).navigate(HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(id!!))
+                      })
                 rvUpComingMovie.setUpHorizontal(movieData.third, R.layout.item_movie, {
                     ivHomeMovie.loadWithGlide(imageFormatter + it.poster_path)
                     tvHomeMovieName.text = it.original_title
@@ -56,6 +55,10 @@ class HomeFragment : Fragment() {
 
                 tvSeeAllUpComingMovie.setOnClickListener {
                     Navigation.findNavController(this@apply.root).navigate(HomeFragmentDirections.actionHomeFragmentToPaginationFragment(MovieConstant.upcomingPagingState))
+
+                }
+                llSearch.setOnClickListener {
+                    Navigation.findNavController(this@apply.root).navigate(HomeFragmentDirections.actionHomeFragmentToSearchFragment())
 
                 }
             }
