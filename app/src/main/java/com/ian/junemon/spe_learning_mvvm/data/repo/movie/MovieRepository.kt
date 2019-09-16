@@ -34,7 +34,7 @@ class MovieRepository(private val api: ApiInterface) {
     }
 
     suspend fun getSearchMovieAsync(querry: String): GenericMovieModel<MovieData> {
-        return api.getSearchMovieAsync(querry, movieApiKey)
+        return api.getSearchMovieAsync(movieApiKey, querry)
     }
 
     /*Paging session*/

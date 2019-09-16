@@ -10,6 +10,9 @@ import com.ian.junemon.spe_learning_mvvm.base.*
 import com.ian.junemon.spe_learning_mvvm.data.repo.movie.MovieRepository
 import com.ian.junemon.spe_learning_mvvm.model.DetailMovieData
 import com.ian.junemon.spe_learning_mvvm.model.MovieData
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -21,7 +24,7 @@ Github = https://github.com/iandamping
 class MovieViewmodel(private val repo: MovieRepository) : BaseViewModel() {
 
     val uiState = ObservableField<UiState>(Loading)
-
+    val mutableEditText: MutableLiveData<String> = MutableLiveData()
     private val _concurentData: MutableLiveData<Triple<List<MovieData>, List<MovieData>, List<MovieData>>> = MutableLiveData()
     private val _concurentDetailData: MutableLiveData<Pair<DetailMovieData, List<MovieData>>> = MutableLiveData()
     val concurentDetailData: LiveData<Pair<DetailMovieData, List<MovieData>>>
@@ -102,5 +105,22 @@ class MovieViewmodel(private val repo: MovieRepository) : BaseViewModel() {
         }
     }
 
+
+    private fun searchKeywordFlow(data: String): Flow<String> = flow {
+        if (data != "") emit(data)
+    }
+
+    private fun resultOfFlow(data: List<MovieData>): Flow<List<MovieData>> = flow {
+        emit(data)
+    }
+
+    @ExperimentalCoroutinesApi
+    @FlowPreview
+    fun extractFlowData(data: String) = liveData {
+        searchKeywordFlow(data).debounce(500L).map { repo.getSearchMovieAsync(it) }.flatMapLatest {
+            resultOfFlow(it.results) }.collect{ stringFlow ->
+            emit(stringFlow)
+        }
+    }
 
 }

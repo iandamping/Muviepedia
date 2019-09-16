@@ -17,6 +17,9 @@
             app:destination="@id/paginationFragment"
             app:popEnterAnim="@anim/fade_in_activity"
             app:popExitAnim="@anim/fade_out_activity" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailMovieFragment"
@@ -45,5 +48,13 @@
             app:popEnterAnim="@anim/fade_in_activity"
             app:popExitAnim="@anim/fade_out_activity"
             app:popUpTo="@+id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.ui.movie.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>
