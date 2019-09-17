@@ -40,11 +40,10 @@ fun setUiStateForLoading(progressView: ShimmerFrameLayout, state: UiState) {
     }
 }
 
-@BindingAdapter("UiState")
+@BindingAdapter("UiNoDataState")
 fun setUiStateForNoData(view: View, state: UiState) {
     when (state) {
         NoData -> view.visible()
-        else -> view.gone()
     }
 }
 

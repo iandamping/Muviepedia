@@ -15,6 +15,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import kotlin.system.measureTimeMillis
 
 /**
  *
@@ -39,12 +40,12 @@ class MovieViewmodel(private val repo: MovieRepository) : BaseViewModel() {
                 val work1 = repo.getDetailMovieAsync(movieID)
                 val work2 = repo.getSimilarMovieAsync(movieID).results
                 val result = computeDoubleResult(work1, work2)
-                when {
-                    result.first != null -> {
-                        _concurentDetailData.value = result
-                        uiState.set(HasData)
-                    }
-                    result.second.isEmpty() -> uiState.set(NoData)
+                if (work2.isEmpty()) {
+                    uiState.set(NoData)
+                }
+                if (work1 != null) {
+                    _concurentDetailData.value = result
+                    uiState.set(HasData)
                 }
 
 
@@ -117,10 +118,15 @@ class MovieViewmodel(private val repo: MovieRepository) : BaseViewModel() {
     @ExperimentalCoroutinesApi
     @FlowPreview
     fun extractFlowData(data: String) = liveData {
-        searchKeywordFlow(data).debounce(200L).map { repo.getSearchMovieAsync(it) }.flatMapLatest {
-            resultOfFlow(it.results) }.collectLatest{ stringFlow ->
-            emit(stringFlow)
+        val time = measureTimeMillis {
+            searchKeywordFlow(data).debounce(200L).buffer().map { repo.getSearchMovieAsync(it) }.flatMapLatest {
+                resultOfFlow(it.results)
+            }.collectLatest { stringFlow ->
+                emit(stringFlow)
+            }
         }
+        println("finish in $time ms")
+
     }
 
 }

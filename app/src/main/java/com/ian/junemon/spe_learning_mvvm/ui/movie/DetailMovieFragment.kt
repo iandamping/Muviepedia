@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment
 import com.ian.app.helper.util.loadWithGlide
 import com.ian.junemon.spe_learning_mvvm.BuildConfig.imageFormatter
 import com.ian.junemon.spe_learning_mvvm.R
@@ -30,19 +31,38 @@ class DetailMovieFragment : Fragment() {
     }
 
     private fun initData(binding: FragmentDetailBinding) {
-        vm.concurentDetailData.observe(this@DetailMovieFragment.viewLifecycleOwner, Observer { movieData ->
-            movieData.first.poster_path = imageFormatter + movieData.first.poster_path
-            binding.detailData = movieData.first
-            binding.rvSimilarMovie.setUpVerticalListAdapter(movieData.second, movieAdapterCallback, R.layout.item_similar, {
-                ivSimilarMovie.loadWithGlide(imageFormatter + it.poster_path)
-                tvSimilarMovieTittle.text = it.title
-                tvSimilarMovieReleaseDate.text = it.release_date
-            }, {
-                if (id != null) vm.detailMovie(id!!)
+        binding.apply {
+            vm.concurentDetailData.observe(this@DetailMovieFragment.viewLifecycleOwner, Observer { movieData ->
+                movieData.first.poster_path = imageFormatter + movieData.first.poster_path
+                detailData = movieData.first
+                toolbars.title = movieData.first.title
+                rvSimilarMovie.setUpVerticalListAdapter(movieData.second, movieAdapterCallback, R.layout.item_similar, {
+                    ivSimilarMovie.loadWithGlide(imageFormatter + it.poster_path)
+                    tvSimilarMovieTittle.text = it.title
+                    tvSimilarMovieReleaseDate.text = it.release_date
+                }, {
+                    if (id != null) vm.detailMovie(id!!)
+                })
+                invalidateAll()
             })
-            binding.invalidateAll()
-        })
+            ivBack.setOnClickListener {
+                //much better back pressed
+                NavHostFragment.findNavController(this@DetailMovieFragment).navigateUp()
+            }
+        }
+
+
     }
+
+    /* //handle backpressed
+     override fun onActivityCreated(savedInstanceState: Bundle?) {
+         super.onActivityCreated(savedInstanceState)
+         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+             override fun handleOnBackPressed() {
+                 NavHostFragment.findNavController(this@DetailMovieFragment).navigateUp()
+             }
+         })
+     }*/
 
 
 }

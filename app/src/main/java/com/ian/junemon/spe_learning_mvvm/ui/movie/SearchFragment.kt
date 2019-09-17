@@ -15,8 +15,6 @@ import com.ian.junemon.spe_learning_mvvm.data.viewmodel.movie.MovieViewmodel
 import com.ian.junemon.spe_learning_mvvm.databinding.ActivitySearchBinding
 import com.ian.junemon.spe_learning_mvvm.util.movieAdapterCallback
 import com.ian.recyclerviewhelper.helper.setUpVerticalGridAdapter
-import com.ian.recyclerviewhelper.helper.setUpVerticalListAdapter
-import kotlinx.android.synthetic.main.item_movie.*
 import kotlinx.android.synthetic.main.item_movie.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -41,7 +39,7 @@ class SearchFragment : Fragment() {
     fun searchData(binding: ActivitySearchBinding) {
         vm.mutableEditText.observe(this@SearchFragment.viewLifecycleOwner, Observer { querry ->
             vm.extractFlowData(querry).observe(this@SearchFragment.viewLifecycleOwner, Observer { data ->
-                binding.rvSearch.setUpVerticalGridAdapter(data, movieAdapterCallback, R.layout.item_movie, 2,{
+                binding.rvSearch.setUpVerticalGridAdapter(data, movieAdapterCallback, R.layout.item_movie, 2, {
                     ivHomeMovie.loadWithGlide(BuildConfig.imageFormatter + it.poster_path)
                     tvHomeMovieName.text = it.original_title
                 })

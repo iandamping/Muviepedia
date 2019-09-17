@@ -47,7 +47,7 @@ object AndroidXVersions {
     const val pagingRuntimeVer = "1.0.1"
     const val coroutineVer = "1.3.1"
     const val commonHelperVer = "0.0.15-alpha02"
-    const val recyckerHelperVer = "0.0.5-alpha03"
+    const val recyckerHelperVer = "0.0.5-alpha04b"
     const val firebaseCoreVer = "17.1.0"
     const val firebaseDatabaseVer = "19.0.0"
     const val firebaseAuthVer = "19.0.0"
@@ -95,8 +95,8 @@ object RoomLibraies{
 }
 
 object NavigationLibraies{
-    const val navigationStdLib = "androidx.navigation:navigation-fragment:$navigationVer"
-    const val navigationUiStdLib = "androidx.navigation:navigation-ui:$navigationVer"
+    const val navigationStdLib = "androidx.navigation:navigation-fragment-ktx:$navigationVer"
+    const val navigationUiStdLib = "androidx.navigation:navigation-ui-ktx:$navigationVer"
     const val legacySupportStdLib = "androidx.legacy:legacy-support-v4:$legacySupport"
     const val safeArgsNavigationStdLib = "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVer"
 }
