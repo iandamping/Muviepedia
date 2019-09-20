@@ -7,4 +7,6 @@
     <string name="popular_movie">Popular Movie</string>
     <string name="now_playing_movie">Now Playing Movie</string>
     <string name="top_rated_movie">Top Rated Movie</string>
+    <string name="title_dynamic_feature_test">Dynamic Module</string>
+    <string name="title_feature">Dynamic Feature</string>
 </resources>

@@ -119,9 +119,7 @@ class MovieViewmodel(private val repo: MovieRepository) : BaseViewModel() {
     @FlowPreview
     fun extractFlowData(data: String) = liveData {
         val time = measureTimeMillis {
-            searchKeywordFlow(data).debounce(200L).buffer().map { repo.getSearchMovieAsync(it) }.flatMapLatest {
-                resultOfFlow(it.results)
-            }.collectLatest { stringFlow ->
+            searchKeywordFlow(data).debounce(200L).buffer().map { repo.getSearchMovieAsync(it) }.flatMapLatest { resultOfFlow(it.results) }.collectLatest { stringFlow ->
                 emit(stringFlow)
             }
         }

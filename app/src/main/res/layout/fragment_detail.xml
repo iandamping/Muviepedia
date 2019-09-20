@@ -176,7 +176,7 @@
                     android:text="Similar Movie :"
                     android:textColor="@android:color/black" />
 
-                <TextView
+     <!--           <TextView
                     android:id="@+id/tvNoData"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:text="No data"
                     android:textColor="@android:color/black"
-                    app:UiNoDataState="@{movieViewmodel.uiState}" />
+                    app:UiNoDataState="@{movieViewmodel.uiState}" />-->
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvSimilarMovie"

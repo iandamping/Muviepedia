@@ -1,5 +1,6 @@
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.android.build.gradle.internal.dsl.BuildType
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
@@ -35,9 +36,13 @@ android {
     dataBinding {
         isEnabled = true
     }
-    /*androidExtensions {
-        isExperimental = true
-    }*/
+
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {

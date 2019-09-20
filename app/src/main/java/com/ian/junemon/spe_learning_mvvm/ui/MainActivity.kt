@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.ian.app.helper.util.fullScreenAnimation
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.databinding.ActivityMainBinding
+import java.lang.StringBuilder
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -15,4 +16,5 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
     }
+
 }
