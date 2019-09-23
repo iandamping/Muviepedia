@@ -22,7 +22,7 @@ class MovieDataViewModel(private val repository: MovieRemoteRepository) : BaseVi
     val popularMovie by lazy { repository.observePopularMovie() }
 
     val upComingMovie by lazy { repository.observeUpComingMovie() }
-    
+
     @ExperimentalCoroutinesApi
     @FlowPreview
     fun observeSearchData(querry: String) = repository.observeSearchMovie(querry)
