@@ -2,17 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <import type="android.view.View" />
-
-        <import type="java.util.List" />
-
-        <variable
-            name="movieViewmodel"
-            type="com.ian.junemon.spe_learning_mvvm.data.viewmodel.movie.MovieViewmodel" />
-    </data>
-
     <LinearLayout
+        android:id="@+id/lnMovieFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -32,8 +23,8 @@
                     android:orientation="vertical">
 
                     <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmerSlider"
                         android:layout_width="match_parent"
-                        app:UiState="@{movieViewmodel.uiState}"
                         android:layout_height="match_parent">
 
                         <LinearLayout
@@ -52,7 +43,6 @@
 
                     <androidx.viewpager.widget.ViewPager
                         android:id="@+id/vpNowPlaying"
-                        app:UiState="@{movieViewmodel.uiState}"
                         android:layout_width="match_parent"
                         android:layout_height="200dp" />
 
@@ -146,7 +136,7 @@
 
                         <com.facebook.shimmer.ShimmerFrameLayout
                             android:layout_width="match_parent"
-                            app:UiState="@{movieViewmodel.uiState}"
+                            android:id="@+id/shimmerPopularMovie"
                             android:layout_height="match_parent">
 
                             <LinearLayout
@@ -164,7 +154,6 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rvPopularMovie"
-                            app:UiState="@{movieViewmodel.uiState}"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/spacing_medium" />
@@ -183,7 +172,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/lato"
                                 android:paddingBottom="8dp"
-                                android:text="@string/now_playing_movie"
+                                android:text="@string/up_coming_movie"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/letter_medium"
                                 android:textStyle="bold" />
@@ -202,8 +191,8 @@
                         </LinearLayout>
 
                         <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmmerUpComingMovie"
                             android:layout_width="match_parent"
-                            app:UiState="@{movieViewmodel.uiState}"
                             android:layout_height="match_parent">
 
                             <LinearLayout
@@ -222,7 +211,6 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rvUpComingMovie"
                             android:layout_width="match_parent"
-                            app:UiState="@{movieViewmodel.uiState}"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/spacing_medium" />
                     </LinearLayout>

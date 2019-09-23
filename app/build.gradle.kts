@@ -78,6 +78,9 @@ dependencies {
     implementation(NavigationLibraies.navigationStdLib)
     implementation(NavigationLibraies.navigationUiStdLib)
     implementation(NavigationLibraies.legacySupportStdLib)
+    implementation(RoomLibraies.roomStdLib)
+    implementation(RoomLibraies.roomKtxStdLib)
+    kapt(RoomLibraies.roomCompilerStdLib)
 }
 
 fun initBuildCondigField(data: NamedDomainObjectContainer<BuildType>) {

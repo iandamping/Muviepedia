@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorParent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/background_light"
@@ -176,8 +177,9 @@
                     android:text="Similar Movie :"
                     android:textColor="@android:color/black" />
 
-     <!--           <TextView
+                <TextView
                     android:id="@+id/tvNoData"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|center_horizontal"
@@ -185,19 +187,24 @@
                     android:fontFamily="@font/lato"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="No data"
-                    android:textColor="@android:color/black"
-                    app:UiNoDataState="@{movieViewmodel.uiState}" />-->
+                    android:textColor="@android:color/black" />
+
+                <ProgressBar
+                    android:id="@+id/progressDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvSimilarMovie"
+                    tools:listitem="@layout/item_similar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:UiState="@{movieViewmodel.uiState}" />
+                    android:layout_height="wrap_content" />
 
                 <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerSimilar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:UiState="@{movieViewmodel.uiState}">
+                    android:layout_height="match_parent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -291,10 +298,6 @@
         <variable
             name="detailData"
             type="com.ian.junemon.spe_learning_mvvm.model.DetailMovieData" />
-
-        <variable
-            name="movieViewmodel"
-            type="com.ian.junemon.spe_learning_mvvm.data.viewmodel.movie.MovieViewmodel" />
 
     </data>
 </layout>

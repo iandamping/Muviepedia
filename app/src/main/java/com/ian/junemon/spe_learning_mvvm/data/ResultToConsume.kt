@@ -5,7 +5,7 @@ package com.ian.junemon.spe_learning_mvvm.data
 Created by Ian Damping on 19/09/2019.
 Github = https://github.com/iandamping
  */
-class ResultToConsume<out T>(val status: Status, val data: T?, val message: String?) {
+data class ResultToConsume<out T>(val status: Status, val data: T?, val message: String?) {
 
     enum class Status {
         SUCCESS,

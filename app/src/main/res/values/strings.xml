@@ -9,4 +9,5 @@
     <string name="top_rated_movie">Top Rated Movie</string>
     <string name="title_dynamic_feature_test">Dynamic Module</string>
     <string name="title_feature">Dynamic Feature</string>
+    <string name="up_coming_movie">Up Coming Movie</string>
 </resources>

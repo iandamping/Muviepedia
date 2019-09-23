@@ -1,13 +1,12 @@
-package com.ian.junemon.spe_learning_mvvm.ui.slider
+package com.ian.junemon.spe_learning_mvvm.movie.ui.slider
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import com.ian.app.helper.util.inflates
 import com.ian.app.helper.util.loadWithGlide
-import com.ian.junemon.spe_learning_mvvm.BuildConfig.imageFormatter
 import com.ian.junemon.spe_learning_mvvm.R
-import com.ian.junemon.spe_learning_mvvm.model.MovieData
+import com.ian.junemon.spe_learning_mvvm.movie.data.local.MovieLocalData
 import kotlinx.android.synthetic.main.item_slider.view.*
 
 /**
@@ -15,12 +14,12 @@ import kotlinx.android.synthetic.main.item_slider.view.*
 Created by Ian Damping on 12/09/2019.
 Github = https://github.com/iandamping
  */
-class SliderMovieAdapter(private val data: List<MovieData>) : PagerAdapter() {
+class SliderMovieAdapter(private val data: List<MovieLocalData>) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
 
         val views = container.inflates(R.layout.item_slider)
-        views.ivSliderImage.loadWithGlide(imageFormatter + data[position].poster_path)
+        views.ivSliderImage.loadWithGlide(data[position].poster_path)
         views.ivSliderImage?.setOnClickListener {
 
             /*ctx?.startActivity<DetailActivity> {

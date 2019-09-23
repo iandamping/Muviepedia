@@ -5,7 +5,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.ui.HomeFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.movie.ui.MovieFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_detailMovieFragment"
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailMovieFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.ui.movie.DetailMovieFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.movie.ui.MovieDetailFragment"
         android:label="DetailMovieFragment" >
         <argument
             android:name="movieID"
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/paginationFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.ui.movie.PaginationFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.movie.ui.MoviePaginationFragment"
         android:label="PaginationFragment" >
         <argument
             android:name="movieType"
@@ -50,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.ui.movie.SearchFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.movie.ui.MovieSearchFragment"
         android:label="SearchFragment" >
         <action
             android:id="@+id/action_searchFragment_to_homeFragment"

@@ -65,7 +65,7 @@ object AndroidXVersions {
     const val coreVer = "1.2.0-alpha03"
     const val constraintLayoutVer = "2.0.0-beta2"
     const val materialVer = "material:1.0.0"
-    const val retrofitVer = "2.6.0"
+    const val retrofitVer = "2.6.1"
     const val okHttp3Ver = "3.12.0"
     const val okHttp3LogginInterceptorVer = "3.11.0"
     const val rxjava2Ver = "2.1.0"
@@ -92,6 +92,7 @@ object BuildPlugins {
 object RoomLibraies{
     const val roomStdLib = "androidx.room:room-runtime:$roomVer"
     const val roomCompilerStdLib = "androidx.room:room-compiler:$roomVer"
+    const val roomKtxStdLib = "androidx.room:room-ktx:$roomVer"
 }
 
 object NavigationLibraies{
