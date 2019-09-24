@@ -39,7 +39,7 @@ android {
 
 }
 
-tasks.withType<KotlinCompile> {
+tasks.withType < KotlinCompile > {
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -105,15 +105,15 @@ fun initBuildCondigField(data: NamedDomainObjectContainer<BuildType>) {
     }
 }
 
-fun NamedDomainObjectContainer<BuildType>.initDebug(proguard:BaseAppModuleExtension){
-    this.getByName("debug"){
+fun NamedDomainObjectContainer<BuildType>.initDebug(proguard: BaseAppModuleExtension) {
+    this.getByName("debug") {
         isMinifyEnabled = false
         proguardFiles(proguard.getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
 }
 
-fun NamedDomainObjectContainer<BuildType>.initRelease(proguard:BaseAppModuleExtension){
-    this.getByName("release"){
+fun NamedDomainObjectContainer<BuildType>.initRelease(proguard: BaseAppModuleExtension) {
+    this.getByName("release") {
         isMinifyEnabled = false
         proguardFiles(proguard.getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }

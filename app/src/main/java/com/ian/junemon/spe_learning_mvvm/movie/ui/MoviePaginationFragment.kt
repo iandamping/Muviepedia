@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.ian.app.helper.util.checkConnectivityStatus
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadResizeWithGlide
@@ -40,7 +41,9 @@ class MoviePaginationFragment : Fragment() {
                             rvDiscoverMovie.setUpPagingWithGrid(data, R.layout.item_paging, 2, {
                                 ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
                                 tvDiscoverMovieDescription.text = it.title
-                            }, localMoviePopularPaginationAdapterCallback)
+                            }, localMoviePopularPaginationAdapterCallback, {
+                                this@apply.root.findNavController().navigate(MoviePaginationFragmentDirections.actionPaginationFragmentToHomeFragment(id!!))
+                            })
 
                             if (shimmerGridListContainer.isShimmerStarted && shimmerGridListContainer.isShimmerVisible) {
                                 shimmerGridListContainer.stopShimmer()
@@ -56,7 +59,9 @@ class MoviePaginationFragment : Fragment() {
                             rvDiscoverMovie.setUpPagingWithGrid(data, R.layout.item_paging, 2, {
                                 ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
                                 tvDiscoverMovieDescription.text = it.title
-                            }, localMovieUpComingPaginationAdapterCallback)
+                            }, localMovieUpComingPaginationAdapterCallback, {
+                                this@apply.root.findNavController().navigate(MoviePaginationFragmentDirections.actionPaginationFragmentToHomeFragment(id!!))
+                            })
 
                             if (shimmerGridListContainer.isShimmerStarted && shimmerGridListContainer.isShimmerVisible) {
                                 shimmerGridListContainer.stopShimmer()
