@@ -16,7 +16,8 @@ import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.data.ResultToConsume
 import com.ian.junemon.spe_learning_mvvm.databinding.FragmentHomeBinding
 import com.ian.junemon.spe_learning_mvvm.movie.ui.slider.SliderMovieAdapter
-import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.localMovieAdapterCallback
+import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.localMoviePopularAdapterCallback
+import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.localMovieUpComingAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.popularMovie
 import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.upcomingMovie
 import com.ian.recyclerviewhelper.helper.setUpHorizontalListAdapter
@@ -79,7 +80,7 @@ class MovieFragment : Fragment() {
                 when (result.status) {
                     ResultToConsume.Status.SUCCESS -> {
                         if (!result.data.isNullOrEmpty()) {
-                            rvPopularMovie.setUpHorizontalListAdapter(result.data, localMovieAdapterCallback, R.layout.item_movie, {
+                            rvPopularMovie.setUpHorizontalListAdapter(result.data, localMoviePopularAdapterCallback, R.layout.item_movie, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.title
                             }, { if (id != null) findNavController().navigate(MovieFragmentDirections.actionHomeFragmentToDetailMovieFragment(id!!)) })
@@ -114,7 +115,7 @@ class MovieFragment : Fragment() {
                 when (result.status) {
                     ResultToConsume.Status.SUCCESS -> {
                         if (!result.data.isNullOrEmpty()) {
-                            rvUpComingMovie.setUpHorizontalListAdapter(result.data, localMovieAdapterCallback, R.layout.item_movie, {
+                            rvUpComingMovie.setUpHorizontalListAdapter(result.data, localMovieUpComingAdapterCallback, R.layout.item_movie, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.title
                             }, { if (id != null) findNavController().navigate(MovieFragmentDirections.actionHomeFragmentToDetailMovieFragment(id!!)) })

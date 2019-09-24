@@ -13,7 +13,9 @@ import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadResizeWithGlide
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.databinding.FragmentPagingBinding
-import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.localMovieAdapterCallback
+import com.ian.junemon.spe_learning_mvvm.util.MovieConstant
+import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.localMoviePopularPaginationAdapterCallback
+import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.localMovieUpComingPaginationAdapterCallback
 import com.ian.recyclerviewhelper.helper.setUpPagingWithGrid
 import kotlinx.android.synthetic.main.item_paging.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -32,20 +34,40 @@ class MoviePaginationFragment : Fragment() {
     private fun initFetchNetworkData(state: String, binding: FragmentPagingBinding) {
         binding.apply {
             checkConnectivityStatus { connectivityState ->
-                vm.observePagination(connectivityState, state).observe(viewLifecycleOwner, Observer { data ->
-                    rvDiscoverMovie.setUpPagingWithGrid(data, R.layout.item_paging, 2, {
-                        ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
-                        tvDiscoverMovieCategory.text = it.type
-                        tvDiscoverMovieDescription.text = it.title
-                    }, localMovieAdapterCallback)
+                when (state) {
+                    MovieConstant.popularMovie -> {
+                        vm.observePopularPagination(connectivityState).observe(viewLifecycleOwner, Observer { data ->
+                            rvDiscoverMovie.setUpPagingWithGrid(data, R.layout.item_paging, 2, {
+                                ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
+                                tvDiscoverMovieDescription.text = it.title
+                            }, localMoviePopularPaginationAdapterCallback)
 
-                    if (shimmerGridListContainer.isShimmerStarted && shimmerGridListContainer.isShimmerVisible) {
-                        shimmerGridListContainer.stopShimmer()
-                        shimmerGridListContainer.hideShimmer()
-                        shimmerGridListContainer.gone()
+                            if (shimmerGridListContainer.isShimmerStarted && shimmerGridListContainer.isShimmerVisible) {
+                                shimmerGridListContainer.stopShimmer()
+                                shimmerGridListContainer.hideShimmer()
+                                shimmerGridListContainer.gone()
+                            }
+
+                        })
                     }
 
-                })
+                    MovieConstant.upcomingMovie -> {
+                        vm.observeUpComingPagination(connectivityState).observe(viewLifecycleOwner, Observer { data ->
+                            rvDiscoverMovie.setUpPagingWithGrid(data, R.layout.item_paging, 2, {
+                                ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
+                                tvDiscoverMovieDescription.text = it.title
+                            }, localMovieUpComingPaginationAdapterCallback)
+
+                            if (shimmerGridListContainer.isShimmerStarted && shimmerGridListContainer.isShimmerVisible) {
+                                shimmerGridListContainer.stopShimmer()
+                                shimmerGridListContainer.hideShimmer()
+                                shimmerGridListContainer.gone()
+                            }
+
+                        })
+                    }
+                }
+
             }
         }
     }

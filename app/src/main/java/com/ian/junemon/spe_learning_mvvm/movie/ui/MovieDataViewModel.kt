@@ -1,8 +1,6 @@
 package com.ian.junemon.spe_learning_mvvm.movie.ui
 
 import androidx.lifecycle.MutableLiveData
-import com.ian.app.helper.model.GenericViewModelZipperTriple
-import com.ian.app.helper.util.computeTripleResult
 import com.ian.junemon.spe_learning_mvvm.base.BaseViewModel
 import com.ian.junemon.spe_learning_mvvm.movie.data.remote.MovieRemoteRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,11 +15,11 @@ class MovieDataViewModel(private val repository: MovieRemoteRepository) : BaseVi
 
     val mutableEditText: MutableLiveData<String> = MutableLiveData()
 
-    val nowPlayingMovie by lazy { repository.observeNowPlayingMovie() }
+    val nowPlayingMovie by lazy { repository.observeNowPlayingMovie(vmScopes) }
 
-    val popularMovie by lazy { repository.observePopularMovie() }
+    val popularMovie by lazy { repository.observePopularMovie(vmScopes) }
 
-    val upComingMovie by lazy { repository.observeUpComingMovie() }
+    val upComingMovie by lazy { repository.observeUpComingMovie(vmScopes) }
 
     @ExperimentalCoroutinesApi
     @FlowPreview
@@ -31,5 +29,7 @@ class MovieDataViewModel(private val repository: MovieRemoteRepository) : BaseVi
 
     fun observeSimilarData(movieID: Int) = repository.getSimilarMovie(movieID)
 
-    fun observePagination(connectivityAvailable: Boolean, movieType: String) = repository.observePagination(connectivityAvailable, movieType, vmScopes)
+    fun observePopularPagination(connectivityAvailable: Boolean) = repository.observePopularPagination(connectivityAvailable, vmScopes)
+
+    fun observeUpComingPagination(connectivityAvailable: Boolean) = repository.observeUpComingPagination(connectivityAvailable, vmScopes)
 }

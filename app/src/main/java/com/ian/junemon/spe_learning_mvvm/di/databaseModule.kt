@@ -16,5 +16,9 @@ val databaseModule = module {
                 .build()
     }
     // localDao instance (get instance from MovieDatabase)
-    single { get<MovieDatabase>().movieDao() }
+    single { get<MovieDatabase>().movieNowPlayingDao() }
+    single { get<MovieDatabase>().moviePopularDao() }
+    single { get<MovieDatabase>().movieUpComingDao() }
+    single { get<MovieDatabase>().movieUpComingPaginationDao() }
+    single { get<MovieDatabase>().moviePopularPaginationDao() }
 }

@@ -4,15 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.distinctUntilChanged
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.ian.junemon.spe_learning_mvvm.data.MovieDatabase
 import com.ian.junemon.spe_learning_mvvm.data.resultLiveData
 import com.ian.junemon.spe_learning_mvvm.data.searchResultLiveData
 import com.ian.junemon.spe_learning_mvvm.data.singleResultLiveData
-import com.ian.junemon.spe_learning_mvvm.movie.data.local.MovieLocalDao
-import com.ian.junemon.spe_learning_mvvm.movie.data.local.MovieLocalData
-import com.ian.junemon.spe_learning_mvvm.movie.data.remote.MovieRemoteDataSourceFactory.Companion.pagedListConfig
-import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.nowPlayingMovie
-import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.popularMovie
-import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.upcomingMovie
+import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MoviePopularPaginationData
+import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MovieUpComingPaginationData
+import com.ian.junemon.spe_learning_mvvm.movie.data.remote.pagination.popular.MoviePopularRemoteDataSourceFactory
+import com.ian.junemon.spe_learning_mvvm.movie.data.remote.pagination.upcoming.MovieUpComingRemoteDataSourceFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -22,26 +21,26 @@ import kotlinx.coroutines.FlowPreview
 Created by Ian Damping on 19/09/2019.
 Github = https://github.com/iandamping
  */
-class MovieRemoteRepository(private val remoteSource: MovieRemoteDataSource, private val dao: MovieLocalDao) {
+class MovieRemoteRepository(private val remoteSource: MovieRemoteDataSource, private val db: MovieDatabase) {
 
-    fun observeNowPlayingMovie() = resultLiveData(
-            databaseQuery = { dao.loadSelectedCategory(nowPlayingMovie) },
+    fun observeNowPlayingMovie(scope: CoroutineScope) = resultLiveData(
+            databaseQuery = { db.movieNowPlayingDao().loadAll() },
             networkCall = { remoteSource.getNowPlayingMovie() },
-            saveCallResult = { dao.insertAll(it.results.toNowPlayingMovie()) }
+            saveCallResult = { db.movieNowPlayingDao().insertAll(it.results.toNowPlayingMovie(scope)) }
     ).distinctUntilChanged()
 
 
-    fun observePopularMovie() = resultLiveData(
-            databaseQuery = { dao.loadSelectedCategory(popularMovie) },
+    fun observePopularMovie(scope: CoroutineScope) = resultLiveData(
+            databaseQuery = { db.moviePopularDao().loadAll() },
             networkCall = { remoteSource.getPopularMovie() },
-            saveCallResult = { dao.insertAll(it.results.toPopularMovie()) }
+            saveCallResult = { db.moviePopularDao().insertAll(it.results.toPopularMovie(scope)) }
     ).distinctUntilChanged()
 
 
-    fun observeUpComingMovie() = resultLiveData(
-            databaseQuery = { dao.loadSelectedCategory(upcomingMovie) },
+    fun observeUpComingMovie(scope: CoroutineScope) = resultLiveData(
+            databaseQuery = { db.movieUpComingDao().loadAll() },
             networkCall = { remoteSource.getUpComingMovie() },
-            saveCallResult = { dao.insertAll(it.results.toUpComingMovie()) }
+            saveCallResult = { db.movieUpComingDao().insertAll(it.results.toUpComingMovie(scope)) }
     ).distinctUntilChanged()
 
     fun getDetailMovie(movieId: Int) = singleResultLiveData(
@@ -55,21 +54,38 @@ class MovieRemoteRepository(private val remoteSource: MovieRemoteDataSource, pri
     @FlowPreview
     @ExperimentalCoroutinesApi
     fun observeSearchMovie(querry: String) = searchResultLiveData(querry) {
-        remoteSource.getSearchMovieResponse(querry)
+        remoteSource.getSearchMovie(querry)
     }.distinctUntilChanged()
 
-    fun observePagination(connectivityAvailable: Boolean, movieType: String, scope: CoroutineScope) =
-            if (connectivityAvailable) observeRemotePaged(movieType, scope)
-            else observeLocalPaged(movieType)
+
+    fun observePopularPagination(connectivityAvailable: Boolean, scope: CoroutineScope) =
+            if (connectivityAvailable) observeRemotePopularPaginationPaged(scope)
+            else observeLocalPopularPaginationPaged()
 
 
-    private fun observeRemotePaged(movieType: String, scope: CoroutineScope): LiveData<PagedList<MovieLocalData>> {
-        val dataSourceFactory = MovieRemoteDataSourceFactory(movieType, remoteSource, dao, scope)
-        return LivePagedListBuilder(dataSourceFactory, pagedListConfig()).build()
+    private fun observeRemotePopularPaginationPaged(scope: CoroutineScope): LiveData<PagedList<MoviePopularPaginationData>> {
+        val dataSourceFactory = MoviePopularRemoteDataSourceFactory(remoteSource, db.moviePopularPaginationDao(), scope)
+        return LivePagedListBuilder(dataSourceFactory, MoviePopularRemoteDataSourceFactory.pagedListConfig()).build()
     }
 
-    private fun observeLocalPaged(movieType: String): LiveData<PagedList<MovieLocalData>> {
-        val dataSourceFactory = dao.loadAllPagination(movieType)
-        return LivePagedListBuilder(dataSourceFactory, pagedListConfig()).build()
+    private fun observeLocalPopularPaginationPaged(): LiveData<PagedList<MoviePopularPaginationData>> {
+        val dataSourceFactory = db.moviePopularPaginationDao().loadAllPagination()
+        return LivePagedListBuilder(dataSourceFactory, MoviePopularRemoteDataSourceFactory.pagedListConfig()).build()
+    }
+
+
+    fun observeUpComingPagination(connectivityAvailable: Boolean, scope: CoroutineScope) =
+            if (connectivityAvailable) observeRemoteUpComingPaginationPaged(scope)
+            else observeLocalUpComingPaginationPaged()
+
+
+    private fun observeRemoteUpComingPaginationPaged(scope: CoroutineScope): LiveData<PagedList<MovieUpComingPaginationData>> {
+        val dataSourceFactory = MovieUpComingRemoteDataSourceFactory(remoteSource, db.movieUpComingPaginationDao(), scope)
+        return LivePagedListBuilder(dataSourceFactory, MovieUpComingRemoteDataSourceFactory.pagedListConfig()).build()
+    }
+
+    private fun observeLocalUpComingPaginationPaged(): LiveData<PagedList<MovieUpComingPaginationData>> {
+        val dataSourceFactory = db.movieUpComingPaginationDao().loadAllPagination()
+        return LivePagedListBuilder(dataSourceFactory, MovieUpComingRemoteDataSourceFactory.pagedListConfig()).build()
     }
 }

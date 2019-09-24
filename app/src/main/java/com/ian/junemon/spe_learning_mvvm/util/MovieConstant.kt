@@ -1,7 +1,10 @@
 package com.ian.junemon.spe_learning_mvvm.util
 
 import androidx.recyclerview.widget.DiffUtil
-import com.ian.junemon.spe_learning_mvvm.movie.data.local.MovieLocalData
+import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MoviePopularLocalData
+import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MoviePopularPaginationData
+import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MovieUpComingLocalData
+import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MovieUpComingPaginationData
 import com.ian.junemon.spe_learning_mvvm.movie.data.remote.MovieData
 
 
@@ -16,7 +19,6 @@ object MovieConstant {
     const val times: Int = Int.MAX_VALUE
 
     const val upcomingMovie: String = "upcoming"
-    const val nowPlayingMovie: String = "now playing"
     const val popularMovie: String = "popular"
 
     val movieAdapterCallback = object : DiffUtil.ItemCallback<MovieData>() {
@@ -29,15 +31,44 @@ object MovieConstant {
         }
     }
 
-    val localMovieAdapterCallback = object : DiffUtil.ItemCallback<MovieLocalData>() {
-        override fun areItemsTheSame(oldItem: MovieLocalData, newItem: MovieLocalData): Boolean {
+
+    val localMoviePopularAdapterCallback = object : DiffUtil.ItemCallback<MoviePopularLocalData>() {
+        override fun areItemsTheSame(oldItem: MoviePopularLocalData, newItem: MoviePopularLocalData): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: MovieLocalData, newItem: MovieLocalData): Boolean {
+        override fun areContentsTheSame(oldItem: MoviePopularLocalData, newItem: MoviePopularLocalData): Boolean {
             return oldItem == newItem
         }
     }
 
+    val localMovieUpComingAdapterCallback = object : DiffUtil.ItemCallback<MovieUpComingLocalData>() {
+        override fun areItemsTheSame(oldItem: MovieUpComingLocalData, newItem: MovieUpComingLocalData): Boolean {
+            return oldItem.id == newItem.id
+        }
 
+        override fun areContentsTheSame(oldItem: MovieUpComingLocalData, newItem: MovieUpComingLocalData): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    val localMoviePopularPaginationAdapterCallback = object : DiffUtil.ItemCallback<MoviePopularPaginationData>() {
+        override fun areItemsTheSame(oldItem: MoviePopularPaginationData, newItem: MoviePopularPaginationData): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: MoviePopularPaginationData, newItem: MoviePopularPaginationData): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    val localMovieUpComingPaginationAdapterCallback = object : DiffUtil.ItemCallback<MovieUpComingPaginationData>() {
+        override fun areItemsTheSame(oldItem: MovieUpComingPaginationData, newItem: MovieUpComingPaginationData): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: MovieUpComingPaginationData, newItem: MovieUpComingPaginationData): Boolean {
+            return oldItem == newItem
+        }
+    }
 }

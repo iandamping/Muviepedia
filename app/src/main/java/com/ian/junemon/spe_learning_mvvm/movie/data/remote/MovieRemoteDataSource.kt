@@ -23,7 +23,7 @@ class MovieRemoteDataSource(private val api: ApiInterface) : BaseDataSource() {
 
     suspend fun getPaginationPopularMovie(page: Int) = getResult { api.pagingGetPopularMovieResponse(BuildConfig.movieApiKey, page) }
 
-    suspend fun getSearchMovieResponse(querry: String) = getResult { api.getSearchMovieResponse(BuildConfig.movieApiKey, querry) }
+    suspend fun getSearchMovie(querry: String) = getResult { api.getSearchMovieResponse(BuildConfig.movieApiKey, querry) }
 
-    suspend fun getPaginationUpComingMovieResponse(page: Int) = getResult { api.pagingGetUpComingMovieResponse(BuildConfig.movieApiKey, page) }
+    suspend fun getPaginationUpComingMovie(page: Int) = getResult { api.pagingGetUpComingMovieResponse(BuildConfig.movieApiKey, page) }
 }

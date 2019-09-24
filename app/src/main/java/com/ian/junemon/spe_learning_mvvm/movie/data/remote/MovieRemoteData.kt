@@ -1,13 +1,8 @@
 package com.ian.junemon.spe_learning_mvvm.movie.data.remote
 
-import com.ian.app.helper.util.logE
 import com.ian.junemon.spe_learning_mvvm.BuildConfig.imageFormatter
-import com.ian.junemon.spe_learning_mvvm.movie.data.local.MovieLocalData
-import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.nowPlayingMovie
-import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.popularMovie
-import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.upcomingMovie
+import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.*
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
@@ -33,20 +28,43 @@ data class MovieData(
 )
 
 
-fun List<MovieData>.toUpComingMovie(): MutableList<MovieLocalData> {
-    return this.map {
-        MovieLocalData(it.id, upcomingMovie, it.title, imageFormatter + it.poster_path)
-    }.toMutableList()
+suspend fun List<MovieData>.toUpComingMovie(scope: CoroutineScope): MutableList<MovieUpComingLocalData> {
+    return withContext(scope.coroutineContext) {
+        this@toUpComingMovie.map {
+            MovieUpComingLocalData(it.id, it.title, imageFormatter + it.poster_path)
+        }.toMutableList()
+    }
 }
 
-fun List<MovieData>.toNowPlayingMovie(): MutableList<MovieLocalData> {
-    return this.map {
-        MovieLocalData(it.id, nowPlayingMovie, it.title, imageFormatter + it.poster_path)
-    }.toMutableList()
+suspend fun List<MovieData>.toNowPlayingMovie(scope: CoroutineScope): MutableList<MovieNowPlayingLocalData> {
+    return withContext(scope.coroutineContext) {
+        this@toNowPlayingMovie.map {
+            MovieNowPlayingLocalData(it.id, it.title, imageFormatter + it.poster_path)
+        }.toMutableList()
+    }
 }
 
-fun List<MovieData>.toPopularMovie(): MutableList<MovieLocalData> {
-    return this.map {
-        MovieLocalData(it.id, popularMovie, it.title, imageFormatter + it.poster_path)
-    }.toMutableList()
+suspend fun List<MovieData>.toPopularMovie(scope: CoroutineScope): MutableList<MoviePopularLocalData> {
+    return withContext(scope.coroutineContext) {
+        this@toPopularMovie.map {
+            MoviePopularLocalData(it.id, it.title, imageFormatter + it.poster_path)
+        }.toMutableList()
+    }
 }
+
+suspend fun List<MovieData>.toPaginationPopularMovie(scope: CoroutineScope): MutableList<MoviePopularPaginationData> {
+    return withContext(scope.coroutineContext) {
+        this@toPaginationPopularMovie.map {
+            MoviePopularPaginationData(it.id, it.title, imageFormatter + it.poster_path)
+        }.toMutableList()
+    }
+}
+
+suspend fun List<MovieData>.toPaginationUpComingMovie(scope: CoroutineScope): MutableList<MovieUpComingPaginationData> {
+    return withContext(scope.coroutineContext) {
+        this@toPaginationUpComingMovie.map {
+            MovieUpComingPaginationData(it.id, it.title, imageFormatter + it.poster_path)
+        }.toMutableList()
+    }
+}
+

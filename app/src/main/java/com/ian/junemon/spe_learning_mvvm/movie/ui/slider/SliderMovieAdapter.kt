@@ -6,7 +6,7 @@ import androidx.viewpager.widget.PagerAdapter
 import com.ian.app.helper.util.inflates
 import com.ian.app.helper.util.loadWithGlide
 import com.ian.junemon.spe_learning_mvvm.R
-import com.ian.junemon.spe_learning_mvvm.movie.data.local.MovieLocalData
+import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MovieNowPlayingLocalData
 import kotlinx.android.synthetic.main.item_slider.view.*
 
 /**
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_slider.view.*
 Created by Ian Damping on 12/09/2019.
 Github = https://github.com/iandamping
  */
-class SliderMovieAdapter(private val data: List<MovieLocalData>) : PagerAdapter() {
+class SliderMovieAdapter(private val data: List<MovieNowPlayingLocalData>) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
 
