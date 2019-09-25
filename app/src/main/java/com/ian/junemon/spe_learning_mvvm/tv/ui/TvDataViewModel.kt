@@ -33,4 +33,7 @@ class TvDataViewModel(private val repository:TvRemoteRepository): BaseViewModel(
 
     fun observeTopRatedPagination(connectivityAvailable: Boolean) = repository.observeTopRatedPagination(connectivityAvailable, vmScopes)
 
+    init {
+        vmScopes.launch { repository.clearSearchTvData() }
+    }
 }

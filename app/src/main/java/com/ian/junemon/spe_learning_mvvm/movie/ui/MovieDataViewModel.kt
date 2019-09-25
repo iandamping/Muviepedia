@@ -5,6 +5,7 @@ import com.ian.junemon.spe_learning_mvvm.base.BaseViewModel
 import com.ian.junemon.spe_learning_mvvm.movie.data.remote.MovieRemoteRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.launch
 
 /**
  *
@@ -32,4 +33,8 @@ class MovieDataViewModel(private val repository: MovieRemoteRepository) : BaseVi
     fun observePopularPagination(connectivityAvailable: Boolean) = repository.observePopularPagination(connectivityAvailable, vmScopes)
 
     fun observeUpComingPagination(connectivityAvailable: Boolean) = repository.observeUpComingPagination(connectivityAvailable, vmScopes)
+
+    init {
+        vmScopes.launch { repository.clearSearchMovie() }
+    }
 }

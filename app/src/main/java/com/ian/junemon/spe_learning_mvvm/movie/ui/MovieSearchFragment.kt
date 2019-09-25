@@ -35,7 +35,7 @@ class MovieSearchFragment : Fragment() {
         val binding: FragmentMovieSearchBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_search, container, false)
         binding.apply {
             searchVm = vms
-            lifecycleOwner = this@MovieSearchFragment.viewLifecycleOwner
+            lifecycleOwner = activity
             searchData(this)
         }
         return binding.root

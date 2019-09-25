@@ -25,5 +25,5 @@ interface TvSearchDao {
     }
 
     @Query("DELETE FROM tv_search_data")
-    fun deleteAllData()
+    suspend fun deleteAllData()
 }

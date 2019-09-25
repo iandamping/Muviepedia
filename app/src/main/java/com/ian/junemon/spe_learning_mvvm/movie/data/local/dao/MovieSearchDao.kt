@@ -26,5 +26,5 @@ interface MovieSearchDao {
     }
 
     @Query("DELETE FROM movie_search_data")
-    fun deleteAllData()
+    suspend fun deleteAllData()
 }

@@ -49,6 +49,8 @@ class TvRemoteRepository(private val remoteSource: TvRemoteDataSource, private v
             networkCall = { remoteSource.getSimilarTv(movieId) }
     )
 
+    suspend fun clearSearchTvData() = db.tvSearchDao().deleteAllData()
+
     @FlowPreview
     @ExperimentalCoroutinesApi
     fun observeSearchTv(querry: String, scope: CoroutineScope) = searchResultLiveData(querry,

@@ -36,7 +36,7 @@ class TvSearchFragment : Fragment() {
         val binding: FragmentTvSearchBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tv_search, container, false)
         binding.apply {
             searchVm = vm
-            lifecycleOwner = this@TvSearchFragment.viewLifecycleOwner
+            lifecycleOwner = activity
             searchData(this)
         }
         return binding.root

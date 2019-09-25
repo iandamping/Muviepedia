@@ -51,6 +51,8 @@ class MovieRemoteRepository(private val remoteSource: MovieRemoteDataSource, pri
             networkCall = { remoteSource.getSimilarMovie(movieId) }
     )
 
+    suspend fun clearSearchMovie() = db.movieSearchDao().deleteAllData()
+
     @FlowPreview
     @ExperimentalCoroutinesApi
     fun observeSearchMovie(querry: String,scope: CoroutineScope) = searchResultLiveData(querry,
