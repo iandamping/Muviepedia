@@ -8,70 +8,70 @@ Github = https://github.com/iandamping
  */
 
 data class DetailTvData(
-        val backdrop_path: String,
-        val created_by: List<CreatedBy>,
-        val episode_run_time: List<Int>,
-        val first_air_date: String,
-        val genres: List<Genre>,
-        val homepage: String,
-        val id: Int,
-        val in_production: Boolean,
-        val languages: List<String>,
-        val last_air_date: String,
-        val last_episode_to_air: LastEpisodeToAir,
-        val name: String,
-        val networks: List<Network>,
-        val next_episode_to_air: Any,
-        val number_of_episodes: Int,
-        val number_of_seasons: Int,
-        val origin_country: List<String>,
-        val original_language: String,
-        val original_name: String,
-        val overview: String,
-        val popularity: Double,
-        val poster_path: String,
-        val production_companies: List<ProductionCompany>,
-        val seasons: List<Season>,
-        val status: String,
-        val type: String,
-        val vote_average: Double,
-        val vote_count: Int
+        var backdrop_path: String,
+        var created_by: List<CreatedBy>,
+        var episode_run_time: List<Int>,
+        var first_air_date: String,
+        var genres: List<Genre>,
+        var homepage: String,
+        var id: Int,
+        var in_production: Boolean,
+        var languages: List<String>,
+        var last_air_date: String,
+        var last_episode_to_air: LastEpisodeToAir,
+        var name: String,
+        var networks: List<Network>,
+        var next_episode_to_air: Any,
+        var number_of_episodes: Int,
+        var number_of_seasons: Int,
+        var origin_country: List<String>,
+        var original_language: String,
+        var original_name: String,
+        var overview: String,
+        var popularity: Double,
+        var poster_path: String,
+        var production_companies: List<ProductionCompany>,
+        var seasons: List<Season>,
+        var status: String,
+        var type: String,
+        var vote_average: Double,
+        var vote_count: Int
 ) {
     data class CreatedBy(
-            val credit_id: String,
-            val gender: Int,
-            val id: Int,
-            val name: String,
-            val profile_path: String
+            var credit_id: String,
+            var gender: Int,
+            var id: Int,
+            var name: String,
+            var profile_path: String
     )
 
-    data class Genre(val id: Int, val name: String)
+    data class Genre(var id: Int, var name: String)
 
     data class LastEpisodeToAir(
-            val air_date: String,
-            val episode_number: Int,
-            val id: Int,
-            val name: String,
-            val overview: String,
-            val production_code: String,
-            val season_number: Int,
-            val show_id: Int,
-            val still_path: String,
-            val vote_average: Double,
-            val vote_count: Int
+            var air_date: String,
+            var episode_number: Int,
+            var id: Int,
+            var name: String,
+            var overview: String,
+            var production_code: String,
+            var season_number: Int,
+            var show_id: Int,
+            var still_path: String,
+            var vote_average: Double,
+            var vote_count: Int
     )
 
-    data class Network(val id: Int, val logo_path: String, val name: String, val origin_country: String)
+    data class Network(var id: Int, var logo_path: String, var name: String, var origin_country: String)
 
-    data class ProductionCompany(val id: Int, val logo_path: String, val name: String, val origin_country: String)
+    data class ProductionCompany(var id: Int, var logo_path: String, var name: String, var origin_country: String)
 
     data class Season(
-            val air_date: String,
-            val episode_count: Int,
-            val id: Int,
-            val name: String,
-            val overview: String,
-            val poster_path: String,
-            val season_number: Int
+            var air_date: String,
+            var episode_count: Int,
+            var id: Int,
+            var name: String,
+            var overview: String,
+            var poster_path: String,
+            var season_number: Int
     )
 }

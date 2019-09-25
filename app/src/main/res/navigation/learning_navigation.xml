@@ -65,9 +65,31 @@
             android:id="@+id/action_tvFragment_to_tvSearchFragment"
             app:destination="@id/tvSearchFragment"
             app:popUpTo="@+id/tvFragment" />
+        <action
+            android:id="@+id/action_tvFragment_to_tvPaginationFragment"
+            app:destination="@id/tvPaginationFragment" />
+        <action
+            android:id="@+id/action_tvFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/tvSearchFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.tv.ui.TvSearchFragment"
         android:label="TvSearchFragment" />
+    <fragment
+        android:id="@+id/tvPaginationFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.tv.ui.TvPaginationFragment"
+        android:label="TvPaginationFragment" >
+        <argument
+            android:name="tvPaginationType"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvDetailFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.tv.ui.TvDetailFragment"
+        android:label="TvDetailFragment" >
+        <argument
+            android:name="tvDetailId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

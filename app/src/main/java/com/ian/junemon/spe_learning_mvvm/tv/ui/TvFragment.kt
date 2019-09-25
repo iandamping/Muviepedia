@@ -16,13 +16,12 @@ import com.ian.app.helper.util.visible
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.data.ResultToConsume
 import com.ian.junemon.spe_learning_mvvm.databinding.FragmentTvBinding
-import com.ian.junemon.spe_learning_mvvm.movie.ui.MovieFragmentDirections
-import com.ian.junemon.spe_learning_mvvm.movie.ui.slider.SliderMovieAdapter
 import com.ian.junemon.spe_learning_mvvm.tv.ui.slider.SliderTvAdapter
+import com.ian.junemon.spe_learning_mvvm.util.TvConstant
 import com.ian.junemon.spe_learning_mvvm.util.TvConstant.localTopRatedAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.util.TvConstant.localTvPopularAdapterCallback
+import com.ian.junemon.spe_learning_mvvm.util.TvConstant.topRatedTv
 import com.ian.recyclerviewhelper.helper.setUpHorizontalListAdapter
-import kotlinx.android.synthetic.main.fragment_movie.*
 import kotlinx.android.synthetic.main.item_movie.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -46,48 +45,50 @@ class TvFragment : Fragment() {
         return binding.root
     }
 
-    private fun consumeAiringToday(binding: FragmentTvBinding){
+    private fun consumeAiringToday(binding: FragmentTvBinding) {
         binding.apply {
-           vm.airingToday.observe(viewLifecycleOwner, Observer {result ->
-               when(result.status){
-                   ResultToConsume.Status.LOADING ->shimmerSliderTv.startShimmer()
-                   ResultToConsume.Status.SUCCESS ->{
-                       if (!result.data.isNullOrEmpty()) {
-                           vpNowPlayingTv.adapter = SliderTvAdapter(result.data)
-                           indicator.setViewPager(vpNowPlayingTv)
-                           vpNowPlayingTv.visible()
+            vm.airingToday.observe(viewLifecycleOwner, Observer { result ->
+                when (result.status) {
+                    ResultToConsume.Status.LOADING -> shimmerSliderTv.startShimmer()
+                    ResultToConsume.Status.SUCCESS -> {
+                        if (!result.data.isNullOrEmpty()) {
+                            vpNowPlayingTv.adapter = SliderTvAdapter(result.data)
+                            indicator.setViewPager(vpNowPlayingTv)
+                            vpNowPlayingTv.visible()
 
-                           if (shimmerSliderTv.isShimmerStarted && shimmerSliderTv.isShimmerVisible) {
-                               shimmerSliderTv.stopShimmer()
-                               shimmerSliderTv.hideShimmer()
-                               shimmerSliderTv.gone()
-                           }
-                       }
-                   }
-                   ResultToConsume.Status.ERROR ->{
-                       if (shimmerSliderTv.isShimmerStarted && shimmerSliderTv.isShimmerVisible) {
-                           shimmerSliderTv.stopShimmer()
-                           shimmerSliderTv.hideShimmer()
-                           shimmerSliderTv.gone()
-                       }
-                       Snackbar.make(lnTvFragment, result.message!!, Snackbar.LENGTH_LONG).show()
-                   }
-               }
+                            if (shimmerSliderTv.isShimmerStarted && shimmerSliderTv.isShimmerVisible) {
+                                shimmerSliderTv.stopShimmer()
+                                shimmerSliderTv.hideShimmer()
+                                shimmerSliderTv.gone()
+                            }
+                        }
+                    }
+                    ResultToConsume.Status.ERROR -> {
+                        if (shimmerSliderTv.isShimmerStarted && shimmerSliderTv.isShimmerVisible) {
+                            shimmerSliderTv.stopShimmer()
+                            shimmerSliderTv.hideShimmer()
+                            shimmerSliderTv.gone()
+                        }
+                        Snackbar.make(lnTvFragment, result.message!!, Snackbar.LENGTH_LONG).show()
+                    }
+                }
 
-           })
+            })
         }
     }
 
-    private fun consumePopularTv(binding: FragmentTvBinding){
+    private fun consumePopularTv(binding: FragmentTvBinding) {
         binding.apply {
-            vm.popularTv.observe(viewLifecycleOwner, Observer {result ->
-                when(result.status){
-                    ResultToConsume.Status.LOADING ->shimmerPopulartv.startShimmer()
-                    ResultToConsume.Status.SUCCESS ->{
+            vm.popularTv.observe(viewLifecycleOwner, Observer { result ->
+                when (result.status) {
+                    ResultToConsume.Status.LOADING -> shimmerPopulartv.startShimmer()
+                    ResultToConsume.Status.SUCCESS -> {
                         if (!result.data.isNullOrEmpty()) {
                             rvPopulartv.setUpHorizontalListAdapter(result.data, localTvPopularAdapterCallback, R.layout.item_movie, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.name
+                            },{
+                                if(id!=null)this@apply.root.findNavController().navigate(TvFragmentDirections.actionTvFragmentToTvDetailFragment(id!!))
                             })
 
                             if (shimmerPopulartv.isShimmerStarted && shimmerPopulartv.isShimmerVisible) {
@@ -97,7 +98,7 @@ class TvFragment : Fragment() {
                             }
                         }
                     }
-                    ResultToConsume.Status.ERROR ->{
+                    ResultToConsume.Status.ERROR -> {
                         if (shimmerPopulartv.isShimmerStarted && shimmerPopulartv.isShimmerVisible) {
                             shimmerPopulartv.stopShimmer()
                             shimmerPopulartv.hideShimmer()
@@ -106,20 +107,24 @@ class TvFragment : Fragment() {
                     }
                 }
             })
+            tvSeeAllPopularTv.setOnClickListener { it.findNavController().navigate(TvFragmentDirections.actionTvFragmentToTvPaginationFragment(TvConstant.popularTv)) }
         }
+
     }
 
-    private fun consumeTopRated(binding:FragmentTvBinding){
+    private fun consumeTopRated(binding: FragmentTvBinding) {
         binding.apply {
-            vm.topRated.observe(viewLifecycleOwner, Observer {result ->
-                when(result.status){
-                    ResultToConsume.Status.LOADING ->shimmmerTopRatedTv.startShimmer()
-                    ResultToConsume.Status.SUCCESS ->{
+            vm.topRated.observe(viewLifecycleOwner, Observer { result ->
+                when (result.status) {
+                    ResultToConsume.Status.LOADING -> shimmmerTopRatedTv.startShimmer()
+                    ResultToConsume.Status.SUCCESS -> {
 
                         if (!result.data.isNullOrEmpty()) {
                             rvTopRatedtv.setUpHorizontalListAdapter(result.data, localTopRatedAdapterCallback, R.layout.item_movie, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.name
+                            },{
+                                if(id!=null)this@apply.root.findNavController().navigate(TvFragmentDirections.actionTvFragmentToTvDetailFragment(id!!))
                             })
 
                             if (shimmmerTopRatedTv.isShimmerStarted && shimmmerTopRatedTv.isShimmerVisible) {
@@ -131,7 +136,7 @@ class TvFragment : Fragment() {
 
 
                     }
-                    ResultToConsume.Status.ERROR ->{
+                    ResultToConsume.Status.ERROR -> {
                         if (shimmmerTopRatedTv.isShimmerStarted && shimmmerTopRatedTv.isShimmerVisible) {
                             shimmmerTopRatedTv.stopShimmer()
                             shimmmerTopRatedTv.hideShimmer()
@@ -140,6 +145,7 @@ class TvFragment : Fragment() {
                     }
                 }
             })
+            tvSeeAllTopRatedtv.setOnClickListener { it.findNavController().navigate(TvFragmentDirections.actionTvFragmentToTvPaginationFragment(topRatedTv)) }
         }
     }
 

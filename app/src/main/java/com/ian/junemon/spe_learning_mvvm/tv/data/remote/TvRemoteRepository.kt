@@ -77,8 +77,8 @@ class TvRemoteRepository(private val remoteSource: TvRemoteDataSource, private v
 
 
     fun observeTopRatedPagination(connectivityAvailable: Boolean, scope: CoroutineScope) =
-            if (connectivityAvailable) observeRemotePopularPaginationPaged(scope)
-            else observeLocalPopularPaginationPaged()
+            if (connectivityAvailable) observeRemoteTopRatedPaginationPaged(scope)
+            else observeLocalTopRatedPaginationPaged()
 
 
     private fun observeRemoteTopRatedPaginationPaged(scope: CoroutineScope): LiveData<PagedList<TvTopRatedPaginationData>> {

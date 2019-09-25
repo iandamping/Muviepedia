@@ -12,12 +12,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadWithGlide
 import com.ian.app.helper.util.visible
-import com.ian.junemon.spe_learning_mvvm.BuildConfig
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.data.ResultToConsume
 import com.ian.junemon.spe_learning_mvvm.databinding.FragmentTvSearchBinding
-import com.ian.junemon.spe_learning_mvvm.util.TvConstant.tvSearchAdapterCallback
-import com.ian.recyclerviewhelper.helper.setUpVertical
+import com.ian.junemon.spe_learning_mvvm.util.TvConstant.localTvSearchAdapterCallback
 import com.ian.recyclerviewhelper.helper.setUpVerticalGridAdapter
 import kotlinx.android.synthetic.main.item_movie.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -38,6 +36,7 @@ class TvSearchFragment : Fragment() {
             searchVm = vm
             lifecycleOwner = activity
             searchData(this)
+            invalidateAll()
         }
         return binding.root
     }
@@ -51,7 +50,7 @@ class TvSearchFragment : Fragment() {
                     when (result.status) {
                         ResultToConsume.Status.SUCCESS -> {
                             progressTvSearch.gone()
-                            rvTvSearch.setUpVerticalGridAdapter(result.data, tvSearchAdapterCallback, R.layout.item_movie, 2, {
+                            rvTvSearch.setUpVerticalGridAdapter(result.data, localTvSearchAdapterCallback, R.layout.item_movie, 2, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.name
                             })
@@ -66,7 +65,6 @@ class TvSearchFragment : Fragment() {
                     }
                 })
             })
-            invalidateAll()
         }
 
     }

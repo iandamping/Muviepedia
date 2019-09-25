@@ -16,9 +16,10 @@ import com.ian.app.helper.util.visible
 import com.ian.junemon.spe_learning_mvvm.BuildConfig.imageFormatter
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.data.ResultToConsume
-import com.ian.junemon.spe_learning_mvvm.databinding.FragmentDetailBinding
+import com.ian.junemon.spe_learning_mvvm.databinding.FragmentMovieDetailBinding
 import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.movieAdapterCallback
 import com.ian.recyclerviewhelper.helper.setUpVerticalListAdapter
+import kotlinx.android.synthetic.main.fragment_movie_detail.*
 import kotlinx.android.synthetic.main.item_similar.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -27,7 +28,7 @@ class MovieDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val args = MovieDetailFragmentArgs.fromBundle(arguments!!)
-        val binding: FragmentDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
+        val binding: FragmentMovieDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_detail, container, false)
         binding.apply {
             consumeDetailData(args.movieID, this)
             consumeSimilarData(args.movieID, this)
@@ -41,7 +42,7 @@ class MovieDetailFragment : Fragment() {
         return binding.root
     }
 
-    private fun consumeDetailData(movieId: Int, binding: FragmentDetailBinding) {
+    private fun consumeDetailData(movieId: Int, binding: FragmentMovieDetailBinding) {
         binding.apply {
 
             vm.observeDetailData(movieId).observe(viewLifecycleOwner, Observer { result ->
@@ -65,7 +66,7 @@ class MovieDetailFragment : Fragment() {
 
     }
 
-    private fun consumeSimilarData(movieId: Int, binding: FragmentDetailBinding) {
+    private fun consumeSimilarData(movieId: Int, binding: FragmentMovieDetailBinding) {
         binding.apply {
             vm.observeSimilarData(movieId).observe(viewLifecycleOwner, Observer { result ->
                 when (result.status) {

@@ -37,6 +37,7 @@ class MovieSearchFragment : Fragment() {
             searchVm = vms
             lifecycleOwner = activity
             searchData(this)
+            invalidateAll()
         }
         return binding.root
     }
@@ -65,7 +66,6 @@ class MovieSearchFragment : Fragment() {
 
                 })
             })
-            invalidateAll()
         }
     }
 
