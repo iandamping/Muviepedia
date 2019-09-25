@@ -1,6 +1,7 @@
 package com.ian.junemon.spe_learning_mvvm.di
 
 import com.ian.junemon.spe_learning_mvvm.movie.data.remote.MovieRemoteDataSource
+import com.ian.junemon.spe_learning_mvvm.tv.data.remote.TvRemoteDataSource
 import org.koin.dsl.module
 
 /**
@@ -10,5 +11,6 @@ Github = https://github.com/iandamping
  */
 
 val allSourceModule = module {
-    factory { MovieRemoteDataSource(get()) }
+    single { MovieRemoteDataSource(get()) }
+    single { TvRemoteDataSource(get()) }
 }

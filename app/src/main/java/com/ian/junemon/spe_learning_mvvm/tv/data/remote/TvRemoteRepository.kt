@@ -37,7 +37,7 @@ class TvRemoteRepository(private val remoteSource: TvRemoteDataSource, private v
 
     fun observeTopRated(scope: CoroutineScope) = resultLiveData(
             databaseQuery = { db.tvTopRatedDao().loadAll() },
-            networkCall = { remoteSource.getPopularTv() },
+            networkCall = { remoteSource.getTopRatedTv() },
             saveCallResult = { db.tvTopRatedDao().insertAll(it.results.toTopRatedTv(scope)) }
     ).distinctUntilChanged()
 
@@ -51,9 +51,11 @@ class TvRemoteRepository(private val remoteSource: TvRemoteDataSource, private v
 
     @FlowPreview
     @ExperimentalCoroutinesApi
-    fun observeSearchMovie(querry: String) = searchResultLiveData(querry) {
-        remoteSource.getSearchTv(querry)
-    }.distinctUntilChanged()
+    fun observeSearchTv(querry: String, scope: CoroutineScope) = searchResultLiveData(querry,
+            databaseQuery = { db.tvSearchDao().loadAll() },
+            networkCall = { remoteSource.getSearchTv(querry) },
+            saveCallResult = { db.tvSearchDao().updateData(it.results.toSearchTv(scope)) })
+            .distinctUntilChanged()
 
 
     fun observePopularTvPagination(connectivityAvailable: Boolean, scope: CoroutineScope) =

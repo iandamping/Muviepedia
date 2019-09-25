@@ -53,9 +53,11 @@ class MovieRemoteRepository(private val remoteSource: MovieRemoteDataSource, pri
 
     @FlowPreview
     @ExperimentalCoroutinesApi
-    fun observeSearchMovie(querry: String) = searchResultLiveData(querry) {
-        remoteSource.getSearchMovie(querry)
-    }.distinctUntilChanged()
+    fun observeSearchMovie(querry: String,scope: CoroutineScope) = searchResultLiveData(querry,
+            databaseQuery = {db.movieSearchDao().loadAll()},
+            networkCall = {remoteSource.getSearchMovie(querry)},
+            saveCallResult = {db.movieSearchDao().updateData(it.results.toSearchMovie(scope))}
+    ) .distinctUntilChanged()
 
 
     fun observePopularPagination(connectivityAvailable: Boolean, scope: CoroutineScope) =

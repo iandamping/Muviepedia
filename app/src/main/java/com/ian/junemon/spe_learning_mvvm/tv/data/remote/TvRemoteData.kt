@@ -1,6 +1,7 @@
 package com.ian.junemon.spe_learning_mvvm.tv.data.remote
 
 import com.ian.junemon.spe_learning_mvvm.BuildConfig.imageFormatter
+import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.TvSearchLocalData
 import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
@@ -26,6 +27,7 @@ data class TvRemoteData(
         var overview: String?,
         var poster_path: String?
 )
+
 
 suspend fun List<TvRemoteData>.toAiringToday(scope: CoroutineScope): MutableList<TvAiringTodayData> {
     return withContext(scope.coroutineContext) {
@@ -63,6 +65,14 @@ suspend fun List<TvRemoteData>.toPaginationTopRatedTv(scope: CoroutineScope): Mu
     return withContext(scope.coroutineContext) {
         this@toPaginationTopRatedTv.map {
             TvTopRatedPaginationData(it.id, it.name, imageFormatter + it.poster_path)
+        }.toMutableList()
+    }
+}
+
+suspend fun List<TvRemoteData>.toSearchTv(scope: CoroutineScope): MutableList<TvSearchLocalData> {
+    return withContext(scope.coroutineContext) {
+        this@toSearchTv.map {
+            TvSearchLocalData(it.id, it.name, imageFormatter + it.poster_path)
         }.toMutableList()
     }
 }

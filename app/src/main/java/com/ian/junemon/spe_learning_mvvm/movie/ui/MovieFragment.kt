@@ -12,9 +12,10 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadWithGlide
+import com.ian.app.helper.util.visible
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.data.ResultToConsume
-import com.ian.junemon.spe_learning_mvvm.databinding.FragmentHomeBinding
+import com.ian.junemon.spe_learning_mvvm.databinding.FragmentMovieBinding
 import com.ian.junemon.spe_learning_mvvm.movie.ui.slider.SliderMovieAdapter
 import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.localMoviePopularAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.localMovieUpComingAdapterCallback
@@ -25,10 +26,10 @@ import kotlinx.android.synthetic.main.item_movie.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MovieFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentMovieBinding
     private val vm: MovieDataViewModel by viewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie, container, false)
         binding.apply {
             lifecycleOwner = this@MovieFragment
             consumeNowPlayingMovie(this)
@@ -36,19 +37,19 @@ class MovieFragment : Fragment() {
             consumeUpComingMovie(this)
             llSearch.setOnClickListener {
                 it.findNavController().navigate(MovieFragmentDirections.actionHomeFragmentToSearchFragment())
-
             }
         }
         return binding.root
     }
 
 
-    private fun consumeNowPlayingMovie(binding: FragmentHomeBinding) {
+    private fun consumeNowPlayingMovie(binding: FragmentMovieBinding) {
         binding.apply {
             vm.nowPlayingMovie.observe(viewLifecycleOwner, Observer { result ->
                 when (result.status) {
                     ResultToConsume.Status.SUCCESS -> {
                         if (!result.data.isNullOrEmpty()) {
+                            vpNowPlaying.visible()
                             vpNowPlaying.adapter = SliderMovieAdapter(result.data)
                             indicator.setViewPager(binding.vpNowPlaying)
 
@@ -74,7 +75,7 @@ class MovieFragment : Fragment() {
         }
     }
 
-    private fun consumePopularMovie(binding: FragmentHomeBinding) {
+    private fun consumePopularMovie(binding: FragmentMovieBinding) {
         binding.apply {
             vm.popularMovie.observe(viewLifecycleOwner, Observer { result ->
                 when (result.status) {
@@ -109,7 +110,7 @@ class MovieFragment : Fragment() {
         }
     }
 
-    private fun consumeUpComingMovie(binding: FragmentHomeBinding) {
+    private fun consumeUpComingMovie(binding: FragmentMovieBinding) {
         binding.apply {
             vm.upComingMovie.observe(viewLifecycleOwner, Observer { result ->
                 when (result.status) {

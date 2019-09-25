@@ -10,4 +10,7 @@
     <string name="title_dynamic_feature_test">Dynamic Module</string>
     <string name="title_feature">Dynamic Feature</string>
     <string name="up_coming_movie">Up Coming Movie</string>
+    <string name="top_rated_tv_show">Top Rated Tv Show</string>
+    <string name="popular_tv_show">Popular Tv Show</string>
+    <string name="search_tv">Search Tv</string>
 </resources>

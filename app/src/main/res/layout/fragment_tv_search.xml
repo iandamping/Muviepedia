@@ -42,7 +42,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_weight="3"
-                            android:hint="Search Movies"
+                            android:hint="Search Tv Show"
                             android:imeOptions="actionSearch"
                             android:inputType="text"
                             android:lines="1"
@@ -70,7 +70,7 @@
 
         <ProgressBar
             android:visibility="gone"
-            android:id="@+id/progressSearch"
+            android:id="@+id/progressTvSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -81,7 +81,7 @@
 
 
         <TextView
-            android:id="@+id/tvSearchFailed"
+            android:id="@+id/tvSearchTvFailed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -94,9 +94,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSearch"
+            android:id="@+id/rvTvSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:listitem="@layout/item_similar"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -109,6 +110,6 @@
 
         <variable
             name="searchVm"
-            type="com.ian.junemon.spe_learning_mvvm.movie.ui.MovieDataViewModel" />
+            type="com.ian.junemon.spe_learning_mvvm.tv.ui.TvDataViewModel" />
     </data>
 </layout>

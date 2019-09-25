@@ -42,6 +42,7 @@
 
 
                     <androidx.viewpager.widget.ViewPager
+                        android:visibility="gone"
                         android:id="@+id/vpNowPlaying"
                         android:layout_width="match_parent"
                         android:layout_height="200dp" />

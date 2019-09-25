@@ -23,7 +23,7 @@ class MovieDataViewModel(private val repository: MovieRemoteRepository) : BaseVi
 
     @ExperimentalCoroutinesApi
     @FlowPreview
-    fun observeSearchData(querry: String) = repository.observeSearchMovie(querry)
+    fun observeSearchData(querry: String) = repository.observeSearchMovie(querry,vmScopes)
 
     fun observeDetailData(movieID: Int) = repository.getDetailMovie(movieID)
 

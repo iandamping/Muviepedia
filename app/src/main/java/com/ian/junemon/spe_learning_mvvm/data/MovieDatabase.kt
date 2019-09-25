@@ -6,7 +6,6 @@ import com.ian.junemon.spe_learning_mvvm.movie.data.local.dao.*
 import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.*
 import com.ian.junemon.spe_learning_mvvm.tv.data.local.dao.*
 import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.*
-import kotlin.reflect.KClass
 
 /**
  *
@@ -18,11 +17,13 @@ Github = https://github.com/iandamping
     MoviePopularPaginationData::class,
     MovieUpComingLocalData::class,
     MovieUpComingPaginationData::class,
+    MovieSearchLocalData::class,
     TvAiringTodayData::class,
     TvPopularData::class,
     TvPopularPaginationData::class,
     TvTopRatedData::class,
-    TvTopRatedPaginationData::class], version = 1, exportSchema = false)
+    TvTopRatedPaginationData::class,
+    TvSearchLocalData::class], version = 1, exportSchema = false)
 abstract class MovieDatabase : RoomDatabase() {
 
     abstract fun movieNowPlayingDao(): MovieNowPlayingDao
@@ -30,37 +31,16 @@ abstract class MovieDatabase : RoomDatabase() {
     abstract fun movieUpComingDao(): MovieUpComingDao
     abstract fun movieUpComingPaginationDao(): MovieUpComingPaginationDao
     abstract fun moviePopularPaginationDao(): MoviePopularPaginationDao
+    abstract fun movieSearchDao(): MovieSearchDao
 
     abstract fun tvAiringTodayDao(): TvAiringTodayDao
     abstract fun tvPopularDao(): TvPopularDao
     abstract fun tvTopRatedDao(): TvTopRatedDao
     abstract fun tvTopRatedPaginationDao(): TvTopRatedPaginationDao
     abstract fun tvPopularPaginationDao(): TvPopularPaginationDao
+    abstract fun tvSearchDao(): TvSearchDao
+
 }
 
-/*private fun initDatabaseClass(): Array<KClass<*>> =
-        arrayOf(
-                MovieNowPlayingLocalData::class,
-                MoviePopularLocalData::class,
-                MoviePopularPaginationData::class,
-                MovieUpComingLocalData::class,
-                MovieUpComingPaginationData::class,
-                TvAiringTodayData::class,
-                TvPopularData::class,
-                TvPopularPaginationData::class,
-                TvTopRatedData::class,
-                TvTopRatedPaginationData::class)*/
-/*val arrayKClass:MutableList<KClass<*>> = mutableListOf()
- arrayKClass.add(MovieNowPlayingLocalData::class)
- arrayKClass.add(MoviePopularLocalData::class)
- arrayKClass.add(MoviePopularPaginationData::class)
- arrayKClass.add(MovieUpComingLocalData::class)
- arrayKClass.add(MovieUpComingPaginationData::class)
- arrayKClass.add(TvAiringTodayData::class)
- arrayKClass.add(TvPopularData::class)
- arrayKClass.add(TvPopularPaginationData::class)
- arrayKClass.add(TvTopRatedData::class)
- arrayKClass.add(TvTopRatedPaginationData::class)
- return arrayK*/
 
 

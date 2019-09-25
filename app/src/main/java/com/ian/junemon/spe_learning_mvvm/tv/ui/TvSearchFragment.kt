@@ -1,4 +1,4 @@
-package com.ian.junemon.spe_learning_mvvm.movie.ui
+package com.ian.junemon.spe_learning_mvvm.tv.ui
 
 
 import android.os.Bundle
@@ -15,9 +15,9 @@ import com.ian.app.helper.util.visible
 import com.ian.junemon.spe_learning_mvvm.BuildConfig
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.data.ResultToConsume
-import com.ian.junemon.spe_learning_mvvm.databinding.FragmentMovieSearchBinding
-import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.movieAdapterCallback
-import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.searchMovieAdapterCallback
+import com.ian.junemon.spe_learning_mvvm.databinding.FragmentTvSearchBinding
+import com.ian.junemon.spe_learning_mvvm.util.TvConstant.tvSearchAdapterCallback
+import com.ian.recyclerviewhelper.helper.setUpVertical
 import com.ian.recyclerviewhelper.helper.setUpVerticalGridAdapter
 import kotlinx.android.synthetic.main.item_movie.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -27,15 +27,16 @@ import org.koin.android.viewmodel.ext.android.viewModel
 /**
  * A simple [Fragment] subclass.
  */
-class MovieSearchFragment : Fragment() {
-    private val vms: MovieDataViewModel by viewModel()
+class TvSearchFragment : Fragment() {
+    private val vm: TvDataViewModel by viewModel()
+
     @FlowPreview
     @ExperimentalCoroutinesApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: FragmentMovieSearchBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_search, container, false)
+        val binding: FragmentTvSearchBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tv_search, container, false)
         binding.apply {
-            searchVm = vms
-            lifecycleOwner = this@MovieSearchFragment.viewLifecycleOwner
+            searchVm = vm
+            lifecycleOwner = this@TvSearchFragment.viewLifecycleOwner
             searchData(this)
         }
         return binding.root
@@ -43,30 +44,31 @@ class MovieSearchFragment : Fragment() {
 
     @FlowPreview
     @ExperimentalCoroutinesApi
-    fun searchData(binding: FragmentMovieSearchBinding) {
+    private fun searchData(binding: FragmentTvSearchBinding) {
         binding.apply {
-            vms.mutableEditText.observe(this@MovieSearchFragment.viewLifecycleOwner, Observer { querry ->
-                vms.observeSearchData(querry).observe(this@MovieSearchFragment.viewLifecycleOwner, Observer { result ->
+            vm.mutableEditText.observe(this@TvSearchFragment.viewLifecycleOwner, Observer { querry ->
+                vm.observeSearchData(querry).observe(this@TvSearchFragment.viewLifecycleOwner, Observer { result ->
                     when (result.status) {
                         ResultToConsume.Status.SUCCESS -> {
-                            progressSearch.gone()
-                            rvSearch.setUpVerticalGridAdapter(result.data, searchMovieAdapterCallback, R.layout.item_movie, 2, {
-                                ivHomeMovie.loadWithGlide( it.poster_path)
-                                tvHomeMovieName.text = it.title
+                            progressTvSearch.gone()
+                            rvTvSearch.setUpVerticalGridAdapter(result.data, tvSearchAdapterCallback, R.layout.item_movie, 2, {
+                                ivHomeMovie.loadWithGlide(it.poster_path)
+                                tvHomeMovieName.text = it.name
                             })
                         }
-                        ResultToConsume.Status.LOADING -> progressSearch.visible()
+                        ResultToConsume.Status.LOADING -> progressTvSearch.visible()
 
                         ResultToConsume.Status.ERROR -> {
-                            progressSearch.gone()
+                            progressTvSearch.gone()
+                            tvSearchTvFailed.visible()
                             Snackbar.make(constraintParent, result.message!!, Snackbar.LENGTH_LONG).show()
                         }
                     }
-
                 })
             })
             invalidateAll()
         }
+
     }
 
 

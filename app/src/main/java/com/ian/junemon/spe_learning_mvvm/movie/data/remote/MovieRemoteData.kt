@@ -68,3 +68,11 @@ suspend fun List<MovieData>.toPaginationUpComingMovie(scope: CoroutineScope): Mu
     }
 }
 
+suspend fun List<MovieData>.toSearchMovie(scope: CoroutineScope): MutableList<MovieSearchLocalData> {
+    return withContext(scope.coroutineContext) {
+        this@toSearchMovie.map {
+            MovieSearchLocalData(it.id, it.title, imageFormatter + it.poster_path)
+        }.toMutableList()
+    }
+}
+

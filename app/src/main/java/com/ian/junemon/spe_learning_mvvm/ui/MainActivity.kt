@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private fun initBottomNav(binding:ActivityMainBinding){
         binding.apply {
             with(Navigation.findNavController(this@MainActivity,R.id.learnNavHostFragment)){
-                bottomNav.setupWithNavController(this)
+                bottomNav.setupWithNavController(this@with)
                 addOnDestinationChangedListener { _, destination, _ ->
                     when(destination.id){
                         R.id.homeFragment -> bottomNav.visible()

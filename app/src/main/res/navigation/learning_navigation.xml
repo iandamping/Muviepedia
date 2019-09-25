@@ -60,5 +60,14 @@
     <fragment
         android:id="@+id/tvFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.tv.ui.TvFragment"
-        android:label="TvFragment" />
+        android:label="TvFragment" >
+        <action
+            android:id="@+id/action_tvFragment_to_tvSearchFragment"
+            app:destination="@id/tvSearchFragment"
+            app:popUpTo="@+id/tvFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvSearchFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.tv.ui.TvSearchFragment"
+        android:label="TvSearchFragment" />
 </navigation>

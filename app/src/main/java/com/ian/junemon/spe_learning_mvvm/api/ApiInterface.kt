@@ -47,28 +47,28 @@ interface ApiInterface {
 
     /*Tv Session*/
     @GET(popularTv)
-    fun getPopularTvResponse(@Query("api_key") apiKey: String): Response<ResultResponse<TvRemoteData>>
+    suspend fun getPopularTvResponse(@Query("api_key") apiKey: String): Response<ResultResponse<TvRemoteData>>
 
     @GET(topRatedTv)
-    fun getTopRatedTvResponse(@Query("api_key") apiKey: String): Response<ResultResponse<TvRemoteData>>
+    suspend fun getTopRatedTvResponse(@Query("api_key") apiKey: String): Response<ResultResponse<TvRemoteData>>
 
     @GET(airingTodayTv)
-    fun getAiringTodayTvResponse(@Query("api_key") apiKey: String): Response<ResultResponse<TvRemoteData>>
+    suspend fun getAiringTodayTvResponse(@Query("api_key") apiKey: String): Response<ResultResponse<TvRemoteData>>
 
     @GET("$detailTv{tv_id}")
-    fun getDetailTvResponse(@Path("tv_id") tvId: Int, @Query("api_key") apiKey: String): Response<DetailTvData>
+    suspend fun getDetailTvResponse(@Path("tv_id") tvId: Int, @Query("api_key") apiKey: String): Response<DetailTvData>
 
     @GET("$similarTv{tv_id}/similar")
-    fun getSimilarTvResponse(@Path("tv_id") tvId: Int, @Query("api_key") apiKey: String): Response<ResultResponse<TvRemoteData>>
+    suspend fun getSimilarTvResponse(@Path("tv_id") tvId: Int, @Query("api_key") apiKey: String): Response<ResultResponse<TvRemoteData>>
 
     @GET(searchTvShows)
     suspend fun getSearchTvResponse(@Query("api_key") apiKey: String, @Query("query") searchMovie: String): Response<ResultResponse<TvRemoteData>>
 
     /*Tv Paging session*/
     @GET(popularTv)
-    fun pagingGetPopularTvResponse(@Query("api_key") apiKey: String, @Query("page") page: Int): Response<ResultResponse<TvRemoteData>>
+    suspend  fun pagingGetPopularTvResponse(@Query("api_key") apiKey: String, @Query("page") page: Int): Response<ResultResponse<TvRemoteData>>
 
     @GET(topRatedTv)
-    fun pagingGetTopRatedTvResponse(@Query("api_key") apiKey: String, @Query("page") page: Int): Response<ResultResponse<TvRemoteData>>
+    suspend fun pagingGetTopRatedTvResponse(@Query("api_key") apiKey: String, @Query("page") page: Int): Response<ResultResponse<TvRemoteData>>
 
 }

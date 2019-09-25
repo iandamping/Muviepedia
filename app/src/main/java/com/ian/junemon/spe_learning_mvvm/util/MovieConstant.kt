@@ -1,10 +1,7 @@
 package com.ian.junemon.spe_learning_mvvm.util
 
 import androidx.recyclerview.widget.DiffUtil
-import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MoviePopularLocalData
-import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MoviePopularPaginationData
-import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MovieUpComingLocalData
-import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MovieUpComingPaginationData
+import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.*
 import com.ian.junemon.spe_learning_mvvm.movie.data.remote.MovieData
 
 
@@ -68,6 +65,16 @@ object MovieConstant {
         }
 
         override fun areContentsTheSame(oldItem: MovieUpComingPaginationData, newItem: MovieUpComingPaginationData): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    val searchMovieAdapterCallback = object : DiffUtil.ItemCallback<MovieSearchLocalData>() {
+        override fun areItemsTheSame(oldItem: MovieSearchLocalData, newItem: MovieSearchLocalData): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: MovieSearchLocalData, newItem: MovieSearchLocalData): Boolean {
             return oldItem == newItem
         }
     }
