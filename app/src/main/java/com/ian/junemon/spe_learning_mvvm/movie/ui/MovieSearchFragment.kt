@@ -12,11 +12,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadWithGlide
 import com.ian.app.helper.util.visible
-import com.ian.junemon.spe_learning_mvvm.BuildConfig
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.data.ResultToConsume
 import com.ian.junemon.spe_learning_mvvm.databinding.FragmentMovieSearchBinding
-import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.movieAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.searchMovieAdapterCallback
 import com.ian.recyclerviewhelper.helper.setUpVerticalGridAdapter
 import kotlinx.android.synthetic.main.item_movie.view.*
@@ -34,8 +32,8 @@ class MovieSearchFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: FragmentMovieSearchBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_search, container, false)
         binding.apply {
+            lifecycleOwner = viewLifecycleOwner
             searchVm = vms
-            lifecycleOwner = activity
             searchData(this)
             invalidateAll()
         }
@@ -46,7 +44,7 @@ class MovieSearchFragment : Fragment() {
     @ExperimentalCoroutinesApi
     fun searchData(binding: FragmentMovieSearchBinding) {
         binding.apply {
-            vms.mutableEditText.observe(this@MovieSearchFragment.viewLifecycleOwner, Observer { querry ->
+            vms.movieSearchEditText.observe(this@MovieSearchFragment.viewLifecycleOwner, Observer { querry ->
                 vms.observeSearchData(querry).observe(this@MovieSearchFragment.viewLifecycleOwner, Observer { result ->
                     when (result.status) {
                         ResultToConsume.Status.SUCCESS -> {

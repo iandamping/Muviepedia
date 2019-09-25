@@ -2,13 +2,8 @@
     <string name="app_name">SPE_Learning_MVVM</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="see_all">See All</string>
     <string name="popular_movie">Popular Movie</string>
-    <string name="now_playing_movie">Now Playing Movie</string>
-    <string name="top_rated_movie">Top Rated Movie</string>
-    <string name="title_dynamic_feature_test">Dynamic Module</string>
-    <string name="title_feature">Dynamic Feature</string>
     <string name="up_coming_movie">Up Coming Movie</string>
     <string name="top_rated_tv_show">Top Rated Tv Show</string>
     <string name="popular_tv_show">Popular Tv Show</string>

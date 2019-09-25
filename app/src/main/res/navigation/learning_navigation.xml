@@ -19,7 +19,9 @@
             app:popExitAnim="@anim/fade_out_activity" />
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity" />
     </fragment>
     <fragment
         android:id="@+id/detailMovieFragment"
@@ -63,19 +65,30 @@
         android:label="TvFragment" >
         <action
             android:id="@+id/action_tvFragment_to_tvSearchFragment"
-            app:destination="@id/tvSearchFragment"
+            app:destination="@+id/tvSearchFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity"
             app:popUpTo="@+id/tvFragment" />
         <action
             android:id="@+id/action_tvFragment_to_tvPaginationFragment"
-            app:destination="@id/tvPaginationFragment" />
+            app:destination="@id/tvPaginationFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity" />
         <action
             android:id="@+id/action_tvFragment_to_tvDetailFragment"
-            app:destination="@id/tvDetailFragment" />
+            app:destination="@id/tvDetailFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity" />
     </fragment>
     <fragment
         android:id="@+id/tvSearchFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.tv.ui.TvSearchFragment"
-        android:label="TvSearchFragment" />
+        android:label="TvSearchFragment" >
+        <action
+            android:id="@+id/action_tvSearchFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment"
+            app:popUpTo="@+id/tvFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tvPaginationFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.tv.ui.TvPaginationFragment"
@@ -83,6 +96,10 @@
         <argument
             android:name="tvPaginationType"
             app:argType="string" />
+        <action
+            android:id="@+id/action_tvPaginationFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment"
+            app:popUpTo="@+id/tvFragment" />
     </fragment>
     <fragment
         android:id="@+id/tvDetailFragment"
@@ -91,5 +108,8 @@
         <argument
             android:name="tvDetailId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_tvDetailFragment_to_tvFragment"
+            app:destination="@id/tvFragment" />
     </fragment>
 </navigation>

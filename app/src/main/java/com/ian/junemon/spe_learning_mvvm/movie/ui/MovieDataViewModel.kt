@@ -14,7 +14,7 @@ Github = https://github.com/iandamping
  */
 class MovieDataViewModel(private val repository: MovieRemoteRepository) : BaseViewModel() {
 
-    val mutableEditText: MutableLiveData<String> = MutableLiveData()
+    val movieSearchEditText: MutableLiveData<String> = MutableLiveData()
 
     val nowPlayingMovie by lazy { repository.observeNowPlayingMovie(vmScopes) }
 

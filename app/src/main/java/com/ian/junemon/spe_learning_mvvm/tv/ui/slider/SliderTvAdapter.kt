@@ -9,6 +9,7 @@ import com.ian.app.helper.util.loadWithGlide
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.movie.ui.MovieFragmentDirections
 import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.TvAiringTodayData
+import com.ian.junemon.spe_learning_mvvm.tv.ui.TvFragmentDirections
 import kotlinx.android.synthetic.main.item_slider.view.*
 
 /**
@@ -23,7 +24,7 @@ class SliderTvAdapter(private val data: List<TvAiringTodayData>): PagerAdapter()
         val views = container.inflates(R.layout.item_slider)
         views.ivSliderImage.loadWithGlide(data[position].poster_path)
         views.ivSliderImage?.setOnClickListener {
-            it.findNavController().navigate(MovieFragmentDirections.actionHomeFragmentToDetailMovieFragment(data[position].id!!))
+            it.findNavController().navigate(TvFragmentDirections.actionTvFragmentToTvDetailFragment(data[position].id!!))
 
         }
         container.addView(views)

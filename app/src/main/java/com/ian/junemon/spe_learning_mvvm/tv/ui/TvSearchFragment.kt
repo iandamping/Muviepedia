@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadWithGlide
@@ -33,8 +34,8 @@ class TvSearchFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: FragmentTvSearchBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tv_search, container, false)
         binding.apply {
+            lifecycleOwner = viewLifecycleOwner
             searchVm = vm
-            lifecycleOwner = activity
             searchData(this)
             invalidateAll()
         }
@@ -45,14 +46,17 @@ class TvSearchFragment : Fragment() {
     @ExperimentalCoroutinesApi
     private fun searchData(binding: FragmentTvSearchBinding) {
         binding.apply {
-            vm.mutableEditText.observe(this@TvSearchFragment.viewLifecycleOwner, Observer { querry ->
-                vm.observeSearchData(querry).observe(this@TvSearchFragment.viewLifecycleOwner, Observer { result ->
+            vm.mutableEditText.observe(viewLifecycleOwner, Observer { querry ->
+                vm.observeSearchData(querry).observe(viewLifecycleOwner, Observer { result ->
                     when (result.status) {
                         ResultToConsume.Status.SUCCESS -> {
                             progressTvSearch.gone()
                             rvTvSearch.setUpVerticalGridAdapter(result.data, localTvSearchAdapterCallback, R.layout.item_movie, 2, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.name
+                            },{
+                                if(id!=null)this@apply.root.findNavController().navigate(TvSearchFragmentDirections.actionTvSearchFragmentToTvDetailFragment(id!!))
+
                             })
                         }
                         ResultToConsume.Status.LOADING -> progressTvSearch.visible()

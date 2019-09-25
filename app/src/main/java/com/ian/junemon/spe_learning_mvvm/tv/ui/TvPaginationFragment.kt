@@ -48,7 +48,9 @@ class TvPaginationFragment : Fragment() {
                             rvDiscoverMovie.setUpPagingWithGrid(data, R.layout.item_paging, 2, {
                                 ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
                                 tvDiscoverMovieDescription.text = it.name
-                            }, localTvPopularPaginationAdapterCallback)
+                            }, localTvPopularPaginationAdapterCallback,{
+                                if(id!=null)this@apply.root.findNavController().navigate(TvPaginationFragmentDirections.actionTvPaginationFragmentToTvDetailFragment(id!!))
+                            })
 
                             if (shimmerGridListContainer.isShimmerStarted && shimmerGridListContainer.isShimmerVisible) {
                                 shimmerGridListContainer.stopShimmer()
@@ -64,7 +66,10 @@ class TvPaginationFragment : Fragment() {
                             rvDiscoverMovie.setUpPagingWithGrid(data, R.layout.item_paging, 2, {
                                 ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
                                 tvDiscoverMovieDescription.text = it.name
-                            }, localTvTopRatedPaginationAdapterCallback)
+                            }, localTvTopRatedPaginationAdapterCallback,{
+                                if(id!=null)this@apply.root.findNavController().navigate(TvPaginationFragmentDirections.actionTvPaginationFragmentToTvDetailFragment(id!!))
+
+                            })
 
                             if (shimmerGridListContainer.isShimmerStarted && shimmerGridListContainer.isShimmerVisible) {
                                 shimmerGridListContainer.stopShimmer()

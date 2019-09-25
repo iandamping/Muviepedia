@@ -47,7 +47,7 @@
                             android:inputType="text"
                             android:lines="1"
                             android:maxLines="1"
-                            android:text="@={searchVm.mutableEditText}"
+                            android:text="@={searchVm.movieSearchEditText}"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/dc_gray"
                             android:textSize="14sp" />

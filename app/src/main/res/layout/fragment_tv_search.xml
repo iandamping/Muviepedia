@@ -97,11 +97,11 @@
             android:id="@+id/rvTvSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_similar"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llToolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/llToolbar"
+            tools:listitem="@layout/item_similar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
