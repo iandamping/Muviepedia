@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SPE_Learning_MVVM</string>
+    <string name="app_name">Belajar Jetpack!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="see_all">See All</string>
@@ -8,4 +8,7 @@
     <string name="top_rated_tv_show">Top Rated Tv Show</string>
     <string name="popular_tv_show">Popular Tv Show</string>
     <string name="search_tv">Search Tv</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

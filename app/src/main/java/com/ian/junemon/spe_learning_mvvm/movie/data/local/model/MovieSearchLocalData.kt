@@ -15,5 +15,4 @@ data class MovieSearchLocalData(
         @ColumnInfo(name = "imdb_movie_search_id") var id: Int?,
         @ColumnInfo(name = "imdb_movie_search_tittle") var title: String?,
         @ColumnInfo(name = "imdb_movie_search_poster_path") var poster_path: String?
-) {
-}
+)

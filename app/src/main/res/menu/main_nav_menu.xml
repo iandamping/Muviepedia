@@ -11,7 +11,7 @@
         android:title="Tv Show" />
 
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_person_black_24dp"
         android:title="Profile" />
 </menu>
