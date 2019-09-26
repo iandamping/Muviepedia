@@ -2,6 +2,7 @@ package com.ian.junemon.spe_learning_mvvm.tv.ui
 
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +18,13 @@ import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.data.ResultToConsume
 import com.ian.junemon.spe_learning_mvvm.databinding.FragmentTvBinding
 import com.ian.junemon.spe_learning_mvvm.tv.ui.slider.SliderTvAdapter
+import com.ian.junemon.spe_learning_mvvm.util.MovieConstant
 import com.ian.junemon.spe_learning_mvvm.util.TvConstant
 import com.ian.junemon.spe_learning_mvvm.util.TvConstant.localTopRatedAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.util.TvConstant.localTvPopularAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.util.TvConstant.topRatedTv
+import com.ian.junemon.spe_learning_mvvm.util.TvConstant.tvDelayMillis
+import com.ian.junemon.spe_learning_mvvm.util.postRunnable
 import com.ian.recyclerviewhelper.helper.setUpHorizontalListAdapter
 import kotlinx.android.synthetic.main.item_movie.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -31,6 +35,20 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class TvFragment : Fragment() {
     private lateinit var binding: FragmentTvBinding
     private val vm: TvDataViewModel by viewModel()
+    private var mHandler: Handler = Handler()
+    private var pageSize: Int? = 0
+    private var currentPage = 0
+
+    private fun slideRunnable(binding: FragmentTvBinding) = object : Runnable {
+        override fun run() {
+            if (currentPage == pageSize) {
+                currentPage = 0
+            }
+            binding.vpNowPlayingTv.setCurrentItem(currentPage++, true)
+            mHandler.postDelayed(this, tvDelayMillis)
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tv, container, false)
         binding.apply {
@@ -52,9 +70,14 @@ class TvFragment : Fragment() {
                     ResultToConsume.Status.LOADING -> shimmerSliderTv.startShimmer()
                     ResultToConsume.Status.SUCCESS -> {
                         if (!result.data.isNullOrEmpty()) {
-                            vpNowPlayingTv.adapter = SliderTvAdapter(result.data)
-                            indicator.setViewPager(vpNowPlayingTv)
+
+                            pageSize = if(result.data.size > 10){
+                                10
+                            }else result.data.size
+
                             vpNowPlayingTv.visible()
+                            vpNowPlayingTv.adapter = SliderTvAdapter(result.data.take(10))
+                            indicator.setViewPager(vpNowPlayingTv)
 
                             if (shimmerSliderTv.isShimmerStarted && shimmerSliderTv.isShimmerVisible) {
                                 shimmerSliderTv.stopShimmer()
@@ -149,5 +172,13 @@ class TvFragment : Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        if(::binding.isInitialized) mHandler.postRunnable(slideRunnable(binding))
+    }
 
+    override fun onStop() {
+        super.onStop()
+        if(::binding.isInitialized) mHandler.removeCallbacks(slideRunnable(binding))
+    }
 }

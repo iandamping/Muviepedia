@@ -1,5 +1,6 @@
 package com.ian.junemon.spe_learning_mvvm.util
 
+import android.os.Handler
 import androidx.recyclerview.widget.DiffUtil
 import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.*
 import com.ian.junemon.spe_learning_mvvm.tv.data.remote.TvRemoteData
@@ -12,6 +13,8 @@ Github = https://github.com/iandamping
 object TvConstant {
     const val popularTv: String = "popularTv"
     const val topRatedTv: String = "top rated tv"
+    const val tvDelayMillis = 4000L
+
 
     val tvAdapterCallback = object : DiffUtil.ItemCallback<TvRemoteData>() {
         override fun areItemsTheSame(oldItem: TvRemoteData, newItem: TvRemoteData): Boolean {
@@ -74,3 +77,6 @@ object TvConstant {
     }
 
 }
+
+
+fun Handler.postRunnable(runnable:Runnable) = this.postDelayed(runnable, TvConstant.tvDelayMillis)

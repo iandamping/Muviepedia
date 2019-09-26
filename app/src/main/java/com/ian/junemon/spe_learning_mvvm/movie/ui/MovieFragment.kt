@@ -1,6 +1,7 @@
 package com.ian.junemon.spe_learning_mvvm.movie.ui
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +17,14 @@ import com.ian.app.helper.util.visible
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.data.ResultToConsume
 import com.ian.junemon.spe_learning_mvvm.databinding.FragmentMovieBinding
+import com.ian.junemon.spe_learning_mvvm.databinding.FragmentTvBinding
 import com.ian.junemon.spe_learning_mvvm.movie.ui.slider.SliderMovieAdapter
 import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.localMoviePopularAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.localMovieUpComingAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.popularMovie
 import com.ian.junemon.spe_learning_mvvm.util.MovieConstant.upcomingMovie
+import com.ian.junemon.spe_learning_mvvm.util.TvConstant
+import com.ian.junemon.spe_learning_mvvm.util.postRunnable
 import com.ian.recyclerviewhelper.helper.setUpHorizontalListAdapter
 import kotlinx.android.synthetic.main.item_movie.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -28,6 +32,19 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MovieFragment : Fragment() {
     private lateinit var binding: FragmentMovieBinding
     private val vm: MovieDataViewModel by viewModel()
+    private var mHandler: Handler = Handler()
+    private var pageSize: Int? = 0
+    private var currentPage = 0
+
+    private fun slideRunnable(binding: FragmentMovieBinding) = object : Runnable {
+        override fun run() {
+            if (currentPage == pageSize) {
+                currentPage = 0
+            }
+            binding.vpNowPlaying.setCurrentItem(currentPage++, true)
+            mHandler.postDelayed(this, TvConstant.tvDelayMillis)
+        }
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie, container, false)
         binding.apply {
@@ -49,8 +66,13 @@ class MovieFragment : Fragment() {
                 when (result.status) {
                     ResultToConsume.Status.SUCCESS -> {
                         if (!result.data.isNullOrEmpty()) {
+
+                            pageSize = if(result.data.size > 10){
+                                10
+                            }else result.data.size
+
                             vpNowPlaying.visible()
-                            vpNowPlaying.adapter = SliderMovieAdapter(result.data)
+                            vpNowPlaying.adapter = SliderMovieAdapter(result.data.take(10))
                             indicator.setViewPager(binding.vpNowPlaying)
 
                             if (shimmerSlider.isShimmerStarted && shimmerSlider.isShimmerVisible) {
@@ -145,5 +167,13 @@ class MovieFragment : Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        if(::binding.isInitialized) mHandler.postRunnable(slideRunnable(binding))
+    }
 
+    override fun onStop() {
+        super.onStop()
+        if(::binding.isInitialized) mHandler.removeCallbacks(slideRunnable(binding))
+    }
 }
