@@ -2,6 +2,7 @@ package com.ian.junemon.spe_learning_mvvm.movie.ui
 
 import androidx.lifecycle.MutableLiveData
 import com.ian.junemon.spe_learning_mvvm.base.BaseViewModel
+import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MovieSaveDetailData
 import com.ian.junemon.spe_learning_mvvm.movie.data.remote.MovieRemoteRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -16,11 +17,21 @@ class MovieDataViewModel(private val repository: MovieRemoteRepository) : BaseVi
 
     val movieSearchEditText: MutableLiveData<String> = MutableLiveData()
 
+    val consumeSaveDetailMovie by lazy { repository.getDetailData }
+
     val nowPlayingMovie by lazy { repository.observeNowPlayingMovie(vmScopes) }
 
     val popularMovie by lazy { repository.observePopularMovie(vmScopes) }
 
     val upComingMovie by lazy { repository.observeUpComingMovie(vmScopes) }
+
+    fun saveDetailMovieData(data:MovieSaveDetailData){
+        vmScopes.launch { repository.saveDetailData(data) }
+    }
+
+    fun deleteSelectedMovie(selectedId:Int){
+        vmScopes.launch { repository.deleteSelectedDetailData(selectedId) }
+    }
 
     @ExperimentalCoroutinesApi
     @FlowPreview

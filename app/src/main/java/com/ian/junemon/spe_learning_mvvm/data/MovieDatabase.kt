@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.ian.junemon.spe_learning_mvvm.movie.data.local.dao.*
 import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.*
+import com.ian.junemon.spe_learning_mvvm.movie.ui.MovieDetailFragment
 import com.ian.junemon.spe_learning_mvvm.tv.data.local.dao.*
 import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.*
 
@@ -18,6 +19,7 @@ Github = https://github.com/iandamping
     MovieUpComingLocalData::class,
     MovieUpComingPaginationData::class,
     MovieSearchLocalData::class,
+    MovieSaveDetailData::class,
     TvAiringTodayData::class,
     TvPopularData::class,
     TvPopularPaginationData::class,
@@ -32,6 +34,7 @@ abstract class MovieDatabase : RoomDatabase() {
     abstract fun movieUpComingPaginationDao(): MovieUpComingPaginationDao
     abstract fun moviePopularPaginationDao(): MoviePopularPaginationDao
     abstract fun movieSearchDao(): MovieSearchDao
+    abstract fun movieSaveDetailDao(): MovieSaveDetailDao
 
     abstract fun tvAiringTodayDao(): TvAiringTodayDao
     abstract fun tvPopularDao(): TvPopularDao

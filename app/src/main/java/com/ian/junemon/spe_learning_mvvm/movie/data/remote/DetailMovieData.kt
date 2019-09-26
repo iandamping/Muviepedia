@@ -1,4 +1,7 @@
-package com.ian.junemon.spe_learning_mvvm.model
+package com.ian.junemon.spe_learning_mvvm.movie.data.remote
+
+import com.ian.junemon.spe_learning_mvvm.BuildConfig
+import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MovieSaveDetailData
 
 
 /**
@@ -40,4 +43,8 @@ data class DetailMovieData(
     data class ProductionCountry(var iso31661: String, var name: String)
     data class SpokenLanguage(var iso31661: String, var name: String)
 
+}
+
+fun DetailMovieData.toSaveDetail():MovieSaveDetailData{
+    return MovieSaveDetailData(null,id,budget,revenue,release_date,runtime,vote_average,title,tagline, overview,BuildConfig.imageFormatter + poster_path)
 }

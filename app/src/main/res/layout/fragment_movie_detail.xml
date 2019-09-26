@@ -297,7 +297,7 @@
 
         <variable
             name="detailData"
-            type="com.ian.junemon.spe_learning_mvvm.model.DetailMovieData" />
+            type="com.ian.junemon.spe_learning_mvvm.movie.data.remote.DetailMovieData" />
 
     </data>
 </layout>
