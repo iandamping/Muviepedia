@@ -1,6 +1,8 @@
 package com.ian.junemon.spe_learning_mvvm.data
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.ian.junemon.spe_learning_mvvm.movie.data.local.dao.*
 import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.*
@@ -45,6 +47,4 @@ abstract class MovieDatabase : RoomDatabase() {
     abstract fun tvSaveDetailDao(): TvSaveDetailDao
 
 }
-
-
 

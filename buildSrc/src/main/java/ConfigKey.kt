@@ -22,4 +22,5 @@ object ConfigKey {
     const val topRatedMovie = "\"movie/top_rated\""
     const val upComingMovie = "\"movie/upcoming\""
     const val similarMovie = "\"movie/\""
+    const val workerName = "\"Refresh Movie Worker/\""
 }

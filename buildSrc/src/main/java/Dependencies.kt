@@ -34,6 +34,7 @@ import AndroidXVersions.roomVer
 import AndroidXVersions.rxjava2Ver
 import AndroidXVersions.shimmerVer
 import AndroidXVersions.testRunnerVer
+import AndroidXVersions.workerVersion
 
 /**
  *
@@ -78,6 +79,7 @@ object AndroidXVersions {
     const val shimmerVer = "0.5.0"
     const val cirlceIndicatorRelexVer = "1.2.2@aar"
     const val legacySupport = "1.0.0"
+    const val workerVersion = "2.2.0"
 }
 
 object JitpackPlugins {
@@ -169,6 +171,10 @@ object ShimmerLibrary{
 
 object PagingLibrary{
     const val pagingStdLib = "android.arch.paging:runtime:$pagingRuntimeVer"
+}
+
+object WorkerLibrary{
+    const val workManagerStdLib = "androidx.work:work-runtime-ktx:$workerVersion"
 }
 
 object FirebaseLibraries{

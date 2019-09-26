@@ -3,17 +3,16 @@ package com.ian.junemon.spe_learning_mvvm.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavController
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
 import com.ian.app.helper.util.fullScreenAnimation
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.visible
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -25,12 +24,12 @@ class MainActivity : AppCompatActivity() {
         initBottomNav(binding)
     }
 
-    private fun initBottomNav(binding:ActivityMainBinding){
+    private fun initBottomNav(binding: ActivityMainBinding) {
         binding.apply {
-            with(Navigation.findNavController(this@MainActivity,R.id.learnNavHostFragment)){
+            with(Navigation.findNavController(this@MainActivity, R.id.learnNavHostFragment)) {
                 bottomNav.setupWithNavController(this@with)
                 addOnDestinationChangedListener { _, destination, _ ->
-                    when(destination.id){
+                    when (destination.id) {
                         R.id.homeFragment -> bottomNav.visible()
                         R.id.tvFragment -> bottomNav.visible()
                         R.id.profileFragment -> bottomNav.visible()
@@ -40,7 +39,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
 
 }

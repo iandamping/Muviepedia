@@ -80,6 +80,7 @@ dependencies {
     implementation(NavigationLibraies.legacySupportStdLib)
     implementation(RoomLibraies.roomStdLib)
     implementation(RoomLibraies.roomKtxStdLib)
+    implementation(WorkerLibrary.workManagerStdLib)
     kapt(RoomLibraies.roomCompilerStdLib)
 }
 
@@ -102,6 +103,7 @@ fun initBuildCondigField(data: NamedDomainObjectContainer<BuildType>) {
         it.buildConfigField("String", "topRatedMovie", ConfigKey.topRatedMovie)
         it.buildConfigField("String", "upComingMovie", ConfigKey.upComingMovie)
         it.buildConfigField("String", "similarMovie", ConfigKey.similarMovie)
+        it.buildConfigField("String", "workerName", ConfigKey.workerName)
     }
 }
 
