@@ -2,6 +2,8 @@ package com.ian.junemon.spe_learning_mvvm.tv.ui
 
 import androidx.lifecycle.MutableLiveData
 import com.ian.junemon.spe_learning_mvvm.base.BaseViewModel
+import com.ian.junemon.spe_learning_mvvm.movie.data.local.model.MovieSaveDetailData
+import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.TvSaveDetailData
 import com.ian.junemon.spe_learning_mvvm.tv.data.remote.TvRemoteRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -15,6 +17,8 @@ Github = https://github.com/iandamping
 class TvDataViewModel(private val repository:TvRemoteRepository): BaseViewModel() {
     val mutableEditText: MutableLiveData<String> = MutableLiveData()
 
+    val consumeSaveDetailTv by lazy { repository.getDetailData }
+
     val airingToday by lazy { repository.observeAiringToday(vmScopes) }
 
     val popularTv by lazy { repository.observePopular(vmScopes) }
@@ -24,6 +28,14 @@ class TvDataViewModel(private val repository:TvRemoteRepository): BaseViewModel(
     @ExperimentalCoroutinesApi
     @FlowPreview
     fun observeSearchData(querry: String) = repository.observeSearchTv(querry,vmScopes)
+
+    fun saveDetailMovieData(data: TvSaveDetailData){
+        vmScopes.launch { repository.saveDetailData(data) }
+    }
+
+    fun deleteSelectedMovie(selectedId:Int){
+        vmScopes.launch { repository.deleteSelectedDetailData(selectedId) }
+    }
 
     fun observeDetailData(movieID: Int) = repository.getDetailTv(movieID)
 

@@ -2,7 +2,7 @@ package com.ian.junemon.spe_learning_mvvm.api
 
 import com.ian.junemon.spe_learning_mvvm.BuildConfig.*
 import com.ian.junemon.spe_learning_mvvm.movie.data.remote.DetailMovieData
-import com.ian.junemon.spe_learning_mvvm.model.DetailTvData
+import com.ian.junemon.spe_learning_mvvm.tv.data.remote.DetailTvData
 import com.ian.junemon.spe_learning_mvvm.tv.data.remote.TvRemoteData
 import com.ian.junemon.spe_learning_mvvm.movie.data.remote.MovieData
 import retrofit2.Response

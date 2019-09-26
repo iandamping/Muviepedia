@@ -250,7 +250,7 @@
 
         <variable
             name="detailData"
-            type="com.ian.junemon.spe_learning_mvvm.model.DetailTvData" />
+            type="com.ian.junemon.spe_learning_mvvm.tv.data.remote.DetailTvData" />
 
     </data>
 </layout>

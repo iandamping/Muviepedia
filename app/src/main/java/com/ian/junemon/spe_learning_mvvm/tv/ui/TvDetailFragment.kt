@@ -2,12 +2,12 @@ package com.ian.junemon.spe_learning_mvvm.tv.ui
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadWithGlide
@@ -16,6 +16,11 @@ import com.ian.junemon.spe_learning_mvvm.BuildConfig.imageFormatter
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.data.ResultToConsume
 import com.ian.junemon.spe_learning_mvvm.databinding.FragmentTvDetailBinding
+import com.ian.junemon.spe_learning_mvvm.movie.data.remote.DetailMovieData
+import com.ian.junemon.spe_learning_mvvm.movie.data.remote.toSaveDetail
+import com.ian.junemon.spe_learning_mvvm.tv.data.remote.DetailTvData
+import com.ian.junemon.spe_learning_mvvm.tv.data.remote.toDatabase
+import com.ian.junemon.spe_learning_mvvm.ui.MainActivity
 import com.ian.junemon.spe_learning_mvvm.util.TvConstant
 import com.ian.recyclerviewhelper.helper.setUpVerticalListAdapter
 import kotlinx.android.synthetic.main.item_similar.view.*
@@ -26,14 +31,26 @@ import org.koin.android.viewmodel.ext.android.viewModel
  */
 class TvDetailFragment : Fragment() {
     private val vm: TvDataViewModel by viewModel()
+    private var idForDeleteItem: Int? = null
+    private var isFavorite: Boolean = false
+    private var menuItem: Menu? = null
+    private lateinit var detailData: DetailTvData
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val args = TvDetailFragmentArgs.fromBundle(arguments!!)
         val binding: FragmentTvDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tv_detail, container, false)
         binding.apply {
+            (activity as MainActivity).setSupportActionBar(toolbars)
+            (activity as MainActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
             consumeDetailData(args.tvDetailId, this)
             consumeSimilarData(args.tvDetailId, this)
+            ivBack.setOnClickListener {
+                //much better back pressed
+                NavHostFragment.findNavController(this@TvDetailFragment).navigateUp()
+            }
+
             invalidateAll()
         }
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -48,6 +65,7 @@ class TvDetailFragment : Fragment() {
                         progressDetail.gone()
                         result.data?.poster_path = imageFormatter + result.data?.poster_path
                         detailData = result.data
+                        consumeSaveDetailData(result.data)
                     }
                     ResultToConsume.Status.ERROR -> {
                         progressDetail.gone()
@@ -104,4 +122,52 @@ class TvDetailFragment : Fragment() {
         }
     }
 
+    private fun consumeSaveDetailData(tvDetailData: DetailTvData?) {
+        vm.consumeSaveDetailTv.observe(viewLifecycleOwner, Observer {
+            if (tvDetailData != null) {
+                detailData = tvDetailData
+                it.forEach { result ->
+                    if (result.id == tvDetailData.id) {
+                        idForDeleteItem = result.id
+                        isFavorite = true
+                        setFavoriteState()
+                    }
+                }
+            }
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.save_nav_menu, menu)
+        menuItem = menu
+        super.onCreateOptionsMenu(menu, inflater)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+
+            R.id.add_to_favorite -> {
+                if (isFavorite) {
+                    if (idForDeleteItem != null) vm.deleteSelectedMovie(idForDeleteItem!!)
+                    isFavorite = false
+                    setFavoriteState()
+                } else {
+                    if (::detailData.isInitialized) vm.saveDetailMovieData(detailData.toDatabase())
+                    isFavorite = true
+                    setFavoriteState()
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+    private fun setFavoriteState() {
+        if (isFavorite) {
+            if (context != null) menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_bookmark)
+        } else {
+            if (context != null) menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_unbookmark)
+        }
+
+    }
 }

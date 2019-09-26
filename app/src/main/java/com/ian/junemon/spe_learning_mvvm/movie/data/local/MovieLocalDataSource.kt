@@ -43,6 +43,4 @@ class MovieLocalDataSource(private val db:MovieDatabase) {
 
     suspend fun clearSearchMovie() = db.movieSearchDao().deleteAllData()
 
-
-
 }

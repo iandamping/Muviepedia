@@ -30,5 +30,6 @@ val databaseModule = module {
     single { get<MovieDatabase>().tvTopRatedDao() }
     single { get<MovieDatabase>().tvTopRatedPaginationDao() }
     single { get<MovieDatabase>().tvSearchDao() }
+    single { get<MovieDatabase>().tvSaveDetailDao() }
 
 }

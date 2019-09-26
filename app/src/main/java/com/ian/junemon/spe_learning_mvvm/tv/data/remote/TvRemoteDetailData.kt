@@ -1,4 +1,6 @@
-package com.ian.junemon.spe_learning_mvvm.model
+package com.ian.junemon.spe_learning_mvvm.tv.data.remote
+
+import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.TvSaveDetailData
 
 
 /**
@@ -65,13 +67,9 @@ data class DetailTvData(
 
     data class ProductionCompany(var id: Int, var logo_path: String, var name: String, var origin_country: String)
 
-    data class Season(
-            var air_date: String,
-            var episode_count: Int,
-            var id: Int,
-            var name: String,
-            var overview: String,
-            var poster_path: String,
-            var season_number: Int
-    )
+    data class Season(var air_date: String, var episode_count: Int, var id: Int, var name: String, var overview: String, var poster_path: String, var season_number: Int)
+}
+
+fun DetailTvData.toDatabase():TvSaveDetailData{
+    return TvSaveDetailData(null,id,number_of_episodes,first_air_date,vote_average,name,original_name,overview, poster_path)
 }
