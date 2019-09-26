@@ -43,12 +43,11 @@ fun <T, A> searchResultLiveData(data: String, databaseQuery: () -> LiveData<T>,
     emitSource(source)
     searchKeywordFlow(data).debounce(200L).buffer().map { networkCall.invoke(it) }
             .flatMapLatest { resultFlow -> networkCallResultOfFlow(resultFlow) }
-            .catch {
-                emit(ResultToConsume.error(it.message!!))
-                emitSource(source)
-            }.collectLatest { resultFlow ->
+            .collectLatest { resultFlow ->
                 if (resultFlow.status == ResultToConsume.Status.SUCCESS) {
                     if (resultFlow.data != null) saveCallResult(resultFlow.data)
+                }else if(resultFlow.status == ResultToConsume.Status.ERROR){
+                    if (resultFlow.message != null) emit(ResultToConsume.error(resultFlow.message))
                 }
             }
 
