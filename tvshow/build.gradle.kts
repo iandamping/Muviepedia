@@ -7,16 +7,14 @@ plugins {
     kotlin("kapt")
 }
 android {
-    compileSdkVersion(28)
+    compileSdkVersion(29)
     buildToolsVersion("29.0.1")
     defaultConfig {
-        minSdkVersion(16)
-        targetSdkVersion(28)
+        minSdkVersion(21)
+        targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
-        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFile("consumer-rules.pro")
     }
 
     buildTypes {
@@ -72,7 +70,6 @@ dependencies {
     implementation(ShimmerLibrary.shimmerStdLib)
     implementation(PagingLibrary.pagingStdLib)
     implementation(NavigationLibraies.navigationStdLib)
-    implementation(NavigationLibraies.navigationUiStdLib)
     implementation(NavigationLibraies.legacySupportStdLib)
     implementation(project(":data"))
 }

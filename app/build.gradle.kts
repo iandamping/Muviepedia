@@ -11,12 +11,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(28)
+    compileSdkVersion(29)
     buildToolsVersion("29.0.1")
     defaultConfig {
         applicationId = "com.ian.junemon.spe_learning_mvvm"
-        minSdkVersion(16)
-        targetSdkVersion(28)
+        minSdkVersion(21)
+        targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
         multiDexEnabled = true
@@ -56,7 +56,6 @@ dependencies {
     androidTestImplementation(TestLibraries.testRunnerStdLib)
     androidTestImplementation(TestLibraries.espressoCoreStdLib)
     implementation(CustomLibraries.commonHelperStdLib)
-    implementation(NavigationLibraies.navigationStdLib)
     implementation(NavigationLibraies.navigationUiStdLib)
     implementation(WorkerLibrary.workManagerStdLib)
     implementation(KoinLibraries.koinStdLib)
