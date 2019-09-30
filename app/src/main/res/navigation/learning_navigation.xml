@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/learning_navigation"
     app:startDestination="@id/movie_navigation">
 
@@ -27,34 +28,34 @@
     <fragment
         android:id="@+id/detailMovieFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MovieDetailFragment"
-        android:label="DetailMovieFragment" >
-        <argument
-            android:name="movieID"
-            app:argType="integer" />
+        android:label="DetailMovieFragment">
         <action
             android:id="@+id/action_detailMovieFragment_to_homeFragment"
             app:popEnterAnim="@anim/fade_in_activity"
             app:popExitAnim="@anim/fade_out_activity"
             app:popUpTo="@+id/movie_navigation" />
+        <argument
+            android:name="movieID"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/paginationFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MoviePaginationFragment"
-        android:label="PaginationFragment" >
-        <argument
-            android:name="movieType"
-            app:argType="string" />
+        android:label="PaginationFragment">
         <action
             android:id="@+id/action_paginationFragment_to_homeFragment"
             app:destination="@+id/detailMovieFragment"
             app:popEnterAnim="@anim/fade_in_activity"
             app:popExitAnim="@anim/fade_out_activity"
             app:popUpTo="@+id/movie_navigation" />
+        <argument
+            android:name="movieType"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MovieSearchFragment"
-        android:label="SearchFragment" >
+        android:label="SearchFragment">
         <action
             android:id="@+id/action_searchFragment_to_homeFragment"
             app:destination="@+id/detailMovieFragment"
@@ -84,7 +85,7 @@
     <fragment
         android:id="@+id/tvSearchFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.TvSearchFragment"
-        android:label="TvSearchFragment" >
+        android:label="TvSearchFragment">
         <action
             android:id="@+id/action_tvSearchFragment_to_tvDetailFragment"
             app:destination="@id/tvDetailFragment"
@@ -93,25 +94,25 @@
     <fragment
         android:id="@+id/tvPaginationFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.TvPaginationFragment"
-        android:label="TvPaginationFragment" >
-        <argument
-            android:name="tvPaginationType"
-            app:argType="string" />
+        android:label="TvPaginationFragment">
         <action
             android:id="@+id/action_tvPaginationFragment_to_tvDetailFragment"
             app:destination="@id/tvDetailFragment"
             app:popUpTo="@+id/tv_navigation" />
+        <argument
+            android:name="tvPaginationType"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/tvDetailFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.TvDetailFragment"
-        android:label="TvDetailFragment" >
-        <argument
-            android:name="tvDetailId"
-            app:argType="integer" />
+        android:label="TvDetailFragment">
         <action
             android:id="@+id/action_tvDetailFragment_to_tvFragment"
             app:destination="@id/tv_navigation" />
+        <argument
+            android:name="tvDetailId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

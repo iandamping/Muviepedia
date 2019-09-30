@@ -17,23 +17,23 @@ import com.ian.junemon.spe_learning_mvvm.data.util.MovieDetailConstant.localMovi
 import com.ian.junemon.spe_learning_mvvm.data.util.MovieDetailConstant.popularMovie
 import com.ian.junemon.spe_learning_mvvm.data.util.MovieDetailConstant.upcomingMovie
 import com.ian.junemon.spe_learning_mvvm.movie.R
-import com.ian.junemon.spe_learning_mvvm.movie.databinding.FragmentPagingBinding
+import com.ian.junemon.spe_learning_mvvm.movie.databinding.FragmentMoviePagingBinding
 import com.ian.recyclerviewhelper.helper.setUpPagingWithGrid
-import kotlinx.android.synthetic.main.item_paging.view.*
+import kotlinx.android.synthetic.main.item_paging.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MoviePaginationFragment : Fragment() {
     private val vm: MovieDataViewModel by viewModel()
-    private lateinit var binding: FragmentPagingBinding
+    private lateinit var binding: FragmentMoviePagingBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_paging, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_paging, container, false)
         val args = MoviePaginationFragmentArgs.fromBundle(arguments!!)
         initFetchNetworkData(args.movieType, binding)
         return binding.root
     }
 
 
-    private fun initFetchNetworkData(state: String, binding: FragmentPagingBinding) {
+    private fun initFetchNetworkData(state: String, binding: FragmentMoviePagingBinding) {
         binding.apply {
             checkConnectivityStatus { connectivityState ->
                 when (state) {

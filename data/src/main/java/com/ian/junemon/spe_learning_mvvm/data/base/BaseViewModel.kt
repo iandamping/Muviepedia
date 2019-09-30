@@ -1,4 +1,4 @@
-package com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.base
+package com.ian.junemon.spe_learning_mvvm.data.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

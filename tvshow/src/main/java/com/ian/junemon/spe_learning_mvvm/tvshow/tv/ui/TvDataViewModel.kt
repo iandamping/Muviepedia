@@ -1,9 +1,9 @@
 package com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui
 
 import androidx.lifecycle.MutableLiveData
+import com.ian.junemon.spe_learning_mvvm.data.base.BaseViewModel
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.local.model.TvSaveDetailData
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.remote.TvRemoteRepository
-import com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.base.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch

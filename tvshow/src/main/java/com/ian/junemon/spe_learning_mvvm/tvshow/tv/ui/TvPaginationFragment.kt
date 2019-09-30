@@ -17,9 +17,9 @@ import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.localTvT
 import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.popularTv
 import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.topRatedTv
 import com.ian.junemon.spe_learning_mvvm.tvshow.R
-import com.ian.junemon.spe_learning_mvvm.tvshow.databinding.FragmentPagingBinding
+import com.ian.junemon.spe_learning_mvvm.tvshow.databinding.FragmentTvPagingBinding
 import com.ian.recyclerviewhelper.helper.setUpPagingWithGrid
-import kotlinx.android.synthetic.main.item_paging.*
+import kotlinx.android.synthetic.main.item_paging.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
@@ -27,14 +27,14 @@ import org.koin.android.viewmodel.ext.android.viewModel
  */
 class TvPaginationFragment : Fragment() {
     private val vm: TvDataViewModel by viewModel()
-    private lateinit var binding: FragmentPagingBinding
+    private lateinit var binding: FragmentTvPagingBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_paging, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tv_paging, container, false)
         val args = TvPaginationFragmentArgs.fromBundle(arguments!!)
         initFetchNetworkData(args.tvPaginationType, binding)
         return binding.root
     }
-    private fun initFetchNetworkData(state: String, binding: FragmentPagingBinding) {
+    private fun initFetchNetworkData(state: String, binding: FragmentTvPagingBinding) {
         binding.apply {
             checkConnectivityStatus { connectivityState ->
                 when (state) {

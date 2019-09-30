@@ -3,7 +3,7 @@ package com.ian.junemon.spe_learning_mvvm.movie.movie.ui
 import androidx.lifecycle.MutableLiveData
 import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.local.model.MovieSaveDetailData
 import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.remote.MovieRemoteRepository
-import com.ian.junemon.spe_learning_mvvm.movie.movie.ui.base.BaseViewModel
+import com.ian.junemon.spe_learning_mvvm.data.base.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
