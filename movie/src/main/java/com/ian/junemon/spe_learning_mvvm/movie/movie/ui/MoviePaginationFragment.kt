@@ -19,7 +19,7 @@ import com.ian.junemon.spe_learning_mvvm.data.util.MovieDetailConstant.upcomingM
 import com.ian.junemon.spe_learning_mvvm.movie.R
 import com.ian.junemon.spe_learning_mvvm.movie.databinding.FragmentMoviePagingBinding
 import com.ian.recyclerviewhelper.helper.setUpPagingWithGrid
-import kotlinx.android.synthetic.main.item_paging.*
+import kotlinx.android.synthetic.main.item_paging.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MoviePaginationFragment : Fragment() {
@@ -40,8 +40,8 @@ class MoviePaginationFragment : Fragment() {
                     popularMovie -> {
                         vm.observePopularPagination(connectivityState).observe(viewLifecycleOwner, Observer { data ->
                             rvDiscoverMovie.setUpPagingWithGrid(data, R.layout.item_paging, 2, {
-                                ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
-                                tvDiscoverMovieDescription.text = it.title
+                                 ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
+                                 tvDiscoverMovieDescription.text = it.title
                             }, localMoviePopularPaginationAdapterCallback, {
                                 this@apply.root.findNavController().navigate(MoviePaginationFragmentDirections.actionPaginationFragmentToHomeFragment(id!!))
                             })
