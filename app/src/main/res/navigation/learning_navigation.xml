@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/learning_navigation"
-    app:startDestination="@id/homeFragment">
+    android:id="@+id/learning_navigation"
+    app:startDestination="@id/movie_navigation">
+
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.movie.ui.MovieFragment"
+        android:id="@+id/movie_navigation"
+        android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MovieFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_detailMovieFragment"
@@ -25,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailMovieFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.movie.ui.MovieDetailFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MovieDetailFragment"
         android:label="DetailMovieFragment" >
         <argument
             android:name="movieID"
@@ -34,11 +35,11 @@
             android:id="@+id/action_detailMovieFragment_to_homeFragment"
             app:popEnterAnim="@anim/fade_in_activity"
             app:popExitAnim="@anim/fade_out_activity"
-            app:popUpTo="@+id/homeFragment" />
+            app:popUpTo="@+id/movie_navigation" />
     </fragment>
     <fragment
         android:id="@+id/paginationFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.movie.ui.MoviePaginationFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MoviePaginationFragment"
         android:label="PaginationFragment" >
         <argument
             android:name="movieType"
@@ -48,27 +49,27 @@
             app:destination="@+id/detailMovieFragment"
             app:popEnterAnim="@anim/fade_in_activity"
             app:popExitAnim="@anim/fade_out_activity"
-            app:popUpTo="@+id/homeFragment" />
+            app:popUpTo="@+id/movie_navigation" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.movie.ui.MovieSearchFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MovieSearchFragment"
         android:label="SearchFragment" >
         <action
             android:id="@+id/action_searchFragment_to_homeFragment"
             app:destination="@+id/detailMovieFragment"
-            app:popUpTo="@+id/homeFragment" />
+            app:popUpTo="@+id/movie_navigation" />
     </fragment>
     <fragment
-        android:id="@+id/tvFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.tv.ui.TvFragment"
+        android:id="@+id/tv_navigation"
+        android:name="com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.TvFragment"
         android:label="TvFragment" >
         <action
             android:id="@+id/action_tvFragment_to_tvSearchFragment"
             app:destination="@+id/tvSearchFragment"
             app:popEnterAnim="@anim/fade_in_activity"
             app:popExitAnim="@anim/fade_out_activity"
-            app:popUpTo="@+id/tvFragment" />
+            app:popUpTo="@+id/tv_navigation" />
         <action
             android:id="@+id/action_tvFragment_to_tvPaginationFragment"
             app:destination="@id/tvPaginationFragment"
@@ -82,16 +83,16 @@
     </fragment>
     <fragment
         android:id="@+id/tvSearchFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.tv.ui.TvSearchFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.TvSearchFragment"
         android:label="TvSearchFragment" >
         <action
             android:id="@+id/action_tvSearchFragment_to_tvDetailFragment"
             app:destination="@id/tvDetailFragment"
-            app:popUpTo="@+id/tvFragment" />
+            app:popUpTo="@+id/tv_navigation" />
     </fragment>
     <fragment
         android:id="@+id/tvPaginationFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.tv.ui.TvPaginationFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.TvPaginationFragment"
         android:label="TvPaginationFragment" >
         <argument
             android:name="tvPaginationType"
@@ -99,18 +100,18 @@
         <action
             android:id="@+id/action_tvPaginationFragment_to_tvDetailFragment"
             app:destination="@id/tvDetailFragment"
-            app:popUpTo="@+id/tvFragment" />
+            app:popUpTo="@+id/tv_navigation" />
     </fragment>
     <fragment
         android:id="@+id/tvDetailFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.tv.ui.TvDetailFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.TvDetailFragment"
         android:label="TvDetailFragment" >
         <argument
             android:name="tvDetailId"
             app:argType="integer" />
         <action
             android:id="@+id/action_tvDetailFragment_to_tvFragment"
-            app:destination="@id/tvFragment" />
+            app:destination="@id/tv_navigation" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

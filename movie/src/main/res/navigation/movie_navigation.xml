@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movie_navigation"
+    tools:ignore="UnusedNavigation"
+    app:startDestination="@id/movieFragment">
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MovieFragment"
+        android:label="MovieFragment">
+        <action
+            android:id="@+id/action_movieFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_paginationFragment"
+            app:destination="@id/paginationFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_detailMovieFragment"
+            app:destination="@id/detailMovieFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailMovieFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MovieDetailFragment"
+        android:label="DetailMovieFragment">
+        <action
+            android:id="@+id/action_detailMovieFragment_to_homeFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity" />
+        <argument
+            android:name="movieID"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/paginationFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MoviePaginationFragment"
+        android:label="PaginationFragment">
+        <action
+            android:id="@+id/action_paginationFragment_to_homeFragment"
+            app:destination="@+id/detailMovieFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity" />
+        <argument
+            android:name="movieType"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MovieSearchFragment"
+        android:label="SearchFragment">
+        <action
+            android:id="@+id/action_searchFragment_to_homeFragment"
+            app:destination="@+id/detailMovieFragment" />
+    </fragment>
+</navigation>

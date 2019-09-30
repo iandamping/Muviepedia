@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
                 bottomNav.setupWithNavController(this@with)
                 addOnDestinationChangedListener { _, destination, _ ->
                     when (destination.id) {
-                        R.id.homeFragment -> bottomNav.visible()
-                        R.id.tvFragment -> bottomNav.visible()
+                        R.id.movie_navigation -> bottomNav.visible()
+                        R.id.tv_navigation -> bottomNav.visible()
                         R.id.profileFragment -> bottomNav.visible()
                         else -> bottomNav.gone()
                     }

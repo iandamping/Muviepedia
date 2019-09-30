@@ -26,7 +26,6 @@ android {
     buildTypes {
         initDebug(this@android)
         initRelease(this@android)
-        initBuildCondigField(this)
     }
 
     java {
@@ -38,8 +37,7 @@ android {
     }
 
 }
-
-tasks.withType < KotlinCompile > {
+tasks.withType <KotlinCompile> {
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -57,59 +55,20 @@ dependencies {
     testImplementation(TestLibraries.mockitoCoreStdLib)
     androidTestImplementation(TestLibraries.testRunnerStdLib)
     androidTestImplementation(TestLibraries.espressoCoreStdLib)
-    implementation(CoroutineLibraries.coroutineCoreStdLib)
-    implementation(CoroutineLibraries.coroutineStdLib)
     implementation(CustomLibraries.commonHelperStdLib)
-    implementation(CustomLibraries.recyclerHelperStdLib)
-    implementation(CustomLibraries.cirlceIndicatorStdLib)
-    implementation(KoinLibraries.koinStdLib)
-    implementation(LifecycleLibraries.lifecycleLib)
-    kapt(LifecycleLibraries.lifecycleCompilerStdLib)
-    implementation(LifecycleLibraries.viewmodelKtxStdLib)
-    implementation(LifecycleLibraries.liveDataKtxStdLib)
-    implementation(NetworkingLibraries.retrofitStdLib)
-    implementation(NetworkingLibraries.retrofitGsonConverterStdLib)
-    implementation(NetworkingLibraries.okhttp3LoggingInterceptorStdLib)
-    implementation(NetworkingLibraries.okhttp3StdLib)
-    implementation(NetworkingLibraries.gsonStdLib)
-    implementation(LottieLibrary.lottieStdLib)
-    implementation(ShimmerLibrary.shimmerStdLib)
-    implementation(PagingLibrary.pagingStdLib)
     implementation(NavigationLibraies.navigationStdLib)
     implementation(NavigationLibraies.navigationUiStdLib)
-    implementation(NavigationLibraies.legacySupportStdLib)
-    implementation(RoomLibraies.roomStdLib)
-    implementation(RoomLibraies.roomKtxStdLib)
     implementation(WorkerLibrary.workManagerStdLib)
-    kapt(RoomLibraies.roomCompilerStdLib)
-}
-
-fun initBuildCondigField(data: NamedDomainObjectContainer<BuildType>) {
-    data.forEach {
-        it.buildConfigField("String", "movieApiKey", ConfigKey.movie_api_key)
-        it.buildConfigField("String", "baseUrl", ConfigKey.base_url)
-        it.buildConfigField("String", "imageFormatter", ConfigKey.imageFormatter)
-        it.buildConfigField("String", "popularMovie", ConfigKey.popularMovie)
-        it.buildConfigField("String", "searchMovie", ConfigKey.searchMovie)
-        it.buildConfigField("String", "detailMovie", ConfigKey.detailMovie)
-        it.buildConfigField("String", "popularTv", ConfigKey.popularTv)
-        it.buildConfigField("String", "searchTvShows", ConfigKey.searchTvShows)
-        it.buildConfigField("String", "detailTv", ConfigKey.detailTv)
-        it.buildConfigField("String", "similarTv", ConfigKey.similarTv)
-        it.buildConfigField("String", "topRatedTv", ConfigKey.topRatedTv)
-        it.buildConfigField("String", "airingTodayTv", ConfigKey.airingTodayTv)
-        it.buildConfigField("String", "onAirTv", ConfigKey.onAirTv)
-        it.buildConfigField("String", "nowPlayingMovie", ConfigKey.nowPlayingMovie)
-        it.buildConfigField("String", "topRatedMovie", ConfigKey.topRatedMovie)
-        it.buildConfigField("String", "upComingMovie", ConfigKey.upComingMovie)
-        it.buildConfigField("String", "similarMovie", ConfigKey.similarMovie)
-        it.buildConfigField("String", "workerName", ConfigKey.workerName)
-    }
+    implementation(KoinLibraries.koinStdLib)
+    implementation(project(":movie"))
+    implementation(project(":tvshow"))
+    implementation(project(":data"))
 }
 
 fun NamedDomainObjectContainer<BuildType>.initDebug(proguard: BaseAppModuleExtension) {
     this.getByName("debug") {
         isMinifyEnabled = false
+        isShrinkResources = false
         proguardFiles(proguard.getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
 }
@@ -117,6 +76,7 @@ fun NamedDomainObjectContainer<BuildType>.initDebug(proguard: BaseAppModuleExten
 fun NamedDomainObjectContainer<BuildType>.initRelease(proguard: BaseAppModuleExtension) {
     this.getByName("release") {
         isMinifyEnabled = false
+        isShrinkResources = false
         proguardFiles(proguard.getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
 }
