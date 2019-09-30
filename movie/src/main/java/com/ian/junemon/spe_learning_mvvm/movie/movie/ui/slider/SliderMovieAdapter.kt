@@ -23,7 +23,7 @@ class SliderMovieAdapter(private val data: List<MovieNowPlayingLocalData>) : Pag
         val views = container.inflates(R.layout.item_slider)
         views.ivSliderImage.loadWithGlide(data[position].poster_path)
         views.ivSliderImage?.setOnClickListener {
-            it.findNavController().navigate(MovieFragmentDirections.actionMovieFragmentToDetailMovieFragment(data[position].id!!))
+            it.findNavController().navigate(MovieFragmentDirections.actionHomeFragmentToDetailMovieFragment(data[position].id!!))
 
         }
         container.addView(views)

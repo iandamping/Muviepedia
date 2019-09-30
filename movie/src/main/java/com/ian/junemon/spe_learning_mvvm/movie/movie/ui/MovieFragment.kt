@@ -52,7 +52,7 @@ class MovieFragment : Fragment() {
             consumePopularMovie(this)
             consumeUpComingMovie(this)
             llSearch.setOnClickListener {
-                it.findNavController().navigate(MovieFragmentDirections.actionMovieFragmentToSearchFragment())
+                it.findNavController().navigate(MovieFragmentDirections.actionHomeFragmentToSearchFragment())
             }
         }
         return binding.root
@@ -105,7 +105,7 @@ class MovieFragment : Fragment() {
                             rvPopularMovie.setUpHorizontalListAdapter(result.data, localMoviePopularAdapterCallback, R.layout.item_movie, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.title
-                            }, { if (id != null) findNavController().navigate(MovieFragmentDirections.actionMovieFragmentToDetailMovieFragment(id!!)) })
+                            }, { if (id != null) findNavController().navigate(MovieFragmentDirections.actionHomeFragmentToDetailMovieFragment(id!!)) })
 
                             if (shimmerPopularMovie.isShimmerStarted && shimmerPopularMovie.isShimmerVisible) {
                                 shimmerPopularMovie.stopShimmer()
@@ -126,7 +126,7 @@ class MovieFragment : Fragment() {
                 }
             })
             tvSeeAllPopularMovie.setOnClickListener {
-                it.findNavController().navigate(MovieFragmentDirections.actionMovieFragmentToPaginationFragment(popularMovie))
+                it.findNavController().navigate(MovieFragmentDirections.actionMovieNavigationToPaginationFragment(popularMovie))
             }
         }
     }
@@ -140,7 +140,7 @@ class MovieFragment : Fragment() {
                             rvUpComingMovie.setUpHorizontalListAdapter(result.data, localMovieUpComingAdapterCallback, R.layout.item_movie, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.title
-                            }, { if (id != null) findNavController().navigate(MovieFragmentDirections.actionMovieFragmentToDetailMovieFragment(id!!)) })
+                            }, { if (id != null) findNavController().navigate(MovieFragmentDirections.actionHomeFragmentToDetailMovieFragment(id!!)) })
 
                             if (shimmmerUpComingMovie.isShimmerStarted && shimmmerUpComingMovie.isShimmerVisible) {
                                 shimmmerUpComingMovie.stopShimmer()
@@ -161,7 +161,7 @@ class MovieFragment : Fragment() {
                 }
             })
             tvSeeAllUpComingMovie.setOnClickListener {
-                it.findNavController().navigate(MovieFragmentDirections.actionMovieFragmentToPaginationFragment(upcomingMovie))
+                it.findNavController().navigate(MovieFragmentDirections.actionMovieNavigationToPaginationFragment(upcomingMovie))
             }
         }
     }

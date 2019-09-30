@@ -15,15 +15,16 @@
             app:popEnterAnim="@anim/fade_in_activity"
             app:popExitAnim="@anim/fade_out_activity" />
         <action
-            android:id="@+id/action_homeFragment_to_paginationFragment"
-            app:destination="@id/paginationFragment"
-            app:popEnterAnim="@anim/fade_in_activity"
-            app:popExitAnim="@anim/fade_out_activity" />
-        <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment"
             app:popEnterAnim="@anim/fade_in_activity"
             app:popExitAnim="@anim/fade_out_activity" />
+        <action
+            android:id="@+id/action_movie_navigation_to_paginationFragment"
+            app:destination="@id/paginationFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity"
+            app:popUpTo="@+id/movie_navigation" />
     </fragment>
     <fragment
         android:id="@+id/detailMovieFragment"
@@ -82,6 +83,7 @@
             app:popEnterAnim="@anim/fade_in_activity"
             app:popExitAnim="@anim/fade_out_activity" />
     </fragment>
+
     <fragment
         android:id="@+id/tvSearchFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.TvSearchFragment"
