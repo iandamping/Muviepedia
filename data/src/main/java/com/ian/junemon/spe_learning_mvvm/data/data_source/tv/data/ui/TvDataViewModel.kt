@@ -1,4 +1,4 @@
-package com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui
+package com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.ui
 
 import androidx.lifecycle.MutableLiveData
 import com.ian.junemon.spe_learning_mvvm.data.base.BaseViewModel

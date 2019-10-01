@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import com.ian.app.helper.util.checkConnectivityStatus
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadResizeWithGlide
+import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.ui.MovieDataViewModel
 import com.ian.junemon.spe_learning_mvvm.data.util.MovieDetailConstant.localMoviePopularPaginationAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.data.util.MovieDetailConstant.localMovieUpComingPaginationAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.data.util.MovieDetailConstant.popularMovie

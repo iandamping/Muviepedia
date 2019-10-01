@@ -15,6 +15,7 @@ import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadWithGlide
 import com.ian.app.helper.util.visible
 import com.ian.junemon.spe_learning_mvvm.data.data.ResultToConsume
+import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.ui.TvDataViewModel
 import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.localTopRatedAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.localTvPopularAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.popularTv

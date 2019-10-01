@@ -1,4 +1,4 @@
-package com.ian.junemon.spe_learning_mvvm.movie.movie.ui
+package com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.ui
 
 import androidx.lifecycle.MutableLiveData
 import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.local.model.MovieSaveDetailData

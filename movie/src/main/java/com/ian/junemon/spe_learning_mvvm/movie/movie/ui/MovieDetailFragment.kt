@@ -16,6 +16,7 @@ import com.ian.junemon.spe_learning_mvvm.data.BuildConfig.imageFormatter
 import com.ian.junemon.spe_learning_mvvm.data.data.ResultToConsume
 import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.remote.DetailMovieData
 import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.remote.toSaveDetail
+import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.ui.MovieDataViewModel
 import com.ian.junemon.spe_learning_mvvm.data.util.MovieDetailConstant.movieAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.movie.R
 import com.ian.junemon.spe_learning_mvvm.movie.databinding.FragmentMovieDetailBinding

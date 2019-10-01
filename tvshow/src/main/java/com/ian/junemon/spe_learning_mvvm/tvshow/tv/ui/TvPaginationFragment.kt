@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import com.ian.app.helper.util.checkConnectivityStatus
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadResizeWithGlide
+import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.ui.TvDataViewModel
 import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.localTvPopularPaginationAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.localTvTopRatedPaginationAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.popularTv

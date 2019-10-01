@@ -13,6 +13,7 @@ import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadWithGlide
 import com.ian.app.helper.util.visible
 import com.ian.junemon.spe_learning_mvvm.data.data.ResultToConsume
+import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.ui.MovieDataViewModel
 import com.ian.junemon.spe_learning_mvvm.data.util.MovieDetailConstant.searchMovieAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.movie.R
 import com.ian.junemon.spe_learning_mvvm.movie.databinding.FragmentMovieSearchBinding

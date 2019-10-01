@@ -8,12 +8,15 @@ import com.ian.junemon.spe_learning_mvvm.data.api.ApiInterface
 import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.local.MovieLocalDataSource
 import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.remote.MovieRemoteDataSource
 import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.remote.MovieRemoteRepository
+import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.ui.MovieDataViewModel
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.local.TvLocalDataSource
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.remote.TvRemoteDataSource
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.remote.TvRemoteRepository
+import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.ui.TvDataViewModel
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -34,7 +37,8 @@ private val loadFeature by lazy {
                     databaseModule,
                     networkModule,
                     repositoryModule,
-                    dataSourceModule)
+                    dataSourceModule,
+                    viewModelModule)
     )
 }
 
@@ -78,6 +82,11 @@ val networkModule = module {
 val repositoryModule = module {
     single { MovieRemoteRepository(get(), get()) }
     single { TvRemoteRepository(get(), get()) }
+}
+
+val viewModelModule = module {
+    viewModel { MovieDataViewModel(get()) }
+    viewModel { TvDataViewModel(get()) }
 }
 
 private fun createOkHttpClient(): OkHttpClient {

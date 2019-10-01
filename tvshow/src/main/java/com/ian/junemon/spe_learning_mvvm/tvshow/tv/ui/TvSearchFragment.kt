@@ -14,6 +14,7 @@ import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadWithGlide
 import com.ian.app.helper.util.visible
 import com.ian.junemon.spe_learning_mvvm.data.data.ResultToConsume
+import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.ui.TvDataViewModel
 import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.localTvSearchAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.tvshow.R
 import com.ian.junemon.spe_learning_mvvm.tvshow.databinding.FragmentTvSearchBinding

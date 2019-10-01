@@ -16,6 +16,7 @@ import com.ian.junemon.spe_learning_mvvm.data.BuildConfig.imageFormatter
 import com.ian.junemon.spe_learning_mvvm.data.data.ResultToConsume
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.remote.DetailTvData
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.remote.toDatabase
+import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.ui.TvDataViewModel
 import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.tvAdapterCallback
 import com.ian.junemon.spe_learning_mvvm.tvshow.R
 import com.ian.junemon.spe_learning_mvvm.tvshow.databinding.FragmentTvDetailBinding
