@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/learning_navigation"
     app:startDestination="@id/movie_navigation">
@@ -116,8 +116,10 @@
             android:name="tvDetailId"
             app:argType="integer" />
     </fragment>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.profile.ProfileFragment"
         android:label="ProfileFragment" />
+
 </navigation>

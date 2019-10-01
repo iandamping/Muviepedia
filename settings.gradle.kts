@@ -1,1 +1,1 @@
-include(":app",":movie",":tvshow",":data")
+include(":app",":movie",":tvshow",":data",":navigation")

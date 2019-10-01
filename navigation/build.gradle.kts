@@ -1,4 +1,3 @@
-
 plugins {
     id("com.android.library")
     id("androidx.navigation.safeargs")
@@ -30,7 +29,6 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
 
         }
-
     }
 
     java {
@@ -43,7 +41,6 @@ android {
 
 }
 
-
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(CoreLibraries.kotlinStdLib)
@@ -51,21 +48,13 @@ dependencies {
     implementation(CoreLibraries.androidXCoreStdLib)
     implementation(CoreLibraries.constraintLayoutStdLib)
     implementation(CoreLibraries.materialDesignStdLib)
-    implementation(CoreLibraries.multidexStdLib)
     testImplementation(TestLibraries.jUnit4StdLib)
     testImplementation(TestLibraries.mockitoCoreStdLib)
     androidTestImplementation(TestLibraries.testRunnerStdLib)
     androidTestImplementation(TestLibraries.espressoCoreStdLib)
     implementation(CustomLibraries.commonHelperStdLib)
-    implementation(CustomLibraries.recyclerHelperStdLib)
-    implementation(CustomLibraries.cirlceIndicatorStdLib)
-    implementation(KoinLibraries.koinStdLib)
-    implementation(LottieLibrary.lottieStdLib)
-    implementation(ShimmerLibrary.shimmerStdLib)
-    implementation(PagingLibrary.pagingStdLib)
     implementation(NavigationLibraies.navigationStdLib)
-    implementation(NavigationLibraies.legacySupportStdLib)
-    implementation(project(":data"))
-
+    implementation(NavigationLibraies.navigationUiStdLib)
+    implementation(project(":movie"))
+    implementation(project(":tvshow"))
 }
-

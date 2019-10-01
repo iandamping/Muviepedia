@@ -37,15 +37,8 @@ class TvDetailFragment : Fragment() {
             val args = TvDetailFragmentArgs.fromBundle(arguments!!)
         val binding: FragmentTvDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tv_detail, container, false)
         binding.apply {
-         /*   (activity as MainActivity).setSupportActionBar(toolbars)
-            (activity as MainActivity).supportActionBar?.setDisplayShowTitleEnabled(false)*/
             consumeDetailData(args.tvDetailId, this)
             consumeSimilarData(args.tvDetailId, this)
-            ivBack.setOnClickListener {
-                //much better back pressed
-                NavHostFragment.findNavController(this@TvDetailFragment).navigateUp()
-            }
-
             invalidateAll()
         }
         setHasOptionsMenu(true)
@@ -67,7 +60,7 @@ class TvDetailFragment : Fragment() {
                     }
                     ResultToConsume.Status.ERROR -> {
                         progressDetail.gone()
-                        Snackbar.make(coordinatorParent, result.message!!, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(nestedParent, result.message!!, Snackbar.LENGTH_LONG).show()
                     }
                 }
             })
@@ -90,7 +83,10 @@ class TvDetailFragment : Fragment() {
                                 tvSimilarMovieTittle.text = it.name
                                 tvSimilarMovieReleaseDate.text = it.first_air_date
                             }, {
-                                if (id != null) consumeDetailData(id!!, this@apply)
+                                if (id != null) {
+                                    consumeDetailData(id!!, this@apply)
+                                    consumeSimilarData(id!!, this@apply)
+                                }
                             })
 
                             if (shimmerSimilar.isShimmerStarted && shimmerSimilar.isShimmerVisible) {

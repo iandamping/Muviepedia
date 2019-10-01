@@ -3,11 +3,8 @@ package com.ian.junemon.spe_learning_mvvm.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
-import androidx.work.WorkInfo
-import androidx.work.WorkManager
 import com.ian.app.helper.util.fullScreenAnimation
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.visible

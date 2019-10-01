@@ -26,6 +26,7 @@ import com.ian.junemon.spe_learning_mvvm.movie.databinding.FragmentMovieBinding
 import com.ian.junemon.spe_learning_mvvm.movie.movie.ui.slider.SliderMovieAdapter
 import com.ian.junemon.spe_learning_mvvm.movie.util.postRunnable
 import com.ian.recyclerviewhelper.helper.setUpHorizontalListAdapter
+import kotlinx.android.synthetic.main.item_movie.*
 import kotlinx.android.synthetic.main.item_movie.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 

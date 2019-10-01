@@ -35,16 +35,8 @@ class MovieDetailFragment : Fragment() {
         val args = MovieDetailFragmentArgs.fromBundle(arguments!!)
         val binding: FragmentMovieDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_detail, container, false)
         binding.apply {
-            /*(activity as MainActivity).setSupportActionBar(toolbars)
-            (activity as MainActivity).supportActionBar.setDisplayShowTitleEnabled(false)*/
-
             consumeDetailData(args.movieID, this)
             consumeSimilarData(args.movieID, this)
-
-            ivBack.setOnClickListener {
-                //much better back pressed
-                NavHostFragment.findNavController(this@MovieDetailFragment).navigateUp()
-            }
             invalidateAll()
 
         }
@@ -92,7 +84,10 @@ class MovieDetailFragment : Fragment() {
                                 tvSimilarMovieTittle.text = it.title
                                 tvSimilarMovieReleaseDate.text = it.release_date
                             }, {
-                                if (id != null){ consumeDetailData(id!!, this@apply) }
+                                if (id != null){
+                                    consumeDetailData(id!!, this@apply)
+                                    consumeSimilarData(id!!, this@apply)
+                                }
                             })
 
                             if (shimmerSimilar.isShimmerStarted && shimmerSimilar.isShimmerVisible) {

@@ -4,10 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
-    id("androidx.navigation.safeargs")
     kotlin("android")
-    kotlin("android.extensions")
-    kotlin("kapt")
 }
 
 android {
@@ -44,6 +41,8 @@ tasks.withType <KotlinCompile> {
 }
 
 dependencies {
+    implementation(project(":data"))
+    implementation(project(":navigation"))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(CoreLibraries.kotlinStdLib)
     implementation(CoreLibraries.appCompatStdLib)
@@ -56,12 +55,11 @@ dependencies {
     androidTestImplementation(TestLibraries.testRunnerStdLib)
     androidTestImplementation(TestLibraries.espressoCoreStdLib)
     implementation(CustomLibraries.commonHelperStdLib)
+//    implementation(NavigationLibraies.navigationStdLib)
     implementation(NavigationLibraies.navigationUiStdLib)
     implementation(WorkerLibrary.workManagerStdLib)
     implementation(KoinLibraries.koinStdLib)
-    implementation(project(":movie"))
-    implementation(project(":tvshow"))
-    implementation(project(":data"))
+
 }
 
 fun NamedDomainObjectContainer<BuildType>.initDebug(proguard: BaseAppModuleExtension) {
