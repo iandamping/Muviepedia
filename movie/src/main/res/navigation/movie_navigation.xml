@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/movie_navigation"
     tools:ignore="UnusedNavigation"
-    app:startDestination="@id/HomeFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/HomeFragment"
+        android:id="@+id/homeFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MovieFragment"
         android:label="HomeFragment" >
         <action
@@ -25,7 +25,7 @@
             app:destination="@id/paginationFragment"
             app:popEnterAnim="@anim/fade_in_activity"
             app:popExitAnim="@anim/fade_out_activity"
-            app:popUpTo="@+id/movie_navigation" />
+            app:popUpTo="@+id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailMovieFragment"
@@ -35,7 +35,7 @@
             android:id="@+id/action_detailMovieFragment_to_homeFragment"
             app:popEnterAnim="@anim/fade_in_activity"
             app:popExitAnim="@anim/fade_out_activity"
-            app:popUpTo="@+id/movie_navigation" />
+            app:popUpTo="@+id/homeFragment" />
         <argument
             android:name="movieID"
             app:argType="integer" />
@@ -49,7 +49,7 @@
             app:destination="@+id/detailMovieFragment"
             app:popEnterAnim="@anim/fade_in_activity"
             app:popExitAnim="@anim/fade_out_activity"
-            app:popUpTo="@+id/movie_navigation" />
+            app:popUpTo="@+id/homeFragment" />
         <argument
             android:name="movieType"
             app:argType="string" />
@@ -61,6 +61,6 @@
         <action
             android:id="@+id/action_searchFragment_to_homeFragment"
             app:destination="@+id/detailMovieFragment"
-            app:popUpTo="@+id/movie_navigation" />
+            app:popUpTo="@+id/homeFragment" />
     </fragment>
 </navigation>

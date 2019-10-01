@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
+import com.ian.app.helper.util.fullScreen
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadWithGlide
 import com.ian.app.helper.util.visible
@@ -56,6 +57,9 @@ class TvDetailFragment : Fragment() {
                         progressDetail.gone()
                         result.data?.poster_path = imageFormatter + result.data?.poster_path
                         detailData = result.data
+                        ivDetailTvImages.setOnClickListener {
+                            it.context.fullScreen(result.data?.poster_path)
+                        }
                         consumeSaveDetailData(result.data)
                     }
                     ResultToConsume.Status.ERROR -> {

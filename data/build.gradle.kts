@@ -9,11 +9,11 @@ plugins {
     kotlin("kapt")
 }
 android {
-    compileSdkVersion(28)
+    compileSdkVersion(29)
     buildToolsVersion("29.0.1")
     defaultConfig {
-        minSdkVersion(16)
-        targetSdkVersion(28)
+        minSdkVersion(19)
+        targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
         multiDexEnabled = true

@@ -9,11 +9,12 @@ android {
     compileSdkVersion(29)
     buildToolsVersion("29.0.1")
     defaultConfig {
-        minSdkVersion(21)
+        minSdkVersion(19)
         targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFile("consumer-rules.pro")
     }
 
     buildTypes {

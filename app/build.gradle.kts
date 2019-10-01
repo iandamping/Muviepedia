@@ -12,7 +12,7 @@ android {
     buildToolsVersion("29.0.1")
     defaultConfig {
         applicationId = "com.ian.junemon.spe_learning_mvvm"
-        minSdkVersion(21)
+        minSdkVersion(19)
         targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
@@ -43,6 +43,8 @@ tasks.withType <KotlinCompile> {
 dependencies {
     implementation(project(":data"))
     implementation(project(":navigation"))
+    /*implementation(project(":movie"))
+    implementation(project(":tvshow"))*/
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(CoreLibraries.kotlinStdLib)
     implementation(CoreLibraries.appCompatStdLib)

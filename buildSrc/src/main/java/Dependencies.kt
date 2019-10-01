@@ -75,7 +75,7 @@ object AndroidXVersions {
     const val gmsServiceVer = "4.3.1"
     const val roomVer = "2.2.0-beta01"
     const val lottiVer = "3.0.7"
-    const val navigationVer = "2.1.0"
+    const val navigationVer = "2.2.0-alpha03"
     const val shimmerVer = "0.5.0"
     const val cirlceIndicatorRelexVer = "1.2.2@aar"
     const val legacySupport = "1.0.0"

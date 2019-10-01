@@ -2,8 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/learning_navigation"
+    android:id="@+id/navigation_app"
     app:startDestination="@id/movie_navigation">
+
+
+   <!--<include app:graph="@navigation/movie_navigation" />
+   <include app:graph="@navigation/tv_navigation" />-->
 
     <fragment
         android:id="@+id/movie_navigation"
@@ -121,5 +125,7 @@
         android:id="@+id/profileFragment"
         android:name="com.ian.junemon.spe_learning_mvvm.profile.ProfileFragment"
         android:label="ProfileFragment" />
+
+
 
 </navigation>
