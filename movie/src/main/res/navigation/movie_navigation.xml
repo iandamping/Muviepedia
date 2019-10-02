@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MovieFragment"
+        android:name="com.ian.app.muviepedia.movie.movie.ui.MovieFragment"
         android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_detailMovieFragment"
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailMovieFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MovieDetailFragment"
+        android:name="com.ian.app.muviepedia.movie.movie.ui.MovieDetailFragment"
         android:label="DetailMovieFragment">
         <action
             android:id="@+id/action_detailMovieFragment_to_homeFragment"
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/paginationFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MoviePaginationFragment"
+        android:name="com.ian.app.muviepedia.movie.movie.ui.MoviePaginationFragment"
         android:label="PaginationFragment">
         <action
             android:id="@+id/action_paginationFragment_to_homeFragment"
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.movie.movie.ui.MovieSearchFragment"
+        android:name="com.ian.app.muviepedia.movie.movie.ui.MovieSearchFragment"
         android:label="SearchFragment">
         <action
             android:id="@+id/action_searchFragment_to_homeFragment"

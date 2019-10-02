@@ -108,6 +108,6 @@
 
         <variable
             name="searchVm"
-            type="com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.ui.MovieDataViewModel" />
+            type="com.ian.app.muviepedia.data.data_source.movie.data.ui.MovieDataViewModel" />
     </data>
 </layout>

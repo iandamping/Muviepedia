@@ -11,7 +11,7 @@ android {
     compileSdkVersion(29)
     buildToolsVersion("29.0.1")
     defaultConfig {
-        applicationId = "com.ian.junemon.spe_learning_mvvm"
+        applicationId = "com.ian.app.muviepedia"
         minSdkVersion(19)
         targetSdkVersion(29)
         versionCode = 1

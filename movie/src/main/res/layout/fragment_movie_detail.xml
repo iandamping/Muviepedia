@@ -255,7 +255,7 @@
 
         <variable
             name="detailData"
-            type="com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.remote.DetailMovieData" />
+            type="com.ian.app.muviepedia.data.data_source.movie.data.remote.DetailMovieData" />
 
     </data>
 </layout>
