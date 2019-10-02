@@ -61,6 +61,8 @@
         <action
             android:id="@+id/action_searchFragment_to_homeFragment"
             app:destination="@+id/detailMovieFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity"
             app:popUpTo="@+id/homeFragment" />
     </fragment>
 </navigation>

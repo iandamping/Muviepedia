@@ -43,8 +43,8 @@ tasks.withType <KotlinCompile> {
 dependencies {
     implementation(project(":data"))
     implementation(project(":navigation"))
-    /*implementation(project(":movie"))
-    implementation(project(":tvshow"))*/
+    implementation(project(":movie"))
+    implementation(project(":tvshow"))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(CoreLibraries.kotlinStdLib)
     implementation(CoreLibraries.appCompatStdLib)

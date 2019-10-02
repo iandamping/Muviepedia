@@ -35,6 +35,8 @@
         <action
             android:id="@+id/action_tvSearchFragment_to_tvDetailFragment"
             app:destination="@id/tvDetailFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity"
             app:popUpTo="@+id/tvFragment" />
     </fragment>
     <fragment
@@ -44,6 +46,8 @@
         <action
             android:id="@+id/action_tvPaginationFragment_to_tvDetailFragment"
             app:destination="@id/tvDetailFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity"
             app:popUpTo="@+id/tvFragment" />
         <argument
             android:name="tvPaginationType"
@@ -55,7 +59,9 @@
         android:label="TvDetailFragment">
         <action
             android:id="@+id/action_tvDetailFragment_to_tvFragment"
-            app:destination="@id/tvFragment" />
+            app:destination="@id/tvFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity" />
         <argument
             android:name="tvDetailId"
             app:argType="integer" />
