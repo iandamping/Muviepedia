@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadWithGlide
@@ -53,6 +54,8 @@ class MovieSearchFragment : Fragment() {
                             rvSearch.setUpVerticalGridAdapter(result.data, searchMovieAdapterCallback, R.layout.item_movie, 2, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.title
+                            },{
+                               if(id!=null) this@apply.root.findNavController().navigate(MovieSearchFragmentDirections.actionSearchFragmentToHomeFragment(id!!))
                             })
                         }
                         ResultToConsume.Status.LOADING -> progressSearch.visible()
