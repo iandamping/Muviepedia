@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/lnMovieFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/vpNowPlaying"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:visibility="gone" />
+
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmerSlider"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <include layout="@layout/shimmer_slider" />
+
+
+                        </LinearLayout>
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_horizontal"
+                        app:ci_drawable="@drawable/dot_enable"
+                        app:ci_drawable_unselected="@drawable/dot_disable" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/slider"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/spacing_medium"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/lato"
+                        android:paddingBottom="8dp"
+                        android:text="Search Movie"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/letter_medium"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvSearch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:fontFamily="@font/lato"
+                        android:paddingBottom="8dp"
+                        android:text="@string/see_all"
+                        android:textColor="@color/dc_gray"
+                        android:textSize="@dimen/letter_medium" />
+
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvPopular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/llSearch"
+                    android:layout_marginTop="@dimen/spacing_medium">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/spacing_medium"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/lato"
+                                android:paddingBottom="8dp"
+                                android:text="@string/popular_movie"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/letter_medium"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvSeeAllPopularMovie"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:fontFamily="@font/lato"
+                                android:paddingBottom="8dp"
+                                android:text="@string/see_all"
+                                android:textColor="@color/dc_gray"
+                                android:textSize="@dimen/letter_medium" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/spacing_medium"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/lato"
+                                android:paddingBottom="8dp"
+                                android:text="@string/up_coming_movie"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/letter_medium"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvSeeAllUpComingMovie"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:fontFamily="@font/lato"
+                                android:paddingBottom="8dp"
+                                android:text="@string/see_all"
+                                android:textColor="@color/dc_gray"
+                                android:textSize="@dimen/letter_medium" />
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvPopularMovie"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_medium" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvUpComingMovie"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_medium" />
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmmerUpComingMovie"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <include layout="@layout/shimmer_recycler_bg" />
+
+
+                            </LinearLayout>
+
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmerPopularMovie"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <include layout="@layout/shimmer_recycler_bg" />
+
+
+                            </LinearLayout>
+
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+</layout>

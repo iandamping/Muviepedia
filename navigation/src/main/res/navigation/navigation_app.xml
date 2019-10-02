@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_app"
+    app:startDestination="@id/movie_navigation">
+
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.ian.junemon.spe_learning_mvvm.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+    <include app:graph="@navigation/tv_navigation" />
+
+    <include app:graph="@navigation/movie_navigation" />
+
+
+</navigation>
