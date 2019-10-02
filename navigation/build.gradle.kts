@@ -1,9 +1,7 @@
 plugins {
     id("com.android.library")
-    id("androidx.navigation.safeargs")
     kotlin("android")
     kotlin("android.extensions")
-    kotlin("kapt")
 }
 android {
     compileSdkVersion(29)

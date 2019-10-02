@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.library")
-    id("androidx.navigation.safeargs")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")

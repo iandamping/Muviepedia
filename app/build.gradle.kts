@@ -34,7 +34,7 @@ android {
     }
 
 }
-tasks.withType <KotlinCompile> {
+tasks.withType<KotlinCompile> {
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -57,7 +57,6 @@ dependencies {
     androidTestImplementation(TestLibraries.testRunnerStdLib)
     androidTestImplementation(TestLibraries.espressoCoreStdLib)
     implementation(CustomLibraries.commonHelperStdLib)
-//    implementation(NavigationLibraies.navigationStdLib)
     implementation(NavigationLibraies.navigationUiStdLib)
     implementation(WorkerLibrary.workManagerStdLib)
     implementation(KoinLibraries.koinStdLib)
