@@ -71,5 +71,5 @@ data class DetailTvData(
 }
 
 fun DetailTvData.toDatabase(): TvSaveDetailData {
-    return TvSaveDetailData(null,id,number_of_episodes,first_air_date,vote_average,name,original_name,overview, poster_path)
+    return TvSaveDetailData(null, id, number_of_episodes, first_air_date, vote_average, name, original_name, overview, poster_path)
 }

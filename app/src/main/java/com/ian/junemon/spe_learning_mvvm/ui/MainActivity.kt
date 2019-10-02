@@ -7,7 +7,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.ian.app.helper.util.fullScreenAnimation
 import com.ian.app.helper.util.gone
-import com.ian.app.helper.util.logE
 import com.ian.app.helper.util.visible
 import com.ian.junemon.spe_learning_mvvm.R
 import com.ian.junemon.spe_learning_mvvm.databinding.ActivityMainBinding

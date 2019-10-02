@@ -2,7 +2,7 @@ package com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.remote
 
 import com.ian.junemon.spe_learning_mvvm.data.BuildConfig.imageFormatter
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.local.model.*
-import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.*
+import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.TvAiringTodayData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
 

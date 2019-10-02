@@ -26,7 +26,6 @@ import com.ian.junemon.spe_learning_mvvm.movie.databinding.FragmentMovieBinding
 import com.ian.junemon.spe_learning_mvvm.movie.movie.ui.slider.SliderMovieAdapter
 import com.ian.junemon.spe_learning_mvvm.movie.util.postRunnable
 import com.ian.recyclerviewhelper.helper.setUpHorizontalListAdapter
-import kotlinx.android.synthetic.main.item_movie.*
 import kotlinx.android.synthetic.main.item_movie.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -46,6 +45,7 @@ class MovieFragment : Fragment() {
             mHandler.postDelayed(this, tvDelayMillis)
         }
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie, container, false)
         binding.apply {
@@ -68,9 +68,9 @@ class MovieFragment : Fragment() {
                     ResultToConsume.Status.SUCCESS -> {
                         if (!result.data.isNullOrEmpty()) {
 
-                            pageSize = if(result.data!!.size > 10){
+                            pageSize = if (result.data!!.size > 10) {
                                 10
-                            }else result.data!!.size
+                            } else result.data!!.size
 
                             vpNowPlaying.visible()
                             vpNowPlaying.adapter = SliderMovieAdapter(result.data!!.take(10))
@@ -170,11 +170,11 @@ class MovieFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        if(::binding.isInitialized) mHandler.postRunnable(slideRunnable(binding))
+        if (::binding.isInitialized) mHandler.postRunnable(slideRunnable(binding))
     }
 
     override fun onStop() {
         super.onStop()
-        if(::binding.isInitialized) mHandler.removeCallbacks(slideRunnable(binding))
+        if (::binding.isInitialized) mHandler.removeCallbacks(slideRunnable(binding))
     }
 }

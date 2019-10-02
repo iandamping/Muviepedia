@@ -55,8 +55,8 @@ class TvSearchFragment : Fragment() {
                             rvTvSearch.setUpVerticalGridAdapter(result.data, localTvSearchAdapterCallback, R.layout.item_movie, 2, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.name
-                            },{
-                                if(id!=null)this@apply.root.findNavController().navigate(TvSearchFragmentDirections.actionTvSearchFragmentToTvDetailFragment(id!!))
+                            }, {
+                                if (id != null) this@apply.root.findNavController().navigate(TvSearchFragmentDirections.actionTvSearchFragmentToTvDetailFragment(id!!))
 
                             })
                         }

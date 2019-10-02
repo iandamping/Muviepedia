@@ -6,8 +6,9 @@ import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.local.dao.*
 import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.local.model.*
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.local.dao.*
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.local.model.*
-import com.ian.junemon.spe_learning_mvvm.tv.data.local.dao.*
-import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.*
+import com.ian.junemon.spe_learning_mvvm.tv.data.local.dao.TvAiringTodayDao
+import com.ian.junemon.spe_learning_mvvm.tv.data.local.dao.TvSaveDetailDao
+import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.TvAiringTodayData
 
 /**
  *

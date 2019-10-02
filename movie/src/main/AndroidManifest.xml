@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ian.junemon.spe_learning_mvvm.movie" />
+<manifest package="com.ian.junemon.spe_learning_mvvm.movie" />

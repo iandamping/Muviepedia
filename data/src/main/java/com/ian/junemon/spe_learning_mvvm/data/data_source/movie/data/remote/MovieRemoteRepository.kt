@@ -28,7 +28,7 @@ class MovieRemoteRepository(private val remoteSource: MovieRemoteDataSource, pri
 
     suspend fun saveDetailData(data: MovieSaveDetailData) = localSource.saveDetailMovieData(data)
 
-    suspend fun deleteSelectedDetailData(selectedId:Int) = localSource.deleteSelectedDetailMovieData(selectedId)
+    suspend fun deleteSelectedDetailData(selectedId: Int) = localSource.deleteSelectedDetailMovieData(selectedId)
 
     fun observeNowPlayingMovie(scope: CoroutineScope) = resultLiveData(
             databaseQuery = { localSource.getNowPlayingMovieData },
@@ -45,7 +45,7 @@ class MovieRemoteRepository(private val remoteSource: MovieRemoteDataSource, pri
 
 
     fun observeUpComingMovie(scope: CoroutineScope) = resultLiveData(
-            databaseQuery = {localSource.getUpComingMovieData },
+            databaseQuery = { localSource.getUpComingMovieData },
             networkCall = { remoteSource.getUpComingMovie() },
             saveCallResult = { localSource.saveUpComingMovie(it.results.toUpComingMovie(scope)) }
     ).distinctUntilChanged()
@@ -62,11 +62,11 @@ class MovieRemoteRepository(private val remoteSource: MovieRemoteDataSource, pri
 
     @FlowPreview
     @ExperimentalCoroutinesApi
-    fun observeSearchMovie(querry: String,scope: CoroutineScope) = searchResultLiveData(querry,
-            databaseQuery = {localSource.getSearchLocalData},
-            networkCall = {remoteSource.getSearchMovie(querry)},
-            saveCallResult = {localSource.updateSearchMovie(it.results.toSearchMovie(scope))}
-    ) .distinctUntilChanged()
+    fun observeSearchMovie(querry: String, scope: CoroutineScope) = searchResultLiveData(querry,
+            databaseQuery = { localSource.getSearchLocalData },
+            networkCall = { remoteSource.getSearchMovie(querry) },
+            saveCallResult = { localSource.updateSearchMovie(it.results.toSearchMovie(scope)) }
+    ).distinctUntilChanged()
 
 
     fun observePopularPagination(connectivityAvailable: Boolean, scope: CoroutineScope) =

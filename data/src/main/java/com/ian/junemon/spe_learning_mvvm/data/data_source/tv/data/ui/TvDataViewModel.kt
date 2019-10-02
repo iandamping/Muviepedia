@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 Created by Ian Damping on 24/09/2019.
 Github = https://github.com/iandamping
  */
-class TvDataViewModel(private val repository: TvRemoteRepository): BaseViewModel() {
+class TvDataViewModel(private val repository: TvRemoteRepository) : BaseViewModel() {
     val mutableEditText: MutableLiveData<String> = MutableLiveData()
 
     val consumeSaveDetailTv by lazy { repository.getDetailData }
@@ -26,13 +26,13 @@ class TvDataViewModel(private val repository: TvRemoteRepository): BaseViewModel
 
     @ExperimentalCoroutinesApi
     @FlowPreview
-    fun observeSearchData(querry: String) = repository.observeSearchTv(querry,vmScopes)
+    fun observeSearchData(querry: String) = repository.observeSearchTv(querry, vmScopes)
 
-    fun saveDetailMovieData(data: TvSaveDetailData){
+    fun saveDetailMovieData(data: TvSaveDetailData) {
         vmScopes.launch { repository.saveDetailData(data) }
     }
 
-    fun deleteSelectedMovie(selectedId:Int){
+    fun deleteSelectedMovie(selectedId: Int) {
         vmScopes.launch { repository.deleteSelectedDetailData(selectedId) }
     }
 

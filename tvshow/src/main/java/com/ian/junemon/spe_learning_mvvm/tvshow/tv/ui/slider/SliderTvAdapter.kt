@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_slider.view.*
 Created by Ian Damping on 24/09/2019.
 Github = https://github.com/iandamping
  */
-class SliderTvAdapter(private val data: List<TvAiringTodayData>): PagerAdapter() {
+class SliderTvAdapter(private val data: List<TvAiringTodayData>) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
 

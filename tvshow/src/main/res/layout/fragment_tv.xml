@@ -16,11 +16,19 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:id="@+id/slider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/vpNowPlayingTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:visibility="gone" />
+
 
                     <com.facebook.shimmer.ShimmerFrameLayout
                         android:id="@+id/shimmerSliderTv"
@@ -40,13 +48,6 @@
 
                     </com.facebook.shimmer.ShimmerFrameLayout>
 
-
-                    <androidx.viewpager.widget.ViewPager
-                        android:visibility="gone"
-                        android:id="@+id/vpNowPlayingTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp" />
-
                     <me.relex.circleindicator.CircleIndicator
                         android:id="@+id/indicator"
                         android:layout_width="wrap_content"
@@ -58,13 +59,13 @@
 
 
                 <LinearLayout
+                    android:id="@+id/llSearchTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:id="@+id/llSearchTv"
                     android:layout_below="@id/slider"
-                    android:orientation="horizontal"
-                    android:layout_marginEnd="8dp">
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
@@ -106,9 +107,9 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
                             android:layout_marginRight="8dp"
-                            android:orientation="horizontal"
-                            android:layout_marginEnd="8dp">
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="0dp"
@@ -135,36 +136,12 @@
 
                         </LinearLayout>
 
-                        <com.facebook.shimmer.ShimmerFrameLayout
-                            android:layout_width="match_parent"
-                            android:id="@+id/shimmerPopulartv"
-                            android:layout_height="match_parent">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:orientation="vertical">
-
-                                <include layout="@layout/shimmer_recycler_bg" />
-
-
-                            </LinearLayout>
-
-                        </com.facebook.shimmer.ShimmerFrameLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvPopulartv"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/spacing_medium" />
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
                             android:layout_marginRight="8dp"
-                            android:orientation="horizontal"
-                            android:layout_marginEnd="8dp">
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="0dp"
@@ -191,6 +168,18 @@
 
                         </LinearLayout>
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvPopulartv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_medium" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvTopRatedtv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_medium" />
+
                         <com.facebook.shimmer.ShimmerFrameLayout
                             android:id="@+id/shimmmerTopRatedTv"
                             android:layout_width="match_parent"
@@ -209,11 +198,23 @@
 
                         </com.facebook.shimmer.ShimmerFrameLayout>
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvTopRatedtv"
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmerPopulartv"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/spacing_medium" />
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <include layout="@layout/shimmer_recycler_bg" />
+
+
+                            </LinearLayout>
+
+                        </com.facebook.shimmer.ShimmerFrameLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

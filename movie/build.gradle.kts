@@ -1,4 +1,3 @@
-
 plugins {
     id("com.android.library")
     id("androidx.navigation.safeargs")
@@ -19,13 +18,13 @@ android {
     }
 
     buildTypes {
-        getByName("debug"){
+        getByName("debug") {
             isMinifyEnabled = false
             isShrinkResources = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
 
         }
-        getByName("release"){
+        getByName("release") {
             isMinifyEnabled = false
             isShrinkResources = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")

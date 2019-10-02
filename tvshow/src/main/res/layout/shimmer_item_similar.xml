@@ -17,9 +17,9 @@
         android:layout_marginLeft="@dimen/spacing_huge"
         android:layout_marginTop="@dimen/spacing_large"
         android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_marginRight="@dimen/spacing_medium"
         android:layout_toRightOf="@id/ivSimilarMovie"
-        android:orientation="vertical"
-        android:layout_marginRight="@dimen/spacing_medium">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvSimilarMovieTittle"

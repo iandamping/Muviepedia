@@ -21,10 +21,10 @@ import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.localTvP
 import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.popularTv
 import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.topRatedTv
 import com.ian.junemon.spe_learning_mvvm.data.util.TvShowDetailConstant.tvDelayMillis
-import com.ian.junemon.spe_learning_mvvm.tvshow.util.postRunnable
-import com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.slider.SliderTvAdapter
 import com.ian.junemon.spe_learning_mvvm.tvshow.R
 import com.ian.junemon.spe_learning_mvvm.tvshow.databinding.FragmentTvBinding
+import com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.slider.SliderTvAdapter
+import com.ian.junemon.spe_learning_mvvm.tvshow.util.postRunnable
 import com.ian.recyclerviewhelper.helper.setUpHorizontalListAdapter
 import kotlinx.android.synthetic.main.item_movie.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -71,9 +71,9 @@ class TvFragment : Fragment() {
                     ResultToConsume.Status.SUCCESS -> {
                         if (!result.data.isNullOrEmpty()) {
 
-                            pageSize = if(result.data!!.size > 10){
+                            pageSize = if (result.data!!.size > 10) {
                                 10
-                            }else result.data!!.size
+                            } else result.data!!.size
 
                             vpNowPlayingTv.visible()
                             vpNowPlayingTv.adapter = SliderTvAdapter(result.data!!.take(10))
@@ -110,8 +110,8 @@ class TvFragment : Fragment() {
                             rvPopulartv.setUpHorizontalListAdapter(result.data, localTvPopularAdapterCallback, R.layout.item_movie, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.name
-                            },{
-                                if(id!=null)this@apply.root.findNavController().navigate(TvFragmentDirections.actionTvFragmentToTvDetailFragment(id!!))
+                            }, {
+                                if (id != null) this@apply.root.findNavController().navigate(TvFragmentDirections.actionTvFragmentToTvDetailFragment(id!!))
                             })
 
                             if (shimmerPopulartv.isShimmerStarted && shimmerPopulartv.isShimmerVisible) {
@@ -146,8 +146,8 @@ class TvFragment : Fragment() {
                             rvTopRatedtv.setUpHorizontalListAdapter(result.data, localTopRatedAdapterCallback, R.layout.item_movie, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.name
-                            },{
-                                if(id!=null)this@apply.root.findNavController().navigate(TvFragmentDirections.actionTvFragmentToTvDetailFragment(id!!))
+                            }, {
+                                if (id != null) this@apply.root.findNavController().navigate(TvFragmentDirections.actionTvFragmentToTvDetailFragment(id!!))
                             })
 
                             if (shimmmerTopRatedTv.isShimmerStarted && shimmmerTopRatedTv.isShimmerVisible) {
@@ -174,11 +174,11 @@ class TvFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        if(::binding.isInitialized) mHandler.postRunnable(slideRunnable(binding))
+        if (::binding.isInitialized) mHandler.postRunnable(slideRunnable(binding))
     }
 
     override fun onStop() {
         super.onStop()
-        if(::binding.isInitialized) mHandler.removeCallbacks(slideRunnable(binding))
+        if (::binding.isInitialized) mHandler.removeCallbacks(slideRunnable(binding))
     }
 }

@@ -21,13 +21,13 @@ android {
     }
 
     buildTypes {
-        getByName("debug"){
+        getByName("debug") {
             isMinifyEnabled = false
             isShrinkResources = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
 
         }
-        getByName("release"){
+        getByName("release") {
             isMinifyEnabled = false
             isShrinkResources = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -41,7 +41,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_10
     }
 }
-tasks.withType <KotlinCompile> {
+tasks.withType<KotlinCompile> {
     kotlinOptions {
         jvmTarget = "1.8"
     }

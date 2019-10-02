@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:layout_marginBottom="16dp"
@@ -29,22 +29,22 @@
             android:id="@+id/tvDiscoverMovieCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/lato"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
             android:layout_gravity="center"
+            android:fontFamily="@font/lato"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/letter_large"
-            tools:text="Vegetarian"/>
+            android:textStyle="bold"
+            tools:text="Vegetarian" />
 
         <TextView
             android:id="@+id/tvDiscoverMovieDescription"
             android:layout_width="wrap_content"
-            android:maxLines="1"
-            android:ellipsize="end"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/lato"
             android:layout_gravity="center"
-            tools:text="Italia"/>
+            android:ellipsize="end"
+            android:fontFamily="@font/lato"
+            android:maxLines="1"
+            tools:text="Italia" />
 
     </LinearLayout>
 

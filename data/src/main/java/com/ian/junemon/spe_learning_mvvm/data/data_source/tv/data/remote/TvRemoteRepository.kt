@@ -7,7 +7,6 @@ import androidx.paging.PagedList
 import com.ian.junemon.spe_learning_mvvm.data.data.resultLiveData
 import com.ian.junemon.spe_learning_mvvm.data.data.searchResultLiveData
 import com.ian.junemon.spe_learning_mvvm.data.data.singleResultLiveData
-import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.remote.*
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.local.TvLocalDataSource
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.local.model.TvPopularPaginationData
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.local.model.TvSaveDetailData
@@ -29,7 +28,7 @@ class TvRemoteRepository(private val remoteSource: TvRemoteDataSource, private v
 
     suspend fun saveDetailData(data: TvSaveDetailData) = localSource.saveDetailTvData(data)
 
-    suspend fun deleteSelectedDetailData(selectedId:Int) = localSource.deleteSelectedDetailTvData(selectedId)
+    suspend fun deleteSelectedDetailData(selectedId: Int) = localSource.deleteSelectedDetailTvData(selectedId)
 
     fun observeAiringToday(scope: CoroutineScope) = resultLiveData(
             databaseQuery = { localSource.getAiringTodayTvData },

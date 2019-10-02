@@ -87,7 +87,7 @@ class MovieDetailFragment : Fragment() {
                                 tvSimilarMovieTittle.text = it.title
                                 tvSimilarMovieReleaseDate.text = it.release_date
                             }, {
-                                if (id != null){
+                                if (id != null) {
                                     consumeDetailData(id!!, this@apply)
                                     consumeSimilarData(id!!, this@apply)
                                 }

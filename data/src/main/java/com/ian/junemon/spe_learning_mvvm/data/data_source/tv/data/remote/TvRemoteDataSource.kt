@@ -10,7 +10,7 @@ import com.ian.junemon.spe_learning_mvvm.data.api.BaseDataSource
 Created by Ian Damping on 24/09/2019.
 Github = https://github.com/iandamping
  */
-class TvRemoteDataSource(private val api: ApiInterface): BaseDataSource() {
+class TvRemoteDataSource(private val api: ApiInterface) : BaseDataSource() {
     suspend fun getPopularTv() = getResult { api.getPopularTvResponse(BuildConfig.movieApiKey) }
 
     suspend fun getTopRatedTv() = getResult { api.getTopRatedTvResponse(BuildConfig.movieApiKey) }

@@ -1,10 +1,10 @@
 package com.ian.junemon.spe_learning_mvvm.data.api
 
 import com.ian.junemon.spe_learning_mvvm.data.BuildConfig.*
-import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.remote.TvRemoteData
 import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.remote.DetailMovieData
-import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.remote.DetailTvData
 import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.remote.MovieData
+import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.remote.DetailTvData
+import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.remote.TvRemoteData
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -44,7 +44,6 @@ interface ApiInterface {
     suspend fun pagingGetUpComingMovieResponse(@Query("api_key") apiKey: String, @Query("page") page: Int): Response<ResultResponse<MovieData>>
 
 
-
     /*Tv Session*/
     @GET(popularTv)
     suspend fun getPopularTvResponse(@Query("api_key") apiKey: String): Response<ResultResponse<TvRemoteData>>
@@ -66,7 +65,7 @@ interface ApiInterface {
 
     /*Tv Paging session*/
     @GET(popularTv)
-    suspend  fun pagingGetPopularTvResponse(@Query("api_key") apiKey: String, @Query("page") page: Int): Response<ResultResponse<TvRemoteData>>
+    suspend fun pagingGetPopularTvResponse(@Query("api_key") apiKey: String, @Query("page") page: Int): Response<ResultResponse<TvRemoteData>>
 
     @GET(topRatedTv)
     suspend fun pagingGetTopRatedTvResponse(@Query("api_key") apiKey: String, @Query("page") page: Int): Response<ResultResponse<TvRemoteData>>

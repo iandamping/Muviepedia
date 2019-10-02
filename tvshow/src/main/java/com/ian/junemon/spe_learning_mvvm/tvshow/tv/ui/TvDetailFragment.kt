@@ -7,7 +7,6 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
 import com.ian.app.helper.util.fullScreen
 import com.ian.app.helper.util.gone
@@ -35,7 +34,7 @@ class TvDetailFragment : Fragment() {
     private var menuItem: Menu? = null
     private lateinit var detailData: DetailTvData
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            val args = TvDetailFragmentArgs.fromBundle(arguments!!)
+        val args = TvDetailFragmentArgs.fromBundle(arguments!!)
         val binding: FragmentTvDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tv_detail, container, false)
         binding.apply {
             consumeDetailData(args.tvDetailId, this)
@@ -160,6 +159,7 @@ class TvDetailFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     private fun setFavoriteState() {
         if (isFavorite) {
             if (context != null) menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_bookmark)

@@ -51,7 +51,7 @@ class MovieSearchFragment : Fragment() {
                         ResultToConsume.Status.SUCCESS -> {
                             progressSearch.gone()
                             rvSearch.setUpVerticalGridAdapter(result.data, searchMovieAdapterCallback, R.layout.item_movie, 2, {
-                                ivHomeMovie.loadWithGlide( it.poster_path)
+                                ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.title
                             })
                         }

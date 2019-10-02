@@ -2,11 +2,11 @@ package com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.ian.app.helper.util.checkConnectivityStatus
@@ -35,6 +35,7 @@ class TvPaginationFragment : Fragment() {
         initFetchNetworkData(args.tvPaginationType, binding)
         return binding.root
     }
+
     private fun initFetchNetworkData(state: String, binding: FragmentTvPagingBinding) {
         binding.apply {
             checkConnectivityStatus { connectivityState ->
@@ -44,8 +45,8 @@ class TvPaginationFragment : Fragment() {
                             rvDiscoverMovie.setUpPagingWithGrid(data, R.layout.item_paging, 2, {
                                 ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
                                 tvDiscoverMovieDescription.text = it.name
-                            }, localTvPopularPaginationAdapterCallback,{
-                                if(id!=null)this@apply.root.findNavController().navigate(TvPaginationFragmentDirections.actionTvPaginationFragmentToTvDetailFragment(id!!))
+                            }, localTvPopularPaginationAdapterCallback, {
+                                if (id != null) this@apply.root.findNavController().navigate(TvPaginationFragmentDirections.actionTvPaginationFragmentToTvDetailFragment(id!!))
                             })
 
                             if (shimmerGridListContainer.isShimmerStarted && shimmerGridListContainer.isShimmerVisible) {
@@ -62,8 +63,8 @@ class TvPaginationFragment : Fragment() {
                             rvDiscoverMovie.setUpPagingWithGrid(data, R.layout.item_paging, 2, {
                                 ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
                                 tvDiscoverMovieDescription.text = it.name
-                            }, localTvTopRatedPaginationAdapterCallback,{
-                                if(id!=null)this@apply.root.findNavController().navigate(TvPaginationFragmentDirections.actionTvPaginationFragmentToTvDetailFragment(id!!))
+                            }, localTvTopRatedPaginationAdapterCallback, {
+                                if (id != null) this@apply.root.findNavController().navigate(TvPaginationFragmentDirections.actionTvPaginationFragmentToTvDetailFragment(id!!))
 
                             })
 

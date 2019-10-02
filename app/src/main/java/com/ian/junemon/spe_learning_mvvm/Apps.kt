@@ -1,7 +1,7 @@
 package com.ian.junemon.spe_learning_mvvm
 
 import android.app.Application
-import com.ian.junemon.spe_learning_mvvm.data.di.*
+import com.ian.junemon.spe_learning_mvvm.data.di.injectData
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

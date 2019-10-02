@@ -5,7 +5,7 @@ import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.local.model.Tv
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.local.model.TvSaveDetailData
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.local.model.TvSearchLocalData
 import com.ian.junemon.spe_learning_mvvm.data.data_source.tv.data.local.model.TvTopRatedData
-import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.*
+import com.ian.junemon.spe_learning_mvvm.tv.data.local.model.TvAiringTodayData
 
 /**
  *

@@ -46,7 +46,7 @@ fun <T, A> searchResultLiveData(data: String, databaseQuery: () -> LiveData<T>,
             .collectLatest { resultFlow ->
                 if (resultFlow.status == ResultToConsume.Status.SUCCESS) {
                     if (resultFlow.data != null) saveCallResult(resultFlow.data)
-                }else if(resultFlow.status == ResultToConsume.Status.ERROR){
+                } else if (resultFlow.status == ResultToConsume.Status.ERROR) {
                     if (resultFlow.message != null) emit(ResultToConsume.error(resultFlow.message))
                 }
             }

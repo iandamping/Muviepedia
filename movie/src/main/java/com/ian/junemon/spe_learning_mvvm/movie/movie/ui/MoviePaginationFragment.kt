@@ -41,8 +41,8 @@ class MoviePaginationFragment : Fragment() {
                     popularMovie -> {
                         vm.observePopularPagination(connectivityState).observe(viewLifecycleOwner, Observer { data ->
                             rvDiscoverMovie.setUpPagingWithGrid(data, R.layout.item_paging, 2, {
-                                 ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
-                                 tvDiscoverMovieDescription.text = it.title
+                                ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
+                                tvDiscoverMovieDescription.text = it.title
                             }, localMoviePopularPaginationAdapterCallback, {
                                 this@apply.root.findNavController().navigate(MoviePaginationFragmentDirections.actionPaginationFragmentToHomeFragment(id!!))
                             })

@@ -8,7 +8,7 @@ import com.ian.junemon.spe_learning_mvvm.data.data_source.movie.data.local.model
 Created by Ian Damping on 26/09/2019.
 Github = https://github.com/iandamping
  */
-class MovieLocalDataSource(private val db:MovieDatabase) {
+class MovieLocalDataSource(private val db: MovieDatabase) {
 
     val getDetailSavedMovieData by lazy { db.movieSaveDetailDao().loadAll() }
 
@@ -18,7 +18,7 @@ class MovieLocalDataSource(private val db:MovieDatabase) {
 
     val getUpComingMovieData by lazy { db.movieUpComingDao().loadAll() }
 
-    val getSearchLocalData by lazy {db.movieSearchDao().loadAll()}
+    val getSearchLocalData by lazy { db.movieSearchDao().loadAll() }
 
     val popularMoviePaginationDao by lazy { db.moviePopularPaginationDao() }
 
@@ -30,15 +30,15 @@ class MovieLocalDataSource(private val db:MovieDatabase) {
 
     suspend fun saveDetailMovieData(data: MovieSaveDetailData) = db.movieSaveDetailDao().insertAll(data)
 
-    suspend fun saveNowPlayingMovie(data:List<MovieNowPlayingLocalData>) =  db.movieNowPlayingDao().insertAll(data)
+    suspend fun saveNowPlayingMovie(data: List<MovieNowPlayingLocalData>) = db.movieNowPlayingDao().insertAll(data)
 
-    suspend fun savePopularMovie(data:List<MoviePopularLocalData>) =  db.moviePopularDao().insertAll(data)
+    suspend fun savePopularMovie(data: List<MoviePopularLocalData>) = db.moviePopularDao().insertAll(data)
 
-    suspend fun saveUpComingMovie(data:List<MovieUpComingLocalData>) =  db.movieUpComingDao().insertAll(data)
+    suspend fun saveUpComingMovie(data: List<MovieUpComingLocalData>) = db.movieUpComingDao().insertAll(data)
 
-    suspend fun updateSearchMovie(data:List<MovieSearchLocalData>) =  db.movieSearchDao().updateData(data)
+    suspend fun updateSearchMovie(data: List<MovieSearchLocalData>) = db.movieSearchDao().updateData(data)
 
-    suspend fun deleteSelectedDetailMovieData(selectedId:Int) = db.movieSaveDetailDao().deleteSelectedId(selectedId)
+    suspend fun deleteSelectedDetailMovieData(selectedId: Int) = db.movieSaveDetailDao().deleteSelectedId(selectedId)
 
     suspend fun clearSearchMovie() = db.movieSearchDao().deleteAllData()
 
