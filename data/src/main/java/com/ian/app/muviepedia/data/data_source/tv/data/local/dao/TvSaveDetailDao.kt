@@ -1,4 +1,4 @@
-package com.ian.app.muviepedia.tv.data.local.dao
+package com.ian.app.muviepedia.data.data_source.tv.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -20,9 +20,10 @@ interface TvSaveDetailDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(inputMovie: TvSaveDetailData)
 
+
     @Query("DELETE FROM tv_save_detail_data")
     suspend fun deleteAllData()
 
-    @Query("DELETE FROM tv_save_detail_data where localID = :selectedId")
+    @Query("DELETE FROM tv_save_detail_data where tv_save_detail_data_id = :selectedId")
     suspend fun deleteSelectedId(selectedId: Int)
 }

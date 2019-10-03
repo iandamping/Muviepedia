@@ -112,7 +112,10 @@ object LottieLibrary{
 object GlidePlugins {
     const val glidePlugin = "com.github.bumptech.glide:glide:$glideVer"
     const val glideCompllierPlugin = "com.github.bumptech.glide:compiler:$glideVer"
+}
 
+object PicassoPlugins{
+    const val picassoPlugin = "com.squareup.picasso:picasso:2.5.2"
 }
 
 object CoreLibraries {

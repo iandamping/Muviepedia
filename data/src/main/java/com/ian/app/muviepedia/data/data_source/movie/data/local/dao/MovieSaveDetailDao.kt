@@ -24,6 +24,6 @@ interface MovieSaveDetailDao {
     @Query("DELETE FROM movie_save_detail_data")
     fun deleteAllData()
 
-    @Query("DELETE FROM movie_save_detail_data where localID = :selectedId")
+    @Query("DELETE FROM movie_save_detail_data where movie_save_detail_data_id = :selectedId")
     suspend fun deleteSelectedId(selectedId: Int)
 }

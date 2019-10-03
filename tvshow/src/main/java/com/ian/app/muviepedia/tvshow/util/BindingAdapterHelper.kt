@@ -3,6 +3,7 @@ package com.ian.app.muviepedia.tvshow.util
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.ian.app.helper.util.loadWithGlide
+import com.ian.app.muviepedia.tvshow.R
 
 /**
  *
@@ -14,4 +15,11 @@ Github = https://github.com/iandamping
 @BindingAdapter("loadImageHelper")
 fun loadImageHelper(view: ImageView, url: String?) {
     if (url != null) view.loadWithGlide(url)
+}
+
+@BindingAdapter("initBookmark")
+fun initBookmarkHelper(view: ImageView, state:Boolean){
+    if (state){
+        view.setBackgroundResource(R.drawable.ic_bookmark)
+    }else view.setBackgroundResource(R.drawable.ic_unbookmark)
 }

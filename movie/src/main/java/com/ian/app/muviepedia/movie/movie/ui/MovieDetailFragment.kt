@@ -1,12 +1,18 @@
 package com.ian.app.muviepedia.movie.movie.ui
 
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.*
-import androidx.core.content.ContextCompat
+import android.os.StrictMode
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
 import com.google.android.material.snackbar.Snackbar
 import com.ian.app.helper.util.fullScreen
 import com.ian.app.helper.util.gone
@@ -18,6 +24,7 @@ import com.ian.app.muviepedia.data.data_source.movie.data.remote.DetailMovieData
 import com.ian.app.muviepedia.data.data_source.movie.data.remote.toSaveDetail
 import com.ian.app.muviepedia.data.data_source.movie.data.ui.MovieDataViewModel
 import com.ian.app.muviepedia.data.util.MovieDetailConstant.movieAdapterCallback
+import com.ian.app.muviepedia.data.util.intentShareImageAndText
 import com.ian.app.muviepedia.movie.R
 import com.ian.app.muviepedia.movie.databinding.FragmentMovieDetailBinding
 import com.ian.recyclerviewhelper.helper.setUpVerticalListAdapter
@@ -29,8 +36,27 @@ class MovieDetailFragment : Fragment() {
     private val vm: MovieDataViewModel by viewModel()
     private var idForDeleteItem: Int? = null
     private var isFavorite: Boolean = false
-    private var menuItem: Menu? = null
-    private lateinit var detailData: DetailMovieData
+    private val requestExternalStorage = 3
+    private val permissionStorage = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        //dont use this, but i had to
+        val builder = StrictMode.VmPolicy.Builder()
+        StrictMode.setVmPolicy(builder.build())
+
+        val permission = ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity!!,
+                    permissionStorage,
+                    requestExternalStorage
+            )
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val args = MovieDetailFragmentArgs.fromBundle(arguments!!)
         val binding: FragmentMovieDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_detail, container, false)
@@ -57,10 +83,8 @@ class MovieDetailFragment : Fragment() {
                         progressDetail.gone()
                         result.data?.poster_path = imageFormatter + result.data?.poster_path
                         detailData = result.data
-                        ivDetailMovieImages.setOnClickListener {
-                            it.context.fullScreen(result.data?.poster_path)
-                        }
-                        consumeSaveDetailData(result.data)
+                        inflateView(this@apply, result.data)
+                        consumeSaveDetailData(result.data!!, this)
                     }
                     ResultToConsume.Status.ERROR -> {
                         progressDetail.gone()
@@ -71,6 +95,25 @@ class MovieDetailFragment : Fragment() {
         }
 
 
+    }
+
+    private fun inflateView(binding: FragmentMovieDetailBinding, data: DetailMovieData?) {
+        binding.apply {
+            ivDetailMovieImages.setOnClickListener {
+                it.context.fullScreen(data?.poster_path)
+            }
+            ivShare.setOnClickListener {
+                intentShareImageAndText(vm.viewModelScope, activity, data?.title!!, data.overview, data.poster_path)
+            }
+            ivBookmark.setOnClickListener {
+                if (data != null)
+                    if (isFavorite) {
+                        if (idForDeleteItem != null) vm.deleteSelectedMovie(idForDeleteItem!!)
+                    } else {
+                        vm.saveDetailMovieData(data.toSaveDetail())
+                    }
+            }
+        }
     }
 
     private fun consumeSimilarData(movieId: Int, binding: FragmentMovieDetailBinding) {
@@ -120,64 +163,27 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
-    private fun consumeSaveDetailData(movieDetailData: DetailMovieData?) {
-        vm.consumeSaveDetailMovie.observe(viewLifecycleOwner, Observer {
-            if (movieDetailData != null) {
-                detailData = movieDetailData
-                it.forEach { result ->
-                    if (result.id == movieDetailData.id) {
-                        idForDeleteItem = result.id
-                        isFavorite = true
-                        setFavoriteState()
+    private fun consumeSaveDetailData(detailState: DetailMovieData, binding: FragmentMovieDetailBinding) {
+        binding.apply {
+            vm.consumeSaveDetailMovie.observe(viewLifecycleOwner, Observer { result ->
+                if (!result.isNullOrEmpty()) {
+                    result.forEach {
+                        if (it.id == detailState.id) {
+                            idForDeleteItem = it.id
+                            isFavorite = true
+                            bookmarkedState = isFavorite
+                        } else {
+                            isFavorite = false
+                            bookmarkedState = isFavorite
+                        }
                     }
-                }
-            }
-        })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.save_nav_menu, menu)
-        menuItem = menu
-        super.onCreateOptionsMenu(menu, inflater)
-
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-
-            R.id.add_to_favorite -> {
-                if (isFavorite) {
-                    if (idForDeleteItem != null) vm.deleteSelectedMovie(idForDeleteItem!!)
-                    isFavorite = false
-                    setFavoriteState()
                 } else {
-                    if (::detailData.isInitialized) vm.saveDetailMovieData(detailData.toSaveDetail())
-                    isFavorite = true
-                    setFavoriteState()
+                    isFavorite = false
+                    bookmarkedState = isFavorite
+
                 }
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun setFavoriteState() {
-        if (isFavorite) {
-            if (context != null) menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_bookmark)
-        } else {
-            if (context != null) menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_unbookmark)
+            })
         }
 
     }
-    /* //handle backpressed
-     override fun onActivityCreated(savedInstanceState: Bundle?) {
-         super.onActivityCreated(savedInstanceState)
-         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-             override fun handleOnBackPressed() {
-                 NavHostFragment.findNavController(this@MovieDetailFragment).navigateUp()
-             }
-         })
-     }*/
-
-
 }

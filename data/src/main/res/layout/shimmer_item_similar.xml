@@ -6,7 +6,7 @@
 
 
     <ImageView
-        android:id="@+id/ivSimilarMovie"
+        android:id="@+id/ivSimilarMovieShimmer"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@color/placeholder_bg" />
@@ -18,11 +18,11 @@
         android:layout_marginTop="@dimen/spacing_large"
         android:layout_marginEnd="@dimen/spacing_medium"
         android:layout_marginRight="@dimen/spacing_medium"
-        android:layout_toRightOf="@id/ivSimilarMovie"
+        android:layout_toRightOf="@id/ivSimilarMovieShimmer"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvSimilarMovieTittle"
+            android:id="@+id/tvSimilarMovieTittleShimmer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_medium"
@@ -30,7 +30,7 @@
             android:background="@color/placeholder_bg" />
 
         <TextView
-            android:id="@+id/tvSimilarMovieReleaseDate"
+            android:id="@+id/tvSimilarMovieReleaseDateShimmer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 

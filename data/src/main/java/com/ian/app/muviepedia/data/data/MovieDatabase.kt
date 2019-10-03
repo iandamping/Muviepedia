@@ -7,7 +7,7 @@ import com.ian.app.muviepedia.data.data_source.movie.data.local.model.*
 import com.ian.app.muviepedia.data.data_source.tv.data.local.dao.*
 import com.ian.app.muviepedia.data.data_source.tv.data.local.model.*
 import com.ian.app.muviepedia.tv.data.local.dao.TvAiringTodayDao
-import com.ian.app.muviepedia.tv.data.local.dao.TvSaveDetailDao
+import com.ian.app.muviepedia.data.data_source.tv.data.local.dao.TvSaveDetailDao
 import com.ian.app.muviepedia.tv.data.local.model.TvAiringTodayData
 
 /**

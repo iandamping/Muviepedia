@@ -99,5 +99,7 @@ dependencies {
     implementation(RoomLibraies.roomStdLib)
     implementation(RoomLibraies.roomKtxStdLib)
     implementation(WorkerLibrary.workManagerStdLib)
+    implementation(GlidePlugins.glidePlugin)
+    kapt(GlidePlugins.glideCompllierPlugin)
     kapt(RoomLibraies.roomCompilerStdLib)
 }
