@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import androidx.core.app.ShareCompat
+import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -42,12 +43,11 @@ fun intentShareText(activity: Activity, text: String) {
 }
 
 
-fun intentShareImageAndText(scope: CoroutineScope, activity: Activity?, tittle: String?, message: String?, imageUrl: String) {
+fun FragmentActivity.intentShareImageAndText(scope: CoroutineScope, tittle: String?, message: String?, imageUrl: String) {
     scope.launch {
         try {
             withContext(Dispatchers.IO) {
-                if (activity != null) {
-                    val bitmap = Glide.with(activity)
+                    val bitmap = Glide.with(this@intentShareImageAndText)
                             .asBitmap()
                             .load(imageUrl)
                             .submit(512, 512)
@@ -60,11 +60,10 @@ fun intentShareImageAndText(scope: CoroutineScope, activity: Activity?, tittle: 
                             sharingIntent.putExtra(Intent.EXTRA_SUBJECT, tittle)
                             sharingIntent.putExtra(Intent.EXTRA_TEXT, message)
                             sharingIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                            activity.startActivity(Intent.createChooser(sharingIntent, "Share Image"))
+                            this@intentShareImageAndText.startActivity(Intent.createChooser(sharingIntent, "Share Image"))
                         }
 
                     }
-                }
             }
         } catch (e: Exception) {
             e.printStackTrace()

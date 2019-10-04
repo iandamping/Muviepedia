@@ -28,6 +28,7 @@ import AndroidXVersions.navigationVer
 import AndroidXVersions.okHttp3LogginInterceptorVer
 import AndroidXVersions.okHttp3Ver
 import AndroidXVersions.pagingRuntimeVer
+import AndroidXVersions.picassoVersion
 import AndroidXVersions.recyckerHelperVer
 import AndroidXVersions.retrofitVer
 import AndroidXVersions.roomVer
@@ -48,7 +49,7 @@ object AndroidXVersions {
     const val pagingRuntimeVer = "1.0.1"
     const val coroutineVer = "1.3.1"
     const val commonHelperVer = "0.0.15-alpha02"
-    const val recyckerHelperVer = "0.0.5-alpha04b"
+    const val recyckerHelperVer = "0.0.5-alpha04c"
     const val firebaseCoreVer = "17.1.0"
     const val firebaseDatabaseVer = "19.0.0"
     const val firebaseAuthVer = "19.0.0"
@@ -80,6 +81,7 @@ object AndroidXVersions {
     const val cirlceIndicatorRelexVer = "1.2.2@aar"
     const val legacySupport = "1.0.0"
     const val workerVersion = "2.2.0"
+    const val picassoVersion = "2.5.2"
 }
 
 object JitpackPlugins {
@@ -115,7 +117,7 @@ object GlidePlugins {
 }
 
 object PicassoPlugins{
-    const val picassoPlugin = "com.squareup.picasso:picasso:2.5.2"
+    const val picassoPlugin = "com.squareup.picasso:picasso:$picassoVersion"
 }
 
 object CoreLibraries {

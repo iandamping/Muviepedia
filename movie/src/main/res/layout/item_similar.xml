@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/spacing_huge"
         android:layout_marginTop="@dimen/spacing_large"
-        android:layout_toRightOf="@id/ivSimilarMovieShimmer"
+        android:layout_toRightOf="@id/ivSimilarMovie"
         android:orientation="vertical">
 
         <TextView

@@ -1,5 +1,6 @@
 package com.ian.app.muviepedia.data.data_source.movie.data.remote
 
+import com.google.gson.annotations.SerializedName
 import com.ian.app.muviepedia.data.BuildConfig.imageFormatter
 import com.ian.app.muviepedia.data.data_source.movie.data.local.model.*
 import kotlinx.coroutines.CoroutineScope
@@ -11,20 +12,20 @@ Created by Ian Damping on 02/06/2019.
 Github = https://github.com/iandamping
  */
 data class MovieData(
-        var vote_count: Int?,
-        var id: Int?,
-        var video: Boolean?,
-        var vote_average: Double?,
-        var title: String?,
-        var popularity: Double?,
-        var poster_path: String?,
-        var original_language: String?,
-        var original_title: String?,
-        var genre_ids: List<Int>?,
-        var backdrop_path: String?,
-        var adult: Boolean?,
-        var overview: String?,
-        var release_date: String?
+        @field:SerializedName("vote_count")var vote_count: Int?,
+        @field:SerializedName("id") var id: Int?,
+        @field:SerializedName("video")var video: Boolean?,
+        @field:SerializedName("vote_average")var vote_average: Double?,
+        @field:SerializedName("title")var title: String?,
+        @field:SerializedName("popularity")var popularity: Double?,
+        @field:SerializedName("poster_path")var poster_path: String?,
+        @field:SerializedName("original_language")var original_language: String?,
+        @field:SerializedName("original_title")var original_title: String?,
+        @field:SerializedName("genre_ids")var genre_ids: List<Int>?,
+        @field:SerializedName("backdrop_path")var backdrop_path: String?,
+        @field:SerializedName("adult")var adult: Boolean?,
+        @field:SerializedName("overview")var overview: String?,
+        @field:SerializedName("release_date")var release_date: String?
 )
 
 

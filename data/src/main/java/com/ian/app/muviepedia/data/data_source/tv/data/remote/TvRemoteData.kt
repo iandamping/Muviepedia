@@ -1,5 +1,6 @@
 package com.ian.app.muviepedia.data.data_source.tv.data.remote
 
+import com.google.gson.annotations.SerializedName
 import com.ian.app.muviepedia.data.BuildConfig.imageFormatter
 import com.ian.app.muviepedia.data.data_source.tv.data.local.model.*
 import com.ian.app.muviepedia.tv.data.local.model.TvAiringTodayData
@@ -13,19 +14,19 @@ Created by Ian Damping on 24/06/2019.
 Github = https://github.com/iandamping
  */
 data class TvRemoteData(
-        var original_name: String?,
-        var genre_ids: List<Int>?,
-        var name: String?,
-        var popularity: Double?,
-        var origin_country: List<String>?,
-        var vote_count: Int?,
-        var first_air_date: String?,
-        var backdrop_path: String?,
-        var original_language: String?,
-        var id: Int?,
-        var vote_average: Double?,
-        var overview: String?,
-        var poster_path: String?
+        @field:SerializedName("original_name") var original_name: String?,
+        @field:SerializedName("genre_ids") var genre_ids: List<Int>?,
+        @field:SerializedName("name") var name: String?,
+        @field:SerializedName("popularity") var popularity: Double?,
+        @field:SerializedName("origin_country") var origin_country: List<String>?,
+        @field:SerializedName("vote_count") var vote_count: Int?,
+        @field:SerializedName("first_air_date") var first_air_date: String?,
+        @field:SerializedName("backdrop_path") var backdrop_path: String?,
+        @field:SerializedName("original_language") var original_language: String?,
+        @field:SerializedName("id") var id: Int?,
+        @field:SerializedName("vote_average") var vote_average: Double?,
+        @field:SerializedName("overview") var overview: String?,
+        @field:SerializedName("poster_path") var poster_path: String?
 )
 
 

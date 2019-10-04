@@ -20,7 +20,7 @@ import com.ian.app.muviepedia.data.util.MovieDetailConstant.upcomingMovie
 import com.ian.app.muviepedia.movie.R
 import com.ian.app.muviepedia.movie.databinding.FragmentMoviePagingBinding
 import com.ian.recyclerviewhelper.helper.setUpPagingWithGrid
-import kotlinx.android.synthetic.main.item_paging.*
+import kotlinx.android.synthetic.main.item_paging.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MoviePaginationFragment : Fragment() {
