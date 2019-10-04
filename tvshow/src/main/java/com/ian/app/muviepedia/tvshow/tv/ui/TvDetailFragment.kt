@@ -25,6 +25,7 @@ import com.ian.app.muviepedia.data.data_source.tv.data.remote.toDatabase
 import com.ian.app.muviepedia.data.data_source.tv.data.ui.TvDataViewModel
 import com.ian.app.muviepedia.data.util.TvShowDetailConstant.tvAdapterCallback
 import com.ian.app.muviepedia.data.util.intentShareImageAndText
+import com.ian.app.muviepedia.data.util.saveImage
 import com.ian.app.muviepedia.tvshow.R
 import com.ian.app.muviepedia.tvshow.databinding.FragmentTvDetailBinding
 import com.ian.recyclerviewhelper.helper.setUpVerticalListAdapter
@@ -115,6 +116,9 @@ class TvDetailFragment : Fragment() {
                     } else {
                         vm.saveDetailMovieData(data.toDatabase())
                     }
+            }
+            ivDownload.setOnClickListener {
+                activity?.saveImage(vm.viewModelScope,nestedParent,data?.poster_path)
             }
         }
     }

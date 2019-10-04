@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">data</string>
+    <string name="package_name">com.ian.app.muviepedia.provider</string>
 </resources>

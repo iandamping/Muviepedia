@@ -25,6 +25,7 @@ import com.ian.app.muviepedia.data.data_source.movie.data.remote.toSaveDetail
 import com.ian.app.muviepedia.data.data_source.movie.data.ui.MovieDataViewModel
 import com.ian.app.muviepedia.data.util.MovieDetailConstant.movieAdapterCallback
 import com.ian.app.muviepedia.data.util.intentShareImageAndText
+import com.ian.app.muviepedia.data.util.saveImage
 import com.ian.app.muviepedia.movie.R
 import com.ian.app.muviepedia.movie.databinding.FragmentMovieDetailBinding
 import com.ian.recyclerviewhelper.helper.setUpVerticalListAdapter
@@ -112,6 +113,9 @@ class MovieDetailFragment : Fragment() {
                     } else {
                         vm.saveDetailMovieData(data.toSaveDetail())
                     }
+            }
+            ivDownload.setOnClickListener {
+                activity?.saveImage(vm.viewModelScope,coordinatorParent,data?.poster_path)
             }
         }
     }
