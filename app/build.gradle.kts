@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
     kotlin("android")
 }
 
@@ -45,6 +46,7 @@ dependencies {
     implementation(project(":navigation"))
     implementation(project(":movie"))
     implementation(project(":tvshow"))
+    implementation(project(":profile"))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(CoreLibraries.kotlinStdLib)
     implementation(CoreLibraries.appCompatStdLib)
@@ -65,8 +67,8 @@ dependencies {
 
 fun NamedDomainObjectContainer<BuildType>.initDebug(proguard: BaseAppModuleExtension) {
     this.getByName("debug") {
-        isMinifyEnabled = true
-        isShrinkResources = true
+        isMinifyEnabled = false
+        isShrinkResources = false
         proguardFiles(proguard.getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
 }

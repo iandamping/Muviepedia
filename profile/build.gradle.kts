@@ -1,7 +1,10 @@
+
 plugins {
     id("com.android.library")
+    id("androidx.navigation.safeargs")
     kotlin("android")
     kotlin("android.extensions")
+    kotlin("kapt")
 }
 android {
     compileSdkVersion(29)
@@ -52,9 +55,14 @@ dependencies {
     androidTestImplementation(TestLibraries.testRunnerStdLib)
     androidTestImplementation(TestLibraries.espressoCoreStdLib)
     implementation(CustomLibraries.commonHelperStdLib)
+    implementation(CirlceImageView.circleImageViewStdLib)
+    implementation(KoinLibraries.koinStdLib)
     implementation(NavigationLibraies.navigationStdLib)
-    implementation(NavigationLibraies.navigationUiStdLib)
-    implementation(project(":movie"))
-    implementation(project(":tvshow"))
-    implementation(project(":profile"))
+    implementation(NavigationLibraies.legacySupportStdLib)
+    implementation(FirebaseLibraries.firebaseCoreStdLib)
+    implementation(FirebaseLibraries.firebaseAuthStdLib)
+    implementation(FirebaseLibraries.firebaseUiAuthStdLib)
+    implementation(FirebaseLibraries.facebookLoginSdkStdLib)
+    implementation(FirebaseLibraries.facebookSdkStdLib)
+    implementation(project(":data"))
 }

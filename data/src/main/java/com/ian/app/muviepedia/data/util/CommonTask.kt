@@ -7,6 +7,7 @@ import android.media.MediaScannerConnection
 import android.os.Environment
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
@@ -87,4 +88,8 @@ fun voidCustomMediaScannerConnection(ctx: Context?, paths: String?) {
         }
     }
 
+}
+
+fun ImageView.loadDrawableWithGlide(images:Int){
+    Glide.with(this.context).load(images).into(this)
 }

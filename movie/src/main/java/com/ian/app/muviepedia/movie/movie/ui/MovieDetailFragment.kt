@@ -67,8 +67,6 @@ class MovieDetailFragment : Fragment() {
             invalidateAll()
 
         }
-        setHasOptionsMenu(true)
-
         return binding.root
     }
 

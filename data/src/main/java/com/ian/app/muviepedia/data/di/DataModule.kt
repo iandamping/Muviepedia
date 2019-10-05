@@ -9,10 +9,14 @@ import com.ian.app.muviepedia.data.data_source.movie.data.local.MovieLocalDataSo
 import com.ian.app.muviepedia.data.data_source.movie.data.remote.MovieRemoteDataSource
 import com.ian.app.muviepedia.data.data_source.movie.data.remote.MovieRemoteRepository
 import com.ian.app.muviepedia.data.data_source.movie.data.ui.MovieDataViewModel
+import com.ian.app.muviepedia.data.data_source.profile.local.UserProfileDataSource
+import com.ian.app.muviepedia.data.data_source.profile.remote.UserProfileRepository
+import com.ian.app.muviepedia.data.data_source.profile.ui.UserProfileViewModel
 import com.ian.app.muviepedia.data.data_source.tv.data.local.TvLocalDataSource
 import com.ian.app.muviepedia.data.data_source.tv.data.remote.TvRemoteDataSource
 import com.ian.app.muviepedia.data.data_source.tv.data.remote.TvRemoteRepository
 import com.ian.app.muviepedia.data.data_source.tv.data.ui.TvDataViewModel
+import com.ian.app.muviepedia.data.util.PreferenceHelper
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -38,7 +42,8 @@ private val loadFeature by lazy {
                     networkModule,
                     repositoryModule,
                     dataSourceModule,
-                    viewModelModule)
+                    viewModelModule,
+                    preferenceHelperModule)
     )
 }
 
@@ -64,7 +69,13 @@ val databaseModule = module {
     single { get<MovieDatabase>().tvTopRatedPaginationDao() }
     single { get<MovieDatabase>().tvSearchDao() }
     single { get<MovieDatabase>().tvSaveDetailDao() }
+    single { get<MovieDatabase>().userProfileDao() }
 
+}
+
+
+val preferenceHelperModule = module{
+    single { PreferenceHelper(get()) }
 }
 
 val dataSourceModule = module {
@@ -72,6 +83,7 @@ val dataSourceModule = module {
     single { MovieLocalDataSource(get()) }
     single { TvRemoteDataSource(get()) }
     single { TvLocalDataSource(get()) }
+    single { UserProfileDataSource(get()) }
 }
 
 val networkModule = module {
@@ -82,11 +94,13 @@ val networkModule = module {
 val repositoryModule = module {
     single { MovieRemoteRepository(get(), get()) }
     single { TvRemoteRepository(get(), get()) }
+    single { UserProfileRepository(get()) }
 }
 
 val viewModelModule = module {
     viewModel { MovieDataViewModel(get()) }
     viewModel { TvDataViewModel(get()) }
+    viewModel { UserProfileViewModel(get()) }
 }
 
 private fun createOkHttpClient(): OkHttpClient {

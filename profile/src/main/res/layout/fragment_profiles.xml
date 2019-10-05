@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="userProfile"
+            type="com.ian.app.muviepedia.data.data_source.profile.local.model.UserProfileData" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/white">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivPhotoProfile"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/spacing_huge"
+            app:loadImageHelper="@{userProfile.photoUser}"
+            tools:src="@tools:sample/backgrounds/scenic"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:visibility="@{userProfile.emailUser != null ? View.VISIBLE : View.GONE}"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_medium"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvProfileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivPhotoProfile"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:text="@{userProfile.nameUser}"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="User Name" />
+
+            <LinearLayout
+                android:id="@+id/lnProfileEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnProfileEditUser"
+                android:layout_marginTop="18dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/ic_email_black" />
+
+
+                <TextView
+                    android:id="@+id/tvEmailUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userProfile.emailUser}"
+                    android:textColor="@android:color/black"
+                    android:textStyle="normal"
+                    tools:text="Email@mail.com" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:textStyle="bold"
+                tools:text="Logout" />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/lnLoginFirebaseAuth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{userProfile !=null ? View.GONE : View.VISIBLE}"
+            android:layout_margin="@dimen/spacing_medium"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/lnGmailLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:background="@drawable/gray_stroke_bg"
+                android:orientation="horizontal"
+                android:padding="@dimen/spacing_medium">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_google_logo" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Google" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnFacebookLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:background="@drawable/gray_stroke_bg"
+                android:orientation="horizontal"
+                android:padding="@dimen/spacing_medium">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_facebook" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Facebook" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/login_first_so_you_can_save_your_favourite_movie" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

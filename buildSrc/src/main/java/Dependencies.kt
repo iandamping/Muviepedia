@@ -170,6 +170,10 @@ object CustomLibraries {
     const val cirlceIndicatorStdLib = "me.relex:circleindicator:$cirlceIndicatorRelexVer"
 }
 
+object CirlceImageView{
+    const val circleImageViewStdLib = "de.hdodenhof:circleimageview:3.0.0"
+}
+
 object ShimmerLibrary{
     const val shimmerStdLib = "com.facebook.shimmer:shimmer:$shimmerVer"
 }

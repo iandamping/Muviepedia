@@ -4,6 +4,8 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.ian.app.muviepedia.data.data_source.movie.data.local.dao.*
 import com.ian.app.muviepedia.data.data_source.movie.data.local.model.*
+import com.ian.app.muviepedia.data.data_source.profile.local.dao.UserProfileDao
+import com.ian.app.muviepedia.data.data_source.profile.local.model.UserProfileData
 import com.ian.app.muviepedia.data.data_source.tv.data.local.dao.*
 import com.ian.app.muviepedia.data.data_source.tv.data.local.model.*
 import com.ian.app.muviepedia.tv.data.local.dao.TvAiringTodayDao
@@ -28,7 +30,8 @@ Github = https://github.com/iandamping
     TvTopRatedData::class,
     TvTopRatedPaginationData::class,
     TvSearchLocalData::class,
-    TvSaveDetailData::class], version = 1, exportSchema = false)
+    TvSaveDetailData::class,
+    UserProfileData::class], version = 1, exportSchema = false)
 abstract class MovieDatabase : RoomDatabase() {
 
     abstract fun movieNowPlayingDao(): MovieNowPlayingDao
@@ -46,6 +49,8 @@ abstract class MovieDatabase : RoomDatabase() {
     abstract fun tvPopularPaginationDao(): TvPopularPaginationDao
     abstract fun tvSearchDao(): TvSearchDao
     abstract fun tvSaveDetailDao(): TvSaveDetailDao
+
+    abstract fun userProfileDao(): UserProfileDao
 
 }
 
