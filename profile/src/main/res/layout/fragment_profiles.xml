@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
                 android:gravity="center"
-                android:visibility="@{movieTotalSave == null ? View.GONE : View.GONE}"
+                android:visibility="@{movieTotalSave == null ? View.GONE : View.VISIBLE}"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
                 android:gravity="center"
-                android:visibility="@{tvShowTotalSave == null ? View.GONE : View.GONE}"
+                android:visibility="@{tvShowTotalSave == null ? View.GONE : View.VISIBLE}"
                 android:orientation="horizontal">
 
                 <ImageView

@@ -63,14 +63,16 @@ class ProfileFragments : BaseFirebaseFragment() {
             }
             tvshowVm.consumeSaveDetailTv.observe(viewLifecycleOwner, Observer {result ->
                 if (result.isNotEmpty()){
-                    movieTotalSave = "See all your ${result.size} tv show saved here"
+                    tvShowTotalSave = "See all your ${result.size} tv show saved here"
                 }
             })
             movieVm.consumeSaveDetailMovie.observe(viewLifecycleOwner, Observer { result ->
                 if (result.isNotEmpty()){
-                   tvShowTotalSave = "See all your ${result.size} movie saved here"
+                    movieTotalSave = "See all your ${result.size} movie saved here"
+
                 }
             })
+            invalidateAll()
         }
     }
 

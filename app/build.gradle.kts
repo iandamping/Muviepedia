@@ -68,16 +68,16 @@ dependencies {
 
 fun NamedDomainObjectContainer<BuildType>.initDebug(proguard: BaseAppModuleExtension) {
     this.getByName("debug") {
-        isMinifyEnabled = false
-        isShrinkResources = false
+        isMinifyEnabled = true
+        isShrinkResources = true
         proguardFiles(proguard.getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
 }
 
 fun NamedDomainObjectContainer<BuildType>.initRelease(proguard: BaseAppModuleExtension) {
     this.getByName("release") {
-        isMinifyEnabled = false
-        isShrinkResources = false
+        isMinifyEnabled = true
+        isShrinkResources = true
         proguardFiles(proguard.getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
 }
