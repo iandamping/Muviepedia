@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.ian.app.muviepedia.data.data_source.movie.data.local.model.MovieSaveDetailData
 import com.ian.app.muviepedia.data.data_source.tv.data.local.model.TvSaveDetailData
 
 /**
@@ -20,6 +21,8 @@ interface TvSaveDetailDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(inputMovie: TvSaveDetailData)
 
+    @Query("SELECT * FROM tv_save_detail_data WHERE localID = :id")
+    fun loadAllTvShowDataById(id: Int): LiveData<TvSaveDetailData>
 
     @Query("DELETE FROM tv_save_detail_data")
     suspend fun deleteAllData()

@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                     when (destination.id) {
                         R.id.homeFragment -> bottomNav.visible()
                         R.id.tvFragment -> bottomNav.visible()
-                        R.id.profileFragment -> bottomNav.visible()
+                        R.id.profileFragments -> bottomNav.visible()
                         else -> bottomNav.gone()
                     }
                 }

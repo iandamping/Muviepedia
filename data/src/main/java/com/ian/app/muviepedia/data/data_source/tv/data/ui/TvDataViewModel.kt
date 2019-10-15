@@ -36,6 +36,13 @@ class TvDataViewModel(private val repository: TvRemoteRepository) : BaseViewMode
         vmScopes.launch { repository.deleteSelectedDetailData(selectedId) }
     }
 
+    fun loadAllTvShowDataById(selectedId: Int) = repository.loadAllTvShowDataById(selectedId)
+
+
+    fun deleteAllMovieData() {
+        vmScopes.launch { repository.deleteAllData() }
+    }
+
     fun observeDetailData(movieID: Int) = repository.getDetailTv(movieID)
 
     fun observeSimilarData(movieID: Int) = repository.getSimilarTv(movieID)

@@ -65,30 +65,26 @@
                     android:layout_below="@id/slider"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/spacing_medium"
-                        android:layout_weight="1"
                         android:fontFamily="@font/lato"
-                        android:paddingBottom="8dp"
                         android:text="Search Movie"
                         android:textColor="@color/black"
                         android:textSize="@dimen/letter_medium"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <ImageView
                         android:id="@+id/tvSearch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_medium"
-                        android:fontFamily="@font/lato"
-                        android:paddingBottom="8dp"
-                        android:text="@string/see_all"
-                        android:textColor="@color/dc_gray"
-                        android:textSize="@dimen/letter_medium" />
+                        android:layout_gravity="center"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_search_black_24dp"/>
+
 
                 </LinearLayout>
 
@@ -136,6 +132,14 @@
 
                         </LinearLayout>
 
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvPopularMovie"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_medium" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -167,12 +171,6 @@
                                 android:textSize="@dimen/letter_medium" />
 
                         </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvPopularMovie"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/spacing_medium" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rvUpComingMovie"

@@ -30,6 +30,10 @@ class MovieRemoteRepository(private val remoteSource: MovieRemoteDataSource, pri
 
     suspend fun deleteSelectedDetailData(selectedId: Int) = localSource.deleteSelectedDetailMovieData(selectedId)
 
+    suspend fun deleteAllDetailMovieData() = localSource.deleteAllDetailMovieData()
+
+    fun getDetailSavedMovieByID(selectedId: Int) = localSource.getDetailSavedMovieByID(selectedId)
+
     fun observeNowPlayingMovie(scope: CoroutineScope) = resultLiveData(
             databaseQuery = { localSource.getNowPlayingMovieData },
             networkCall = { remoteSource.getNowPlayingMovie() },

@@ -40,6 +40,10 @@ class MovieLocalDataSource(private val db: MovieDatabase) {
 
     suspend fun deleteSelectedDetailMovieData(selectedId: Int) = db.movieSaveDetailDao().deleteSelectedId(selectedId)
 
+    fun getDetailSavedMovieByID(localSelectedId:Int) = db.movieSaveDetailDao().loadAllMovieDataById(localSelectedId)
+
+    suspend fun deleteAllDetailMovieData() = db.movieSaveDetailDao().deleteAllData()
+
     suspend fun clearSearchMovie() = db.movieSearchDao().deleteAllData()
 
 }

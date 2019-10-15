@@ -24,7 +24,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Discover"
+                    android:text="@string/discover_movie"
                     android:textColor="@android:color/black"
                     android:textSize="30sp"
                     android:textStyle="bold" />
@@ -33,13 +33,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="This is pagination"
+                    android:text="@string/your_favorite_movie_is_in_here"
                     android:textColor="#2B2B2B" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvDiscoverMovie"
                 android:layout_width="match_parent"
+                android:layout_margin="16dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/lnDiscoverContent" />
 

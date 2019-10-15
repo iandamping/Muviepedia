@@ -76,4 +76,14 @@ object MovieDetailConstant {
             return oldItem == newItem
         }
     }
+
+    val savedMovieAdapterCallback = object : DiffUtil.ItemCallback<MovieSaveDetailData>() {
+        override fun areItemsTheSame(oldItem: MovieSaveDetailData, newItem: MovieSaveDetailData): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: MovieSaveDetailData, newItem: MovieSaveDetailData): Boolean {
+            return oldItem == newItem
+        }
+    }
 }

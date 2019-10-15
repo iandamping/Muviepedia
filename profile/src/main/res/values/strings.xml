@@ -2,4 +2,6 @@
     <string name="app_name">profile</string>
     <string name="logout">Logout</string>
     <string name="login_first_so_you_can_save_your_favourite_movie">Login first so you can save your Fave Movie!</string>
+    <string name="you_have_no_tv_show_saved">You have no tv show saved</string>
+    <string name="you_have_no_movie_saved">You have no movie saved</string>
 </resources>

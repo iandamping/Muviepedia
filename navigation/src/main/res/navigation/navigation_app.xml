@@ -5,13 +5,11 @@
     app:startDestination="@id/movie_navigation">
 
 
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.ian.app.muviepedia.profile.ProfileFragments"
-        android:label="ProfileFragment" />
     <include app:graph="@navigation/tv_navigation" />
 
     <include app:graph="@navigation/movie_navigation" />
+
+    <include app:graph="@navigation/profile_navigation"/>
 
 
 </navigation>

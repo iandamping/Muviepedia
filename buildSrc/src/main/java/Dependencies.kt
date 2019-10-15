@@ -5,7 +5,9 @@ import AndroidXVersions.commonHelperVer
 import AndroidXVersions.constraintLayoutVer
 import AndroidXVersions.coreVer
 import AndroidXVersions.coroutineVer
+import AndroidXVersions.crashlyticVersion
 import AndroidXVersions.espressoCoreVer
+import AndroidXVersions.fabricVersion
 import AndroidXVersions.facebookSdkVer
 import AndroidXVersions.firebaseAuthUiVer
 import AndroidXVersions.firebaseAuthVer
@@ -82,15 +84,22 @@ object AndroidXVersions {
     const val legacySupport = "1.0.0"
     const val workerVersion = "2.2.0"
     const val picassoVersion = "2.5.2"
+    const val crashlyticVersion = "2.10.1"
+    const val fabricVersion = "1.31.1"
 }
 
 object JitpackPlugins {
     const val jitpack = "https://jitpack.io"
 }
 
+object FabricioPlugins {
+    const val fabric = "https://maven.fabric.io/public"
+}
+
 object BuildPlugins {
     const val androidGradlePlugin = "com.android.tools.build:gradle:$buildToolsVersion"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVer"
+    const val fabricPlugin = "io.fabric.tools:gradle:$fabricVersion"
 }
 
 object RoomLibraies{
@@ -195,4 +204,5 @@ object FirebaseLibraries{
     const val facebookLoginSdkStdLib = "com.facebook.android:facebook-login:$facebookSdkVer"
     const val firebaseStorageStdLib = "com.google.firebase:firebase-storage:$firebaseStorageVer"
     const val firebaseDatabaseStdLib = "com.google.firebase:firebase-database:$firebaseDatabaseVer"
+    const val firebaseCrashlyticStdLib = "com.crashlytics.sdk.android:crashlytics:$crashlyticVersion"
 }

@@ -29,10 +29,15 @@ class MovieDataViewModel(private val repository: MovieRemoteRepository) : BaseVi
         vmScopes.launch { repository.saveDetailData(data) }
     }
 
+    fun getDetailSavedMovieByID(selectedId: Int) = repository.getDetailSavedMovieByID(selectedId)
+
     fun deleteSelectedMovie(selectedId: Int) {
         vmScopes.launch { repository.deleteSelectedDetailData(selectedId) }
     }
 
+    fun deleteAllDetailMovieData(){
+        vmScopes.launch { repository.deleteAllDetailMovieData() }
+    }
     @ExperimentalCoroutinesApi
     @FlowPreview
     fun observeSearchData(querry: String) = repository.observeSearchMovie(querry, vmScopes)

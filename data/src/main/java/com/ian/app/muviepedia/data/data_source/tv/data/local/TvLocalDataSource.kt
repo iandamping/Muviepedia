@@ -43,5 +43,9 @@ class TvLocalDataSource(private val db: MovieDatabase) {
 
     suspend fun deleteSelectedDetailTvData(selectedId: Int) = db.tvSaveDetailDao().deleteSelectedId(selectedId)
 
+    fun loadAllTvShowDataById(selectedId: Int) = db.tvSaveDetailDao().loadAllTvShowDataById(selectedId)
+
+    suspend fun deleteAllData() = db.tvSaveDetailDao().deleteAllData()
+
     suspend fun clearSearchTv() = db.tvSearchDao().deleteAllData()
 }

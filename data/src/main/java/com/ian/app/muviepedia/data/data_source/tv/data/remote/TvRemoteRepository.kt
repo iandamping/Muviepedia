@@ -30,6 +30,10 @@ class TvRemoteRepository(private val remoteSource: TvRemoteDataSource, private v
 
     suspend fun deleteSelectedDetailData(selectedId: Int) = localSource.deleteSelectedDetailTvData(selectedId)
 
+    fun loadAllTvShowDataById(selectedId: Int) = localSource.loadAllTvShowDataById(selectedId)
+
+    suspend fun deleteAllData() = localSource.deleteAllData()
+
     fun observeAiringToday(scope: CoroutineScope) = resultLiveData(
             databaseQuery = { localSource.getAiringTodayTvData },
             networkCall = { remoteSource.getAiringTodayTv() },

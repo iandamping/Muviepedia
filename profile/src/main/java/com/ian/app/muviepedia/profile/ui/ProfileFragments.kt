@@ -1,4 +1,4 @@
-package com.ian.app.muviepedia.profile
+package com.ian.app.muviepedia.profile.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.ian.app.muviepedia.data.base.BaseFirebaseFragment
 import com.ian.app.muviepedia.data.data_source.profile.ui.UserProfileViewModel
+import com.ian.app.muviepedia.profile.R
 import com.ian.app.muviepedia.profile.databinding.FragmentProfilesBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -45,13 +47,16 @@ class ProfileFragments : BaseFirebaseFragment() {
                 createGmailSignInIntent()
                 vm.inflateFirebaseLogin()
             }
-
-            lnFacebookLogin.setOnClickListener {
-                createFacebookSignInIntent()
-                vm.inflateFirebaseLogin()
-            }
             btnLogout.setOnClickListener {
                 vm.logout(it.context)
+            }
+
+            lnProfileSavedMovie.setOnClickListener {
+                it.findNavController().navigate(ProfileFragmentsDirections.actionProfileFragmentsToMovieSavedFragment())
+            }
+
+            lnProfileSavedTv.setOnClickListener {
+                it.findNavController().navigate(ProfileFragmentsDirections.actionProfileFragmentsToTvshowSavedFragment())
             }
         }
     }

@@ -18,6 +18,9 @@ interface MovieSaveDetailDao {
     @Query("SELECT * FROM movie_save_detail_data")
     fun loadAll(): LiveData<List<MovieSaveDetailData>>
 
+    @Query("SELECT * FROM movie_save_detail_data WHERE localID = :id")
+    fun loadAllMovieDataById(id: Int): LiveData<MovieSaveDetailData>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(inputMovie: MovieSaveDetailData)
 

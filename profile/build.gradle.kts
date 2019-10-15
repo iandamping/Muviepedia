@@ -55,6 +55,7 @@ dependencies {
     androidTestImplementation(TestLibraries.testRunnerStdLib)
     androidTestImplementation(TestLibraries.espressoCoreStdLib)
     implementation(CustomLibraries.commonHelperStdLib)
+    implementation(CustomLibraries.recyclerHelperStdLib)
     implementation(CirlceImageView.circleImageViewStdLib)
     implementation(KoinLibraries.koinStdLib)
     implementation(NavigationLibraies.navigationStdLib)

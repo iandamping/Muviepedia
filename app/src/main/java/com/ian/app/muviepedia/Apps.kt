@@ -14,6 +14,7 @@ class Apps : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         startKoin {
             androidContext(this@Apps)
             injectData()

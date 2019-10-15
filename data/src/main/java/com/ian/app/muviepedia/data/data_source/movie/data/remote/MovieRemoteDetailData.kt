@@ -60,5 +60,5 @@ data class DetailMovieData(
 }
 
 fun DetailMovieData.toSaveDetail(): MovieSaveDetailData {
-    return MovieSaveDetailData(null, id, budget, revenue, release_date, runtime, vote_average, title, tagline, overview, BuildConfig.imageFormatter + poster_path)
+    return MovieSaveDetailData(null, id, budget, revenue, release_date, runtime, vote_average, title, tagline, overview, poster_path)
 }

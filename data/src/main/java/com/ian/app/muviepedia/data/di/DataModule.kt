@@ -1,6 +1,8 @@
 package com.ian.app.muviepedia.data.di
 
+import android.app.Application
 import androidx.room.Room
+import com.crashlytics.android.Crashlytics
 import com.google.gson.GsonBuilder
 import com.ian.app.muviepedia.data.BuildConfig.baseUrl
 import com.ian.app.muviepedia.data.MovieDatabase
@@ -17,6 +19,7 @@ import com.ian.app.muviepedia.data.data_source.tv.data.remote.TvRemoteDataSource
 import com.ian.app.muviepedia.data.data_source.tv.data.remote.TvRemoteRepository
 import com.ian.app.muviepedia.data.data_source.tv.data.ui.TvDataViewModel
 import com.ian.app.muviepedia.data.util.PreferenceHelper
+import io.fabric.sdk.android.Fabric
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -43,7 +46,8 @@ private val loadFeature by lazy {
                     repositoryModule,
                     dataSourceModule,
                     viewModelModule,
-                    preferenceHelperModule)
+                    preferenceHelperModule,
+                    fabricModule)
     )
 }
 
@@ -72,6 +76,15 @@ val databaseModule = module {
     single { get<MovieDatabase>().userProfileDao() }
 
 }
+
+val fabricModule = module{
+    single { injectFabric(get()) }
+}
+
+private fun injectFabric(app:Application){
+    Fabric.with(app, Crashlytics())
+}
+
 
 
 val preferenceHelperModule = module{

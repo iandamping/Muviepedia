@@ -19,3 +19,11 @@ fun loadImageHelper(view: ImageView, url: String?) {
         view.loadDrawableWithGlide(R.drawable.ic_muvie_pedia)
     }
 }
+
+
+@BindingAdapter("initBookmark")
+fun initBookmarkHelper(view: ImageView, state:Boolean){
+    if (state){
+        view.setBackgroundResource(R.drawable.ic_bookmark)
+    }else view.setBackgroundResource(R.drawable.ic_unbookmark)
+}

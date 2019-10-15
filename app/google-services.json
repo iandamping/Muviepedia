@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "572866777932-1lafkbangti76fd81k9m9364uv4puh44.apps.googleusercontent.com",
+          "client_id": "572866777932-h1bm9h16ba9i23ar8264f1kde227iff4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ian.app.muviepedia",
-            "certificate_hash": "67850421df2bdc0c176cc96986aec721ec0d8c94"
+            "certificate_hash": "1c952623c1f9e05a2b85d6b5763d844238db5dab"
           }
         },
         {
@@ -52,11 +52,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "572866777932-ekrhld4fo7a3eo19ir8itn3n4v5vhqj3.apps.googleusercontent.com",
+          "client_id": "572866777932-ngcdfi397mjmouh2dt4rjaghgrjd4jiu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ian.app.muviepedia.profile",
-            "certificate_hash": "67850421df2bdc0c176cc96986aec721ec0d8c94"
+            "certificate_hash": "1c952623c1f9e05a2b85d6b5763d844238db5dab"
           }
         },
         {

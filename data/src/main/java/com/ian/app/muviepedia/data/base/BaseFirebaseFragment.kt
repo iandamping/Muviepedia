@@ -9,19 +9,7 @@ abstract class BaseFirebaseFragment : Fragment() {
     private val gmailLoginProvider = arrayListOf(
             AuthUI.IdpConfig.GoogleBuilder().build()
     )
-    private val facebookLoginProvider = arrayListOf(
-            AuthUI.IdpConfig.FacebookBuilder().build())
 
-
-    protected fun createFacebookSignInIntent() {
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(facebookLoginProvider)
-                        .build(),
-                requestSignIn
-        )
-    }
 
     protected fun createGmailSignInIntent() {
         startActivityForResult(

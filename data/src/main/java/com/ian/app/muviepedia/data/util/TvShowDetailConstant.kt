@@ -75,4 +75,14 @@ object TvShowDetailConstant {
         }
     }
 
+    val savedTvShowAdapterCallback = object : DiffUtil.ItemCallback<TvSaveDetailData>() {
+        override fun areItemsTheSame(oldItem: TvSaveDetailData, newItem: TvSaveDetailData): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: TvSaveDetailData, newItem: TvSaveDetailData): Boolean {
+            return oldItem == newItem
+        }
+    }
+
 }

@@ -14,12 +14,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.snackbar.Snackbar
-import com.ian.app.helper.util.fullScreen
-import com.ian.app.helper.util.gone
-import com.ian.app.helper.util.loadWithGlide
-import com.ian.app.helper.util.visible
+import com.ian.app.helper.util.*
 import com.ian.app.muviepedia.data.BuildConfig.imageFormatter
 import com.ian.app.muviepedia.data.data.ResultToConsume
+import com.ian.app.muviepedia.data.data_source.profile.ui.UserProfileViewModel
 import com.ian.app.muviepedia.data.data_source.tv.data.remote.DetailTvData
 import com.ian.app.muviepedia.data.data_source.tv.data.remote.toDatabase
 import com.ian.app.muviepedia.data.data_source.tv.data.ui.TvDataViewModel
@@ -36,7 +34,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
  * A simple [Fragment] subclass.
  */
 class TvDetailFragment : Fragment() {
-    private val vm: TvDataViewModel by viewModel()
+    private val tvshowVm: TvDataViewModel by viewModel()
     private var idForDeleteItem: Int? = null
     private var isFavorite: Boolean = false
     private val requestExternalStorage = 3
@@ -76,7 +74,7 @@ class TvDetailFragment : Fragment() {
 
     private fun consumeDetailData(movieId: Int, binding: FragmentTvDetailBinding) {
         binding.apply {
-            vm.observeDetailData(movieId).observe(viewLifecycleOwner, Observer { result ->
+            tvshowVm.observeDetailData(movieId).observe(viewLifecycleOwner, Observer { result ->
                 when (result.status) {
                     ResultToConsume.Status.LOADING -> {
                         progressDetail.visible()
@@ -107,25 +105,25 @@ class TvDetailFragment : Fragment() {
                 it.context.fullScreen(data?.poster_path)
             }
             ivShare.setOnClickListener {
-                activity?.intentShareImageAndText(vm.viewModelScope, data?.name!!, data.overview, data.poster_path)
+                activity?.intentShareImageAndText(tvshowVm.viewModelScope, data?.name!!, data.overview, data.poster_path)
             }
             ivBookmark.setOnClickListener {
                 if (data != null)
                     if (isFavorite) {
-                        if (idForDeleteItem != null) vm.deleteSelectedMovie(idForDeleteItem!!)
+                        if (idForDeleteItem != null) tvshowVm.deleteSelectedMovie(idForDeleteItem!!)
                     } else {
-                        vm.saveDetailMovieData(data.toDatabase())
+                        tvshowVm.saveDetailMovieData(data.toDatabase())
                     }
             }
             ivDownload.setOnClickListener {
-                activity?.saveImage(vm.viewModelScope,nestedParent,data?.poster_path)
+                activity?.saveImage(tvshowVm.viewModelScope,nestedParent,data?.poster_path)
             }
         }
     }
 
     private fun consumeSimilarData(movieId: Int, binding: FragmentTvDetailBinding) {
         binding.apply {
-            vm.observeSimilarData(movieId).observe(viewLifecycleOwner, Observer { result ->
+            tvshowVm.observeSimilarData(movieId).observe(viewLifecycleOwner, Observer { result ->
                 when (result.status) {
                     ResultToConsume.Status.LOADING -> {
                         shimmerSimilar.startShimmer()
@@ -172,7 +170,7 @@ class TvDetailFragment : Fragment() {
 
     private fun consumeSaveDetailData(detailState: DetailTvData, binding: FragmentTvDetailBinding) {
         binding.apply {
-            vm.consumeSaveDetailTv.observe(viewLifecycleOwner, Observer { result ->
+            tvshowVm.consumeSaveDetailTv.observe(viewLifecycleOwner, Observer { result ->
                 if (!result.isNullOrEmpty()) {
                     result.forEach {
                         if (it.id == detailState.id) {
