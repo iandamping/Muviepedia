@@ -8,7 +8,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.ian.app.muviepedia.data.base.BaseFirebaseFragment
+import com.ian.app.muviepedia.data.data_source.movie.data.ui.MovieDataViewModel
 import com.ian.app.muviepedia.data.data_source.profile.ui.UserProfileViewModel
+import com.ian.app.muviepedia.data.data_source.tv.data.ui.TvDataViewModel
 import com.ian.app.muviepedia.profile.R
 import com.ian.app.muviepedia.profile.databinding.FragmentProfilesBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -20,7 +22,8 @@ Github = https://github.com/iandamping
  */
 class ProfileFragments : BaseFirebaseFragment() {
     private val vm: UserProfileViewModel by viewModel()
-
+    private val tvshowVm: TvDataViewModel by viewModel()
+    private val movieVm: MovieDataViewModel by viewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: FragmentProfilesBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_profiles, container, false)
         binding.apply {
@@ -58,6 +61,16 @@ class ProfileFragments : BaseFirebaseFragment() {
             lnProfileSavedTv.setOnClickListener {
                 it.findNavController().navigate(ProfileFragmentsDirections.actionProfileFragmentsToTvshowSavedFragment())
             }
+            tvshowVm.consumeSaveDetailTv.observe(viewLifecycleOwner, Observer {result ->
+                if (result.isNotEmpty()){
+                    movieTotalSave = "See all your ${result.size} tv show saved here"
+                }
+            })
+            movieVm.consumeSaveDetailMovie.observe(viewLifecycleOwner, Observer { result ->
+                if (result.isNotEmpty()){
+                   tvShowTotalSave = "See all your ${result.size} movie saved here"
+                }
+            })
         }
     }
 
