@@ -36,20 +36,33 @@ private fun <T> networkCallResultOfFlow(data: ResultToConsume<T>): Flow<ResultTo
 fun <T, A> searchResultLiveData(data: String, databaseQuery: () -> LiveData<T>,
                                 networkCall: suspend (querry: String) -> ResultToConsume<A>,
                                 saveCallResult: suspend (A) -> Unit): LiveData<ResultToConsume<T>> = liveData {
-    val source = databaseQuery.invoke().map {
-        //emit succeed from database
-        ResultToConsume.success(it)
-    }
-    emitSource(source)
-    searchKeywordFlow(data).debounce(200L).buffer().map { networkCall.invoke(it) }
-            .flatMapLatest { resultFlow -> networkCallResultOfFlow(resultFlow) }
+    //emit loading with cache data if exist
+    val disposables = emitSource(databaseQuery.invoke().map {
+        ResultToConsume.loading(it)
+    })
+
+    try {
+        searchKeywordFlow(data).debounce(200L).buffer().map { networkCall.invoke(it) }
+            .distinctUntilChanged()
             .collectLatest { resultFlow ->
-                if (resultFlow.status == ResultToConsume.Status.SUCCESS) {
-                    if (resultFlow.data != null) saveCallResult(resultFlow.data)
-                } else if (resultFlow.status == ResultToConsume.Status.ERROR) {
-                    if (resultFlow.message != null) emit(ResultToConsume.error(resultFlow.message))
+                disposables.dispose()
+                checkNotNull(resultFlow){
+                    " result from network call is null"
                 }
+                check(resultFlow.status == ResultToConsume.Status.SUCCESS){
+                    " result status is not success "
+                }
+                assert(resultFlow.data!=null){
+                    " data from result is null"
+                }
+                saveCallResult(resultFlow.data!!)
+                emitSource(databaseQuery.invoke().map { ResultToConsume.success(it) })
             }
+    }catch (e:Exception){
+        emitSource(databaseQuery.invoke().map { ResultToConsume.error(e.message!!,it) })
+    }
+
+
 
 }
 

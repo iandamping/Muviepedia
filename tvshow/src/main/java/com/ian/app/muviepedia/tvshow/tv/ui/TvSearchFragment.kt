@@ -49,16 +49,19 @@ class TvSearchFragment : Fragment() {
         binding.apply {
             vm.mutableEditText.observe(viewLifecycleOwner, Observer { querry ->
                 vm.observeSearchData(querry).observe(viewLifecycleOwner, Observer { result ->
+
+                    rvTvSearch.setUpVerticalGridAdapter(result.data, localTvSearchAdapterCallback, R.layout.item_movie, 2, {
+                        ivHomeMovie.loadWithGlide(it.poster_path)
+                        tvHomeMovieName.text = it.name
+                    }, {
+                        if (id != null) this@apply.root.findNavController().navigate(TvSearchFragmentDirections.actionTvSearchFragmentToTvDetailFragment(id!!))
+
+                    })
+
                     when (result.status) {
                         ResultToConsume.Status.SUCCESS -> {
                             progressTvSearch.gone()
-                            rvTvSearch.setUpVerticalGridAdapter(result.data, localTvSearchAdapterCallback, R.layout.item_movie, 2, {
-                                ivHomeMovie.loadWithGlide(it.poster_path)
-                                tvHomeMovieName.text = it.name
-                            }, {
-                                if (id != null) this@apply.root.findNavController().navigate(TvSearchFragmentDirections.actionTvSearchFragmentToTvDetailFragment(id!!))
 
-                            })
                         }
                         ResultToConsume.Status.LOADING -> progressTvSearch.visible()
 

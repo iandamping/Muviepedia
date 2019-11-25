@@ -48,15 +48,18 @@ class MovieSearchFragment : Fragment() {
         binding.apply {
             vms.movieSearchEditText.observe(this@MovieSearchFragment.viewLifecycleOwner, Observer { querry ->
                 vms.observeSearchData(querry).observe(this@MovieSearchFragment.viewLifecycleOwner, Observer { result ->
+
+                    rvSearch.setUpVerticalGridAdapter(result.data, searchMovieAdapterCallback, R.layout.item_movie, 2, {
+                        ivHomeMovie.loadWithGlide(it.poster_path)
+                        tvHomeMovieName.text = it.title
+                    }, {
+                        if (id != null) this@apply.root.findNavController().navigate(MovieSearchFragmentDirections.actionSearchFragmentToHomeFragment(id!!))
+                    })
+
                     when (result.status) {
                         ResultToConsume.Status.SUCCESS -> {
                             progressSearch.gone()
-                            rvSearch.setUpVerticalGridAdapter(result.data, searchMovieAdapterCallback, R.layout.item_movie, 2, {
-                                ivHomeMovie.loadWithGlide(it.poster_path)
-                                tvHomeMovieName.text = it.title
-                            }, {
-                                if (id != null) this@apply.root.findNavController().navigate(MovieSearchFragmentDirections.actionSearchFragmentToHomeFragment(id!!))
-                            })
+
                         }
                         ResultToConsume.Status.LOADING -> progressSearch.visible()
 
