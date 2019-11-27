@@ -14,17 +14,17 @@ import com.google.android.material.snackbar.Snackbar
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadWithGlide
 import com.ian.app.helper.util.visible
-import com.ian.app.muviepedia.data.data.ResultToConsume
-import com.ian.app.muviepedia.data.data_source.tv.data.ui.TvDataViewModel
-import com.ian.app.muviepedia.data.util.TvShowDetailConstant.localTopRatedAdapterCallback
-import com.ian.app.muviepedia.data.util.TvShowDetailConstant.localTvPopularAdapterCallback
-import com.ian.app.muviepedia.data.util.TvShowDetailConstant.popularTv
-import com.ian.app.muviepedia.data.util.TvShowDetailConstant.topRatedTv
-import com.ian.app.muviepedia.data.util.TvShowDetailConstant.tvDelayMillis
+import com.ian.app.muvipedia.presentation.util.TvShowDetailConstant.localTopRatedAdapterCallback
+import com.ian.app.muvipedia.presentation.util.TvShowDetailConstant.localTvPopularAdapterCallback
+import com.ian.app.muvipedia.presentation.util.TvShowDetailConstant.popularTv
+import com.ian.app.muvipedia.presentation.util.TvShowDetailConstant.topRatedTv
+import com.ian.app.muvipedia.presentation.util.TvShowDetailConstant.tvDelayMillis
 import com.ian.app.muviepedia.tvshow.R
+import com.ian.app.muviepedia.tvshow.TvViewModel
 import com.ian.app.muviepedia.tvshow.databinding.FragmentTvBinding
 import com.ian.app.muviepedia.tvshow.tv.ui.slider.SliderTvAdapter
 import com.ian.app.muviepedia.tvshow.util.postRunnable
+import com.ian.app.muvipedia.presentation.model.tvshow.mapToPresentation
 import com.ian.recyclerviewhelper.helper.setUpHorizontalListAdapter
 import kotlinx.android.synthetic.main.item_movie.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -34,7 +34,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
  */
 class TvFragment : Fragment() {
     private lateinit var binding: FragmentTvBinding
-    private val vm: TvDataViewModel by viewModel()
+    private val vm: TvViewModel by viewModel()
     private var mHandler: Handler = Handler()
     private var pageSize: Int? = 0
     private var currentPage = 0
@@ -67,8 +67,8 @@ class TvFragment : Fragment() {
         binding.apply {
             vm.airingToday.observe(viewLifecycleOwner, Observer { result ->
                 when (result.status) {
-                    ResultToConsume.Status.LOADING -> shimmerSliderTv.startShimmer()
-                    ResultToConsume.Status.SUCCESS -> {
+                    com.ian.app.muviepedia.model.ResultToConsume.Status.LOADING -> shimmerSliderTv.startShimmer()
+                    com.ian.app.muviepedia.model.ResultToConsume.Status.SUCCESS -> {
                         if (!result.data.isNullOrEmpty()) {
 
                             pageSize = if (result.data!!.size > 10) {
@@ -76,7 +76,7 @@ class TvFragment : Fragment() {
                             } else result.data!!.size
 
                             vpNowPlayingTv.visible()
-                            vpNowPlayingTv.adapter = SliderTvAdapter(result.data!!.take(10))
+                            vpNowPlayingTv.adapter = SliderTvAdapter(result.data?.mapToPresentation()?.take(10)!!)
                             indicator.setViewPager(vpNowPlayingTv)
 
                             if (shimmerSliderTv.isShimmerStarted && shimmerSliderTv.isShimmerVisible) {
@@ -86,7 +86,7 @@ class TvFragment : Fragment() {
                             }
                         }
                     }
-                    ResultToConsume.Status.ERROR -> {
+                    com.ian.app.muviepedia.model.ResultToConsume.Status.ERROR -> {
                         if (shimmerSliderTv.isShimmerStarted && shimmerSliderTv.isShimmerVisible) {
                             shimmerSliderTv.stopShimmer()
                             shimmerSliderTv.hideShimmer()
@@ -104,10 +104,10 @@ class TvFragment : Fragment() {
         binding.apply {
             vm.popularTv.observe(viewLifecycleOwner, Observer { result ->
                 when (result.status) {
-                    ResultToConsume.Status.LOADING -> shimmerPopulartv.startShimmer()
-                    ResultToConsume.Status.SUCCESS -> {
+                    com.ian.app.muviepedia.model.ResultToConsume.Status.LOADING -> shimmerPopulartv.startShimmer()
+                    com.ian.app.muviepedia.model.ResultToConsume.Status.SUCCESS -> {
                         if (!result.data.isNullOrEmpty()) {
-                            rvPopulartv.setUpHorizontalListAdapter(result.data, localTvPopularAdapterCallback, R.layout.item_movie, {
+                            rvPopulartv.setUpHorizontalListAdapter(result.data?.mapToPresentation(), localTvPopularAdapterCallback, R.layout.item_movie, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.name
                             }, {
@@ -121,7 +121,7 @@ class TvFragment : Fragment() {
                             }
                         }
                     }
-                    ResultToConsume.Status.ERROR -> {
+                    com.ian.app.muviepedia.model.ResultToConsume.Status.ERROR -> {
                         if (shimmerPopulartv.isShimmerStarted && shimmerPopulartv.isShimmerVisible) {
                             shimmerPopulartv.stopShimmer()
                             shimmerPopulartv.hideShimmer()
@@ -139,11 +139,11 @@ class TvFragment : Fragment() {
         binding.apply {
             vm.topRated.observe(viewLifecycleOwner, Observer { result ->
                 when (result.status) {
-                    ResultToConsume.Status.LOADING -> shimmmerTopRatedTv.startShimmer()
-                    ResultToConsume.Status.SUCCESS -> {
+                    com.ian.app.muviepedia.model.ResultToConsume.Status.LOADING -> shimmmerTopRatedTv.startShimmer()
+                    com.ian.app.muviepedia.model.ResultToConsume.Status.SUCCESS -> {
 
                         if (!result.data.isNullOrEmpty()) {
-                            rvTopRatedtv.setUpHorizontalListAdapter(result.data, localTopRatedAdapterCallback, R.layout.item_movie, {
+                            rvTopRatedtv.setUpHorizontalListAdapter(result.data?.mapToPresentation(), localTopRatedAdapterCallback, R.layout.item_movie, {
                                 ivHomeMovie.loadWithGlide(it.poster_path)
                                 tvHomeMovieName.text = it.name
                             }, {
@@ -159,7 +159,7 @@ class TvFragment : Fragment() {
 
 
                     }
-                    ResultToConsume.Status.ERROR -> {
+                    com.ian.app.muviepedia.model.ResultToConsume.Status.ERROR -> {
                         if (shimmmerTopRatedTv.isShimmerStarted && shimmmerTopRatedTv.isShimmerVisible) {
                             shimmmerTopRatedTv.stopShimmer()
                             shimmmerTopRatedTv.hideShimmer()

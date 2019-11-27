@@ -10,24 +10,25 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.ian.app.helper.util.fullScreen
-import com.ian.app.muviepedia.data.data_source.tv.data.local.model.TvSaveDetailData
-import com.ian.app.muviepedia.data.data_source.tv.data.ui.TvDataViewModel
-import com.ian.app.muviepedia.data.util.intentShareImageAndText
-import com.ian.app.muviepedia.data.util.saveImage
+import com.ian.app.muvipedia.presentation.util.intentShareImageAndText
+import com.ian.app.muvipedia.presentation.util.saveImage
 import com.ian.app.muviepedia.profile.R
+import com.ian.app.muviepedia.profile.TvViewModel
 import com.ian.app.muviepedia.profile.databinding.FragmentSavedTvshowDetailBinding
+import com.ian.app.muvipedia.presentation.model.tvshow.TvLocalSaveDetailPresentation
+import com.ian.app.muvipedia.presentation.model.tvshow.mapToPresentation
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class DetailSavedTvShowFragment: Fragment() {
-    private val tvshowVm: TvDataViewModel by viewModel()
+class DetailSavedTvShowFragment : Fragment() {
+    private val tvshowVm: TvViewModel by viewModel()
     private var idForDeleteItem: Int? = null
     private var isFavorite: Boolean = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val argumentId by lazy { DetailSavedTvShowFragmentArgs.fromBundle(arguments!!) }
-        val binding:FragmentSavedTvshowDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_saved_tvshow_detail,container,false)
+        val binding: FragmentSavedTvshowDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_saved_tvshow_detail, container, false)
         binding.apply {
-            lifecycleOwner= viewLifecycleOwner
-            consumeDetailData(argumentId.detailSavedID,this)
+            lifecycleOwner = viewLifecycleOwner
+            consumeDetailData(argumentId.detailSavedID, this)
         }
         return binding.root
     }
@@ -35,21 +36,19 @@ class DetailSavedTvShowFragment: Fragment() {
     private fun consumeDetailData(movieId: Int, binding: FragmentSavedTvshowDetailBinding) {
         binding.apply {
             tvshowVm.loadAllTvShowDataById(movieId).observe(viewLifecycleOwner, Observer { result ->
-                if (result!=null){
-                    detailData = result
-                    inflateView(this@apply, result)
+                if (result != null) {
+                    detailData = result.mapToPresentation()
+                    inflateView(this@apply, result.mapToPresentation())
 
-                    consumeSaveDetailData(result, this)
-                }else{
+                    consumeSaveDetailData(result.mapToPresentation(), this)
+                } else {
                     this@apply.root.findNavController().navigateUp()
                 }
             })
         }
-
-
     }
 
-    private fun inflateView(binding: FragmentSavedTvshowDetailBinding, data: TvSaveDetailData?) {
+    private fun inflateView(binding: FragmentSavedTvshowDetailBinding, data: TvLocalSaveDetailPresentation?) {
         binding.apply {
             ivDetailTvImages.setOnClickListener {
                 it.context.fullScreen(data?.poster_path)
@@ -71,7 +70,7 @@ class DetailSavedTvShowFragment: Fragment() {
         }
     }
 
-    private fun consumeSaveDetailData(detailState: TvSaveDetailData, binding: FragmentSavedTvshowDetailBinding) {
+    private fun consumeSaveDetailData(detailState: TvLocalSaveDetailPresentation, binding: FragmentSavedTvshowDetailBinding) {
         binding.apply {
             tvshowVm.consumeSaveDetailTv.observe(viewLifecycleOwner, Observer { result ->
                 if (!result.isNullOrEmpty()) {
@@ -88,10 +87,8 @@ class DetailSavedTvShowFragment: Fragment() {
                 } else {
                     isFavorite = false
                     bookmarkedState = isFavorite
-
                 }
             })
         }
-
     }
 }

@@ -302,7 +302,7 @@
 
         <variable
             name="detailData"
-            type="com.ian.app.muviepedia.data.data_source.movie.data.remote.DetailMovieData" />
+            type="com.ian.app.muvipedia.presentation.model.movie.MovieRemoteDetailPresentation" />
 
     </data>
 </layout>

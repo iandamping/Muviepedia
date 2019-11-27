@@ -44,6 +44,8 @@ tasks.withType<KotlinCompile> {
 
 dependencies {
     implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":presentation"))
     implementation(project(":navigation"))
     implementation(project(":movie"))
     implementation(project(":tvshow"))
@@ -68,8 +70,8 @@ dependencies {
 
 fun NamedDomainObjectContainer<BuildType>.initDebug(proguard: BaseAppModuleExtension) {
     this.getByName("debug") {
-        isMinifyEnabled = true
-        isShrinkResources = true
+        isMinifyEnabled = false
+        isShrinkResources = false
         proguardFiles(proguard.getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
 }

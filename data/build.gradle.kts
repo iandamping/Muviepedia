@@ -15,7 +15,6 @@ android {
         targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
-        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFile("consumer-rules.pro")
     }
@@ -71,13 +70,13 @@ fun initBuildCondigField(data: NamedDomainObjectContainer<BuildType>) {
 }
 
 dependencies {
+    implementation(project(":domain"))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(CoreLibraries.kotlinStdLib)
     implementation(CoreLibraries.appCompatStdLib)
     implementation(CoreLibraries.androidXCoreStdLib)
     implementation(CoreLibraries.constraintLayoutStdLib)
     implementation(CoreLibraries.materialDesignStdLib)
-    implementation(CoreLibraries.multidexStdLib)
     testImplementation(TestLibraries.jUnit4StdLib)
     testImplementation(TestLibraries.mockitoCoreStdLib)
     androidTestImplementation(TestLibraries.testRunnerStdLib)
@@ -86,7 +85,7 @@ dependencies {
     implementation(CoroutineLibraries.coroutineStdLib)
     implementation(CustomLibraries.commonHelperStdLib)
     implementation(KoinLibraries.koinStdLib)
-    implementation(LifecycleLibraries.lifecycleLib)
+    implementation(LifecycleLibraries.lifecycleRuntime)
     implementation(LifecycleLibraries.viewmodelKtxStdLib)
     implementation(LifecycleLibraries.liveDataKtxStdLib)
     implementation(NetworkingLibraries.retrofitStdLib)
@@ -98,12 +97,9 @@ dependencies {
     implementation(RoomLibraies.roomStdLib)
     implementation(RoomLibraies.roomKtxStdLib)
     implementation(WorkerLibrary.workManagerStdLib)
-    implementation(GlidePlugins.glidePlugin)
     implementation(FirebaseLibraries.firebaseCoreStdLib)
     implementation(FirebaseLibraries.firebaseAuthStdLib)
     implementation(FirebaseLibraries.firebaseUiAuthStdLib)
     implementation(FirebaseLibraries.firebaseCrashlyticStdLib)
-    kapt(LifecycleLibraries.lifecycleCompilerStdLib)
-    kapt(GlidePlugins.glideCompllierPlugin)
     kapt(RoomLibraies.roomCompilerStdLib)
 }

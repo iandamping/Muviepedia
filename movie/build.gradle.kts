@@ -64,7 +64,12 @@ dependencies {
     implementation(PagingLibrary.pagingStdLib)
     implementation(NavigationLibraies.navigationStdLib)
     implementation(NavigationLibraies.legacySupportStdLib)
-    implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":presentation"))
+
+    /*implementation(LifecycleLibraries.lifecycleRuntime)
+    implementation(LifecycleLibraries.viewmodelKtxStdLib)
+    implementation(LifecycleLibraries.liveDataKtxStdLib)*/
 }
 
 

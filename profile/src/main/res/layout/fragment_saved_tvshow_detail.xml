@@ -175,7 +175,7 @@
 
         <variable
             name="detailData"
-            type="com.ian.app.muviepedia.data.data_source.tv.data.local.model.TvSaveDetailData" />
+            type="com.ian.app.muvipedia.presentation.model.tvshow.TvLocalSaveDetailPresentation" />
 
     </data>
 </layout>

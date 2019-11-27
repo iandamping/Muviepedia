@@ -13,11 +13,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadWithGlide
 import com.ian.app.helper.util.visible
-import com.ian.app.muviepedia.data.data.ResultToConsume
-import com.ian.app.muviepedia.data.data_source.tv.data.ui.TvDataViewModel
-import com.ian.app.muviepedia.data.util.TvShowDetailConstant.localTvSearchAdapterCallback
+import com.ian.app.muvipedia.presentation.util.TvShowDetailConstant.localTvSearchAdapterCallback
 import com.ian.app.muviepedia.tvshow.R
+import com.ian.app.muviepedia.tvshow.TvViewModel
 import com.ian.app.muviepedia.tvshow.databinding.FragmentTvSearchBinding
+import com.ian.app.muvipedia.presentation.model.tvshow.mapToPresentation
 import com.ian.recyclerviewhelper.helper.setUpVerticalGridAdapter
 import kotlinx.android.synthetic.main.item_movie.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,7 +28,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
  * A simple [Fragment] subclass.
  */
 class TvSearchFragment : Fragment() {
-    private val vm: TvDataViewModel by viewModel()
+    private val vm: TvViewModel by viewModel()
 
     @FlowPreview
     @ExperimentalCoroutinesApi
@@ -50,7 +50,7 @@ class TvSearchFragment : Fragment() {
             vm.mutableEditText.observe(viewLifecycleOwner, Observer { querry ->
                 vm.observeSearchData(querry).observe(viewLifecycleOwner, Observer { result ->
 
-                    rvTvSearch.setUpVerticalGridAdapter(result.data, localTvSearchAdapterCallback, R.layout.item_movie, 2, {
+                    rvTvSearch.setUpVerticalGridAdapter(result.data?.mapToPresentation(), localTvSearchAdapterCallback, R.layout.item_movie, 2, {
                         ivHomeMovie.loadWithGlide(it.poster_path)
                         tvHomeMovieName.text = it.name
                     }, {
@@ -59,13 +59,13 @@ class TvSearchFragment : Fragment() {
                     })
 
                     when (result.status) {
-                        ResultToConsume.Status.SUCCESS -> {
+                        com.ian.app.muviepedia.model.ResultToConsume.Status.SUCCESS -> {
                             progressTvSearch.gone()
 
                         }
-                        ResultToConsume.Status.LOADING -> progressTvSearch.visible()
+                        com.ian.app.muviepedia.model.ResultToConsume.Status.LOADING -> progressTvSearch.visible()
 
-                        ResultToConsume.Status.ERROR -> {
+                        com.ian.app.muviepedia.model.ResultToConsume.Status.ERROR -> {
                             progressTvSearch.gone()
                             tvSearchTvFailed.visible()
                             Snackbar.make(constraintParent, result.message!!, Snackbar.LENGTH_LONG).show()

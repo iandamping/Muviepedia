@@ -11,8 +11,10 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/movie" />
             <option value="$PROJECT_DIR$/navigation" />
+            <option value="$PROJECT_DIR$/presentation" />
             <option value="$PROJECT_DIR$/profile" />
             <option value="$PROJECT_DIR$/tvshow" />
           </set>

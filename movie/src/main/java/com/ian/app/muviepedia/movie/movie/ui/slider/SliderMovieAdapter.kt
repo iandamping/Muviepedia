@@ -6,9 +6,9 @@ import androidx.navigation.findNavController
 import androidx.viewpager.widget.PagerAdapter
 import com.ian.app.helper.util.inflates
 import com.ian.app.helper.util.loadWithGlide
-import com.ian.app.muviepedia.data.data_source.movie.data.local.model.MovieNowPlayingLocalData
 import com.ian.app.muviepedia.movie.R
 import com.ian.app.muviepedia.movie.movie.ui.MovieFragmentDirections
+import com.ian.app.muvipedia.presentation.model.movie.MovieLocalNowPlayingPresentation
 import kotlinx.android.synthetic.main.item_slider.view.*
 
 /**
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_slider.view.*
 Created by Ian Damping on 12/09/2019.
 Github = https://github.com/iandamping
  */
-class SliderMovieAdapter(private val data: List<MovieNowPlayingLocalData>) : PagerAdapter() {
+class SliderMovieAdapter(private val data: List<MovieLocalNowPlayingPresentation>) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
 
@@ -24,7 +24,6 @@ class SliderMovieAdapter(private val data: List<MovieNowPlayingLocalData>) : Pag
         views.ivSliderImage.loadWithGlide(data[position].poster_path)
         views.ivSliderImage?.setOnClickListener {
             it.findNavController().navigate(MovieFragmentDirections.actionHomeFragmentToDetailMovieFragment(data[position].id!!))
-
         }
         container.addView(views)
         return views

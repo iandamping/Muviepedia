@@ -1,6 +1,5 @@
 package com.ian.app.muviepedia.movie.movie.ui
 
-
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -15,24 +14,24 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.snackbar.Snackbar
 import com.ian.app.helper.util.*
-import com.ian.app.muviepedia.data.BuildConfig.imageFormatter
-import com.ian.app.muviepedia.data.data.ResultToConsume
-import com.ian.app.muviepedia.data.data_source.movie.data.remote.DetailMovieData
-import com.ian.app.muviepedia.data.data_source.movie.data.remote.toSaveDetail
-import com.ian.app.muviepedia.data.data_source.movie.data.ui.MovieDataViewModel
-import com.ian.app.muviepedia.data.data_source.profile.ui.UserProfileViewModel
-import com.ian.app.muviepedia.data.util.MovieDetailConstant.movieAdapterCallback
-import com.ian.app.muviepedia.data.util.intentShareImageAndText
-import com.ian.app.muviepedia.data.util.saveImage
+import com.ian.app.muviepedia.model.ResultToConsume
+import com.ian.app.muviepedia.movie.MovieViewModel
 import com.ian.app.muviepedia.movie.R
 import com.ian.app.muviepedia.movie.databinding.FragmentMovieDetailBinding
+import com.ian.app.muvipedia.presentation.model.movie.MovieLocalSaveDetailPresentation
+import com.ian.app.muvipedia.presentation.model.movie.MovieRemoteDetailPresentation
+import com.ian.app.muvipedia.presentation.model.movie.mapToLocalData
+import com.ian.app.muvipedia.presentation.model.movie.mapToPresentation
+import com.ian.app.muvipedia.presentation.util.MovieDetailConstant.imageFormatter
+import com.ian.app.muvipedia.presentation.util.MovieDetailConstant.movieAdapterCallback
+import com.ian.app.muvipedia.presentation.util.intentShareImageAndText
+import com.ian.app.muvipedia.presentation.util.saveImage
 import com.ian.recyclerviewhelper.helper.setUpVerticalListAdapter
 import kotlinx.android.synthetic.main.item_similar.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
 class MovieDetailFragment : Fragment() {
-    private val movieVm: MovieDataViewModel by viewModel()
+    private val movieVm: MovieViewModel by viewModel()
     private var idForDeleteItem: Int? = null
     private var isFavorite: Boolean = false
     private val requestExternalStorage = 3
@@ -40,7 +39,7 @@ class MovieDetailFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //dont use this, but i had to
+        // dont use this, but i had to
         val builder = StrictMode.VmPolicy.Builder()
         StrictMode.setVmPolicy(builder.build())
 
@@ -63,7 +62,6 @@ class MovieDetailFragment : Fragment() {
             consumeDetailData(args.movieID, this)
             consumeSimilarData(args.movieID, this)
             invalidateAll()
-
         }
         return binding.root
     }
@@ -77,11 +75,11 @@ class MovieDetailFragment : Fragment() {
                         progressDetail.visible()
                     }
                     ResultToConsume.Status.SUCCESS -> {
+                        val results = result.data?.mapToPresentation()
                         progressDetail.gone()
-                        result.data?.poster_path = imageFormatter + result.data?.poster_path
-                        detailData = result.data
-                        inflateView(this@apply, result.data)
-                        consumeSaveDetailData(result.data!!, this)
+                        detailData = results
+                        inflateView(this@apply, results)
+                        consumeSaveDetailData(results?.mapToLocalData()!!, this)
                     }
                     ResultToConsume.Status.ERROR -> {
                         progressDetail.gone()
@@ -90,11 +88,9 @@ class MovieDetailFragment : Fragment() {
                 }
             })
         }
-
-
     }
 
-    private fun inflateView(binding: FragmentMovieDetailBinding, data: DetailMovieData?) {
+    private fun inflateView(binding: FragmentMovieDetailBinding, data: MovieRemoteDetailPresentation?) {
         binding.apply {
             ivDetailMovieImages.setOnClickListener {
                 it.context.fullScreen(data?.poster_path)
@@ -107,7 +103,7 @@ class MovieDetailFragment : Fragment() {
                     if (isFavorite) {
                         if (idForDeleteItem != null) movieVm.deleteSelectedMovie(idForDeleteItem!!)
                     } else {
-                        movieVm.saveDetailMovieData(data.toSaveDetail())
+                        movieVm.saveDetailMovieData(data.mapToLocalData())
                     }
             }
             ivDownload.setOnClickListener {
@@ -124,8 +120,8 @@ class MovieDetailFragment : Fragment() {
                         shimmerSimilar.startShimmer()
                     }
                     ResultToConsume.Status.SUCCESS -> {
-                        if (!result.data?.results?.isNullOrEmpty()!!) {
-                            rvSimilarMovie.setUpVerticalListAdapter(result.data!!.results, movieAdapterCallback, R.layout.item_similar, {
+                        if (!result.data?.isNullOrEmpty()!!) {
+                            rvSimilarMovie.setUpVerticalListAdapter(result.data?.mapToPresentation(), movieAdapterCallback, R.layout.item_similar, {
                                 ivSimilarMovie.loadWithGlide(imageFormatter + it.poster_path)
                                 tvSimilarMovieTittle.text = it.title
                                 tvSimilarMovieReleaseDate.text = it.release_date
@@ -156,14 +152,13 @@ class MovieDetailFragment : Fragment() {
                             shimmerSimilar.hideShimmer()
                             shimmerSimilar.gone()
                         }
-
                     }
                 }
             })
         }
     }
 
-    private fun consumeSaveDetailData(detailState: DetailMovieData, binding: FragmentMovieDetailBinding) {
+    private fun consumeSaveDetailData(detailState: MovieLocalSaveDetailPresentation, binding: FragmentMovieDetailBinding) {
         binding.apply {
             movieVm.consumeSaveDetailMovie.observe(viewLifecycleOwner, Observer { result ->
                 if (!result.isNullOrEmpty()) {
@@ -180,11 +175,8 @@ class MovieDetailFragment : Fragment() {
                 } else {
                     isFavorite = false
                     bookmarkedState = isFavorite
-
                 }
             })
         }
-
     }
-
 }

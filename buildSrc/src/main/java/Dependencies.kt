@@ -47,7 +47,7 @@ Github = https://github.com/iandamping
 
 object AndroidXVersions {
     const val buildToolsVersion = "3.4.2"
-    const val kotlinVer = "1.3.50"
+    const val kotlinVer = "1.3.60"
     const val pagingRuntimeVer = "1.0.1"
     const val coroutineVer = "1.3.1"
     const val commonHelperVer = "0.0.15-alpha02"
@@ -60,7 +60,7 @@ object AndroidXVersions {
     const val facebookSdkVer = "4.39.0"
     const val multidexVer = "1.0.3"
     const val koinVer = "2.0.1"
-    const val lifecycleVer = "2.2.0-alpha03"
+    const val lifecycleVer = "2.2.0-rc02"
     const val mockitoCoreVer = "2.5.3"
     const val jUnitVer = "4.12"
     const val testRunnerVer = "1.3.0-alpha02"
@@ -76,7 +76,7 @@ object AndroidXVersions {
     const val gsonVer = "2.8.5"
     const val glideVer = "4.9.0"
     const val gmsServiceVer = "4.3.1"
-    const val roomVer = "2.2.0-beta01"
+    const val roomVer = "2.2.1"
     const val lottiVer = "3.0.7"
     const val navigationVer = "2.2.0-alpha03"
     const val shimmerVer = "0.5.0"
@@ -159,6 +159,7 @@ object LifecycleLibraries {
     const val lifecycleCompilerStdLib = "androidx.lifecycle:lifecycle-compiler:$lifecycleVer"
     const val viewmodelKtxStdLib = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVer"
     const val liveDataKtxStdLib = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVer"
+    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:$lifecycleVer"
 }
 
 object CoroutineLibraries {

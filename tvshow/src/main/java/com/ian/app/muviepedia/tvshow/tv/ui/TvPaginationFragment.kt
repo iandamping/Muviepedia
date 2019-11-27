@@ -9,16 +9,19 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import com.ian.app.helper.util.checkConnectivityStatus
+import androidx.paging.PagedList
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadResizeWithGlide
-import com.ian.app.muviepedia.data.data_source.tv.data.ui.TvDataViewModel
-import com.ian.app.muviepedia.data.util.TvShowDetailConstant.localTvPopularPaginationAdapterCallback
-import com.ian.app.muviepedia.data.util.TvShowDetailConstant.localTvTopRatedPaginationAdapterCallback
-import com.ian.app.muviepedia.data.util.TvShowDetailConstant.popularTv
-import com.ian.app.muviepedia.data.util.TvShowDetailConstant.topRatedTv
+import com.ian.app.muvipedia.presentation.util.TvShowDetailConstant.localTvPopularPaginationAdapterCallback
+import com.ian.app.muvipedia.presentation.util.TvShowDetailConstant.localTvTopRatedPaginationAdapterCallback
+import com.ian.app.muvipedia.presentation.util.TvShowDetailConstant.popularTv
+import com.ian.app.muvipedia.presentation.util.TvShowDetailConstant.topRatedTv
 import com.ian.app.muviepedia.tvshow.R
+import com.ian.app.muviepedia.tvshow.TvViewModel
 import com.ian.app.muviepedia.tvshow.databinding.FragmentTvPagingBinding
+import com.ian.app.muvipedia.presentation.model.tvshow.TvLocalPopularPaginationPresentation
+import com.ian.app.muvipedia.presentation.model.tvshow.TvLocalTopRatedPaginationPresentation
+import com.ian.app.muvipedia.presentation.model.tvshow.mapToPresentation
 import com.ian.recyclerviewhelper.helper.setUpPagingWithGrid
 import kotlinx.android.synthetic.main.item_paging.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -27,7 +30,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
  * A simple [Fragment] subclass.
  */
 class TvPaginationFragment : Fragment() {
-    private val vm: TvDataViewModel by viewModel()
+    private val vm: TvViewModel by viewModel()
     private lateinit var binding: FragmentTvPagingBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tv_paging, container, false)
@@ -38,10 +41,9 @@ class TvPaginationFragment : Fragment() {
 
     private fun initFetchNetworkData(state: String, binding: FragmentTvPagingBinding) {
         binding.apply {
-            checkConnectivityStatus { connectivityState ->
                 when (state) {
                     popularTv -> {
-                        vm.observePopularTvPagination(connectivityState).observe(viewLifecycleOwner, Observer { data ->
+                        vm.observePopularTvPagination().observe(viewLifecycleOwner, Observer { data ->
                             rvDiscoverMovie.setUpPagingWithGrid(data, R.layout.item_paging, 2, {
                                 ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
                                 tvDiscoverMovieDescription.text = it.name
@@ -59,7 +61,7 @@ class TvPaginationFragment : Fragment() {
                     }
 
                     topRatedTv -> {
-                        vm.observeTopRatedPagination(connectivityState).observe(viewLifecycleOwner, Observer { data ->
+                        vm.observeTopRatedPagination().observe(viewLifecycleOwner, Observer { data ->
                             rvDiscoverMovie.setUpPagingWithGrid(data, R.layout.item_paging, 2, {
                                 ivDiscoverMovie.loadResizeWithGlide(it.poster_path)
                                 tvDiscoverMovieDescription.text = it.name
@@ -78,7 +80,6 @@ class TvPaginationFragment : Fragment() {
                     }
                 }
 
-            }
         }
     }
 

@@ -58,6 +58,9 @@ dependencies {
     implementation(CustomLibraries.recyclerHelperStdLib)
     implementation(CirlceImageView.circleImageViewStdLib)
     implementation(KoinLibraries.koinStdLib)
+    implementation(LifecycleLibraries.lifecycleRuntime)
+    implementation(LifecycleLibraries.viewmodelKtxStdLib)
+    implementation(LifecycleLibraries.liveDataKtxStdLib)
     implementation(NavigationLibraies.navigationStdLib)
     implementation(NavigationLibraies.legacySupportStdLib)
     implementation(FirebaseLibraries.firebaseCoreStdLib)
@@ -65,5 +68,6 @@ dependencies {
     implementation(FirebaseLibraries.firebaseUiAuthStdLib)
     implementation(FirebaseLibraries.facebookLoginSdkStdLib)
     implementation(FirebaseLibraries.facebookSdkStdLib)
-    implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":presentation"))
 }

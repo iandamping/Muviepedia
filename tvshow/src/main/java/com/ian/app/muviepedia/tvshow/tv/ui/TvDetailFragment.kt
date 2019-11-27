@@ -15,17 +15,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.snackbar.Snackbar
 import com.ian.app.helper.util.*
-import com.ian.app.muviepedia.data.BuildConfig.imageFormatter
-import com.ian.app.muviepedia.data.data.ResultToConsume
-import com.ian.app.muviepedia.data.data_source.profile.ui.UserProfileViewModel
-import com.ian.app.muviepedia.data.data_source.tv.data.remote.DetailTvData
-import com.ian.app.muviepedia.data.data_source.tv.data.remote.toDatabase
-import com.ian.app.muviepedia.data.data_source.tv.data.ui.TvDataViewModel
-import com.ian.app.muviepedia.data.util.TvShowDetailConstant.tvAdapterCallback
-import com.ian.app.muviepedia.data.util.intentShareImageAndText
-import com.ian.app.muviepedia.data.util.saveImage
+import com.ian.app.muviepedia.model.ResultToConsume
+import com.ian.app.muvipedia.presentation.util.TvShowDetailConstant.tvAdapterCallback
+import com.ian.app.muvipedia.presentation.util.intentShareImageAndText
+import com.ian.app.muvipedia.presentation.util.saveImage
 import com.ian.app.muviepedia.tvshow.R
+import com.ian.app.muviepedia.tvshow.TvViewModel
 import com.ian.app.muviepedia.tvshow.databinding.FragmentTvDetailBinding
+import com.ian.app.muvipedia.presentation.model.tvshow.TvLocalSaveDetailPresentation
+import com.ian.app.muvipedia.presentation.model.tvshow.TvRemoteDetailPresentation
+import com.ian.app.muvipedia.presentation.model.tvshow.mapToLocalData
+import com.ian.app.muvipedia.presentation.model.tvshow.mapToPresentation
+import com.ian.app.muvipedia.presentation.util.MovieDetailConstant.imageFormatter
 import com.ian.recyclerviewhelper.helper.setUpVerticalListAdapter
 import kotlinx.android.synthetic.main.item_similar.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -34,7 +35,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
  * A simple [Fragment] subclass.
  */
 class TvDetailFragment : Fragment() {
-    private val tvshowVm: TvDataViewModel by viewModel()
+    private val tvshowVm: TvViewModel by viewModel()
     private var idForDeleteItem: Int? = null
     private var isFavorite: Boolean = false
     private val requestExternalStorage = 3
@@ -81,13 +82,13 @@ class TvDetailFragment : Fragment() {
                     }
                     ResultToConsume.Status.SUCCESS -> {
                         progressDetail.gone()
-                        result.data?.poster_path = imageFormatter + result.data?.poster_path
-                        detailData = result.data
-                        inflateView(this@apply, result.data)
-                        consumeSaveDetailData(result.data!!, this)
+                        val results = result.data?.mapToPresentation()
+                        detailData = results
+                        inflateView(this@apply, results)
+                        consumeSaveDetailData(results?.mapToLocalData()!!, this)
 
                     }
-                    ResultToConsume.Status.ERROR -> {
+                  ResultToConsume.Status.ERROR -> {
                         progressDetail.gone()
                         Snackbar.make(nestedParent, result.message!!, Snackbar.LENGTH_LONG).show()
                     }
@@ -98,7 +99,7 @@ class TvDetailFragment : Fragment() {
 
     }
 
-    private fun inflateView(binding: FragmentTvDetailBinding, data: DetailTvData?) {
+    private fun inflateView(binding: FragmentTvDetailBinding, data: TvRemoteDetailPresentation?) {
         binding.apply {
 
             ivDetailTvImages.setOnClickListener {
@@ -112,7 +113,7 @@ class TvDetailFragment : Fragment() {
                     if (isFavorite) {
                         if (idForDeleteItem != null) tvshowVm.deleteSelectedMovie(idForDeleteItem!!)
                     } else {
-                        tvshowVm.saveDetailMovieData(data.toDatabase())
+                        tvshowVm.saveDetailMovieData(data.mapToLocalData())
                     }
             }
             ivDownload.setOnClickListener {
@@ -129,9 +130,9 @@ class TvDetailFragment : Fragment() {
                         shimmerSimilar.startShimmer()
                     }
                     ResultToConsume.Status.SUCCESS -> {
-                        if (!result.data?.results?.isNullOrEmpty()!!) {
-                            rvSimilarTv.setUpVerticalListAdapter(result.data!!.results, tvAdapterCallback, R.layout.item_similar, {
-                                ivSimilarMovie.loadWithGlide(imageFormatter + it.poster_path)
+                        if (!result.data?.isNullOrEmpty()!!) {
+                            rvSimilarTv.setUpVerticalListAdapter(result.data?.mapToPresentation(), tvAdapterCallback, R.layout.item_similar, {
+                                ivSimilarMovie.loadWithGlide( it.poster_path)
                                 tvSimilarMovieTittle.text = it.name
                                 tvSimilarMovieReleaseDate.text = it.first_air_date
                             }, {
@@ -155,7 +156,7 @@ class TvDetailFragment : Fragment() {
                             }
                         }
                     }
-                    ResultToConsume.Status.ERROR -> {
+                    com.ian.app.muviepedia.model.ResultToConsume.Status.ERROR -> {
                         if (shimmerSimilar.isShimmerStarted && shimmerSimilar.isShimmerVisible) {
                             shimmerSimilar.stopShimmer()
                             shimmerSimilar.hideShimmer()
@@ -168,7 +169,7 @@ class TvDetailFragment : Fragment() {
         }
     }
 
-    private fun consumeSaveDetailData(detailState: DetailTvData, binding: FragmentTvDetailBinding) {
+    private fun consumeSaveDetailData(detailState: TvLocalSaveDetailPresentation, binding: FragmentTvDetailBinding) {
         binding.apply {
             tvshowVm.consumeSaveDetailTv.observe(viewLifecycleOwner, Observer { result ->
                 if (!result.isNullOrEmpty()) {

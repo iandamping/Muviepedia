@@ -1,7 +1,7 @@
 package com.ian.app.muviepedia
 
 import android.app.Application
-import com.ian.app.muviepedia.data.di.injectData
+import com.ian.app.muviepedia.di.injectData
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -20,5 +20,4 @@ class Apps : Application() {
             injectData()
         }
     }
-
 }

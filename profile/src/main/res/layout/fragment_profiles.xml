@@ -13,7 +13,7 @@
             type="String" />
         <variable
             name="userProfile"
-            type="com.ian.app.muviepedia.data.data_source.profile.local.model.UserProfileData" />
+            type="com.ian.app.muvipedia.presentation.model.profile.UserProfilePresentation" />
     </data>
 
     <LinearLayout

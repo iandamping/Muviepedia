@@ -1,6 +1,5 @@
 package com.ian.app.muviepedia.movie.movie.ui
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +12,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadWithGlide
 import com.ian.app.helper.util.visible
-import com.ian.app.muviepedia.data.data.ResultToConsume
-import com.ian.app.muviepedia.data.data_source.movie.data.ui.MovieDataViewModel
-import com.ian.app.muviepedia.data.util.MovieDetailConstant.searchMovieAdapterCallback
+import com.ian.app.muviepedia.model.ResultToConsume
+import com.ian.app.muviepedia.movie.MovieViewModel
 import com.ian.app.muviepedia.movie.R
 import com.ian.app.muviepedia.movie.databinding.FragmentMovieSearchBinding
+import com.ian.app.muvipedia.presentation.model.movie.mapToPresentation
+import com.ian.app.muvipedia.presentation.util.MovieDetailConstant.searchMovieAdapterCallback
 import com.ian.recyclerviewhelper.helper.setUpVerticalGridAdapter
 import kotlinx.android.synthetic.main.item_movie.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,7 +28,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
  * A simple [Fragment] subclass.
  */
 class MovieSearchFragment : Fragment() {
-    private val vms: MovieDataViewModel by viewModel()
+    private val vms: MovieViewModel by viewModel()
     @FlowPreview
     @ExperimentalCoroutinesApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,7 +49,7 @@ class MovieSearchFragment : Fragment() {
             vms.movieSearchEditText.observe(this@MovieSearchFragment.viewLifecycleOwner, Observer { querry ->
                 vms.observeSearchData(querry).observe(this@MovieSearchFragment.viewLifecycleOwner, Observer { result ->
 
-                    rvSearch.setUpVerticalGridAdapter(result.data, searchMovieAdapterCallback, R.layout.item_movie, 2, {
+                    rvSearch.setUpVerticalGridAdapter(result.data?.mapToPresentation(), searchMovieAdapterCallback, R.layout.item_movie, 2, {
                         ivHomeMovie.loadWithGlide(it.poster_path)
                         tvHomeMovieName.text = it.title
                     }, {
@@ -59,7 +59,6 @@ class MovieSearchFragment : Fragment() {
                     when (result.status) {
                         ResultToConsume.Status.SUCCESS -> {
                             progressSearch.gone()
-
                         }
                         ResultToConsume.Status.LOADING -> progressSearch.visible()
 
@@ -68,11 +67,8 @@ class MovieSearchFragment : Fragment() {
                             Snackbar.make(constraintParent, result.message!!, Snackbar.LENGTH_LONG).show()
                         }
                     }
-
                 })
             })
         }
     }
-
-
 }

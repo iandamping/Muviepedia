@@ -254,7 +254,7 @@
 
         <variable
             name="detailData"
-            type="com.ian.app.muviepedia.data.data_source.tv.data.remote.DetailTvData" />
+            type="com.ian.app.muvipedia.presentation.model.tvshow.TvRemoteDetailPresentation" />
 
     </data>
 </layout>

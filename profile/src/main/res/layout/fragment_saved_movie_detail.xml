@@ -236,7 +236,7 @@
 
         <variable
             name="detailData"
-            type="com.ian.app.muviepedia.data.data_source.movie.data.local.model.MovieSaveDetailData" />
+            type="com.ian.app.muvipedia.presentation.model.movie.MovieLocalSaveDetailPresentation" />
 
     </data>
 </layout>

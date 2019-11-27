@@ -10,47 +10,45 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.ian.app.helper.util.fullScreen
-import com.ian.app.muviepedia.data.data_source.movie.data.local.model.MovieSaveDetailData
-import com.ian.app.muviepedia.data.data_source.movie.data.ui.MovieDataViewModel
-import com.ian.app.muviepedia.data.util.intentShareImageAndText
-import com.ian.app.muviepedia.data.util.saveImage
+import com.ian.app.muviepedia.profile.MovieViewModel
+import com.ian.app.muvipedia.presentation.util.intentShareImageAndText
+import com.ian.app.muvipedia.presentation.util.saveImage
 import com.ian.app.muviepedia.profile.R
 import com.ian.app.muviepedia.profile.databinding.FragmentSavedMovieDetailBinding
+import com.ian.app.muvipedia.presentation.model.movie.MovieLocalSaveDetailPresentation
+import com.ian.app.muvipedia.presentation.model.movie.mapToPresentation
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class DetailSavedMovieFragment : Fragment(){
-    private val movieVm: MovieDataViewModel by viewModel()
+class DetailSavedMovieFragment : Fragment() {
+    private val movieVm: MovieViewModel by viewModel()
     private var idForDeleteItem: Int? = null
     private var isFavorite: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val argumentId by lazy { DetailSavedMovieFragmentArgs.fromBundle(arguments!!) }
-        val binding:FragmentSavedMovieDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_saved_movie_detail,container,false)
+        val binding: FragmentSavedMovieDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_saved_movie_detail, container, false)
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            consumeDetailData(argumentId.detailSavedId,this)
+            consumeDetailData(argumentId.detailSavedId, this)
         }
         return binding.root
     }
     private fun consumeDetailData(movieId: Int, binding: FragmentSavedMovieDetailBinding) {
         binding.apply {
             movieVm.getDetailSavedMovieByID(movieId).observe(viewLifecycleOwner, Observer { result ->
-                if (result!=null){
-                    detailData = result
-                    inflateView(this@apply, result)
+                if (result != null) {
+                    detailData = result.mapToPresentation()
+                    inflateView(this@apply, result.mapToPresentation())
 
-                    consumeSaveDetailData(result, this)
-                }else{
+                    consumeSaveDetailData(result.mapToPresentation(), this)
+                } else {
                     this@apply.root.findNavController().navigateUp()
                 }
-
             })
         }
-
-
     }
 
-    private fun inflateView(binding: FragmentSavedMovieDetailBinding, data: MovieSaveDetailData?) {
+    private fun inflateView(binding: FragmentSavedMovieDetailBinding, data: MovieLocalSaveDetailPresentation?) {
         binding.apply {
             ivDetailMovieImages.setOnClickListener {
                 it.context.fullScreen(data?.poster_path)
@@ -72,7 +70,7 @@ class DetailSavedMovieFragment : Fragment(){
         }
     }
 
-    private fun consumeSaveDetailData(detailState: MovieSaveDetailData, binding: FragmentSavedMovieDetailBinding) {
+    private fun consumeSaveDetailData(detailState: MovieLocalSaveDetailPresentation, binding: FragmentSavedMovieDetailBinding) {
         binding.apply {
             movieVm.consumeSaveDetailMovie.observe(viewLifecycleOwner, Observer { result ->
                 if (!result.isNullOrEmpty()) {
@@ -89,11 +87,8 @@ class DetailSavedMovieFragment : Fragment(){
                 } else {
                     isFavorite = false
                     bookmarkedState = isFavorite
-
                 }
             })
         }
-
     }
-
 }

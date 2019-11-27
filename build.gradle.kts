@@ -16,13 +16,16 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
+plugins{
+    id("org.jlleitschuh.gradle.ktlint") version ("7.1.0")
+}
 allprojects {
     repositories {
         google()
         jcenter()
         maven { url = uri(JitpackPlugins.jitpack) }
     }
+    apply { plugin( "org.jlleitschuh.gradle.ktlint") }
 }
 
 tasks.register("clean",Delete::class){
