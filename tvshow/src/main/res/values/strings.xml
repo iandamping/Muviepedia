@@ -5,5 +5,8 @@
     <string name="up_coming_movie">Up Coming Movie</string>
     <string name="top_rated_tv_show">Top Rated Tv Show</string>
     <string name="popular_tv_show">Popular Tv Show</string>
-    <string name="search_tv">Search Tv</string>
+    <string name="search_tv">Search Tv Show</string>
+    <string name="discover_tv_show">Discover Tv Show</string>
+    <string name="every_tv_show_is_in_here">Your favorite tv show is in here</string>
+    <string name="no_similar_tv_show_data">No similar tv show data</string>
 </resources>

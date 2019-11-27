@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/tvFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.TvFragment"
+        android:name="com.ian.app.muviepedia.tvshow.tv.ui.TvFragment"
         android:label="TvFragment">
         <action
             android:id="@+id/action_tvFragment_to_tvSearchFragment"
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/tvSearchFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.TvSearchFragment"
+        android:name="com.ian.app.muviepedia.tvshow.tv.ui.TvSearchFragment"
         android:label="TvSearchFragment">
         <action
             android:id="@+id/action_tvSearchFragment_to_tvDetailFragment"
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/tvPaginationFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.TvPaginationFragment"
+        android:name="com.ian.app.muviepedia.tvshow.tv.ui.TvPaginationFragment"
         android:label="TvPaginationFragment">
         <action
             android:id="@+id/action_tvPaginationFragment_to_tvDetailFragment"
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/tvDetailFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.tvshow.tv.ui.TvDetailFragment"
+        android:name="com.ian.app.muviepedia.tvshow.tv.ui.TvDetailFragment"
         android:label="TvDetailFragment">
         <action
             android:id="@+id/action_tvDetailFragment_to_tvFragment"

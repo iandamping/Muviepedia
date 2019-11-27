@@ -56,4 +56,5 @@ dependencies {
     implementation(NavigationLibraies.navigationUiStdLib)
     implementation(project(":movie"))
     implementation(project(":tvshow"))
+    implementation(project(":profile"))
 }

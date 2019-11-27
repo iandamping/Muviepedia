@@ -4,6 +4,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
+    id("io.fabric")
     kotlin("android")
 }
 
@@ -11,7 +13,7 @@ android {
     compileSdkVersion(29)
     buildToolsVersion("29.0.1")
     defaultConfig {
-        applicationId = "com.ian.junemon.spe_learning_mvvm"
+        applicationId = "com.ian.app.muviepedia"
         minSdkVersion(19)
         targetSdkVersion(29)
         versionCode = 1
@@ -42,9 +44,12 @@ tasks.withType<KotlinCompile> {
 
 dependencies {
     implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":presentation"))
     implementation(project(":navigation"))
     implementation(project(":movie"))
     implementation(project(":tvshow"))
+    implementation(project(":profile"))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(CoreLibraries.kotlinStdLib)
     implementation(CoreLibraries.appCompatStdLib)
@@ -73,8 +78,8 @@ fun NamedDomainObjectContainer<BuildType>.initDebug(proguard: BaseAppModuleExten
 
 fun NamedDomainObjectContainer<BuildType>.initRelease(proguard: BaseAppModuleExtension) {
     this.getByName("release") {
-        isMinifyEnabled = false
-        isShrinkResources = false
+        isMinifyEnabled = true
+        isShrinkResources = true
         proguardFiles(proguard.getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
 }

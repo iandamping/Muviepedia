@@ -5,13 +5,11 @@
     app:startDestination="@id/movie_navigation">
 
 
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.ian.junemon.spe_learning_mvvm.profile.ProfileFragment"
-        android:label="ProfileFragment" />
     <include app:graph="@navigation/tv_navigation" />
 
     <include app:graph="@navigation/movie_navigation" />
+
+    <include app:graph="@navigation/profile_navigation"/>
 
 
 </navigation>

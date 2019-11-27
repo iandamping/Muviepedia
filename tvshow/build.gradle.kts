@@ -51,11 +51,11 @@ dependencies {
     implementation(CoreLibraries.androidXCoreStdLib)
     implementation(CoreLibraries.constraintLayoutStdLib)
     implementation(CoreLibraries.materialDesignStdLib)
-    implementation(CoreLibraries.multidexStdLib)
     testImplementation(TestLibraries.jUnit4StdLib)
     testImplementation(TestLibraries.mockitoCoreStdLib)
     androidTestImplementation(TestLibraries.testRunnerStdLib)
     androidTestImplementation(TestLibraries.espressoCoreStdLib)
+
     implementation(CustomLibraries.commonHelperStdLib)
     implementation(CustomLibraries.recyclerHelperStdLib)
     implementation(CustomLibraries.cirlceIndicatorStdLib)
@@ -65,7 +65,12 @@ dependencies {
     implementation(PagingLibrary.pagingStdLib)
     implementation(NavigationLibraies.navigationStdLib)
     implementation(NavigationLibraies.legacySupportStdLib)
-    implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":presentation"))
+
+    /*implementation(LifecycleLibraries.lifecycleRuntime)
+    implementation(LifecycleLibraries.viewmodelKtxStdLib)
+    implementation(LifecycleLibraries.liveDataKtxStdLib)*/
 
 }
 

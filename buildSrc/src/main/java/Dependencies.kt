@@ -5,7 +5,9 @@ import AndroidXVersions.commonHelperVer
 import AndroidXVersions.constraintLayoutVer
 import AndroidXVersions.coreVer
 import AndroidXVersions.coroutineVer
+import AndroidXVersions.crashlyticVersion
 import AndroidXVersions.espressoCoreVer
+import AndroidXVersions.fabricVersion
 import AndroidXVersions.facebookSdkVer
 import AndroidXVersions.firebaseAuthUiVer
 import AndroidXVersions.firebaseAuthVer
@@ -28,6 +30,7 @@ import AndroidXVersions.navigationVer
 import AndroidXVersions.okHttp3LogginInterceptorVer
 import AndroidXVersions.okHttp3Ver
 import AndroidXVersions.pagingRuntimeVer
+import AndroidXVersions.picassoVersion
 import AndroidXVersions.recyckerHelperVer
 import AndroidXVersions.retrofitVer
 import AndroidXVersions.roomVer
@@ -44,11 +47,11 @@ Github = https://github.com/iandamping
 
 object AndroidXVersions {
     const val buildToolsVersion = "3.4.2"
-    const val kotlinVer = "1.3.50"
+    const val kotlinVer = "1.3.60"
     const val pagingRuntimeVer = "1.0.1"
     const val coroutineVer = "1.3.1"
     const val commonHelperVer = "0.0.15-alpha02"
-    const val recyckerHelperVer = "0.0.5-alpha04b"
+    const val recyckerHelperVer = "0.0.5-alpha04c"
     const val firebaseCoreVer = "17.1.0"
     const val firebaseDatabaseVer = "19.0.0"
     const val firebaseAuthVer = "19.0.0"
@@ -57,7 +60,7 @@ object AndroidXVersions {
     const val facebookSdkVer = "4.39.0"
     const val multidexVer = "1.0.3"
     const val koinVer = "2.0.1"
-    const val lifecycleVer = "2.2.0-alpha03"
+    const val lifecycleVer = "2.2.0-rc02"
     const val mockitoCoreVer = "2.5.3"
     const val jUnitVer = "4.12"
     const val testRunnerVer = "1.3.0-alpha02"
@@ -73,22 +76,30 @@ object AndroidXVersions {
     const val gsonVer = "2.8.5"
     const val glideVer = "4.9.0"
     const val gmsServiceVer = "4.3.1"
-    const val roomVer = "2.2.0-beta01"
+    const val roomVer = "2.2.1"
     const val lottiVer = "3.0.7"
     const val navigationVer = "2.2.0-alpha03"
     const val shimmerVer = "0.5.0"
     const val cirlceIndicatorRelexVer = "1.2.2@aar"
     const val legacySupport = "1.0.0"
     const val workerVersion = "2.2.0"
+    const val picassoVersion = "2.5.2"
+    const val crashlyticVersion = "2.10.1"
+    const val fabricVersion = "1.31.1"
 }
 
 object JitpackPlugins {
     const val jitpack = "https://jitpack.io"
 }
 
+object FabricioPlugins {
+    const val fabric = "https://maven.fabric.io/public"
+}
+
 object BuildPlugins {
     const val androidGradlePlugin = "com.android.tools.build:gradle:$buildToolsVersion"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVer"
+    const val fabricPlugin = "io.fabric.tools:gradle:$fabricVersion"
 }
 
 object RoomLibraies{
@@ -112,7 +123,10 @@ object LottieLibrary{
 object GlidePlugins {
     const val glidePlugin = "com.github.bumptech.glide:glide:$glideVer"
     const val glideCompllierPlugin = "com.github.bumptech.glide:compiler:$glideVer"
+}
 
+object PicassoPlugins{
+    const val picassoPlugin = "com.squareup.picasso:picasso:$picassoVersion"
 }
 
 object CoreLibraries {
@@ -145,6 +159,7 @@ object LifecycleLibraries {
     const val lifecycleCompilerStdLib = "androidx.lifecycle:lifecycle-compiler:$lifecycleVer"
     const val viewmodelKtxStdLib = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVer"
     const val liveDataKtxStdLib = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVer"
+    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:$lifecycleVer"
 }
 
 object CoroutineLibraries {
@@ -163,6 +178,10 @@ object CustomLibraries {
     const val recyclerHelperStdLib = "com.github.iandamping:RecyclerViewHelper:$recyckerHelperVer"
     const val commonHelperStdLib = "com.github.iandamping:CommonHelper:$commonHelperVer"
     const val cirlceIndicatorStdLib = "me.relex:circleindicator:$cirlceIndicatorRelexVer"
+}
+
+object CirlceImageView{
+    const val circleImageViewStdLib = "de.hdodenhof:circleimageview:3.0.0"
 }
 
 object ShimmerLibrary{
@@ -186,4 +205,5 @@ object FirebaseLibraries{
     const val facebookLoginSdkStdLib = "com.facebook.android:facebook-login:$facebookSdkVer"
     const val firebaseStorageStdLib = "com.google.firebase:firebase-storage:$firebaseStorageVer"
     const val firebaseDatabaseStdLib = "com.google.firebase:firebase-database:$firebaseDatabaseVer"
+    const val firebaseCrashlyticStdLib = "com.crashlytics.sdk.android:crashlytics:$crashlyticVersion"
 }

@@ -6,4 +6,7 @@
     <string name="top_rated_tv_show">Top Rated Tv Show</string>
     <string name="popular_tv_show">Popular Tv Show</string>
     <string name="search_tv">Search Tv</string>
+    <string name="your_favorite_movie_is_in_here">Your favorite movie is in here</string>
+    <string name="discover_movie">Discover Movie</string>
+    <string name="no_similar_movie">No similar movie data</string>
 </resources>

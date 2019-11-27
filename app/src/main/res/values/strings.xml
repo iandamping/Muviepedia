@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Belajar Jetpack!</string>
 
+    <string name="package_name">com.ian.app.muviepedia.provider</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="see_all">See All</string>
     <string name="popular_movie">Popular Movie</string>

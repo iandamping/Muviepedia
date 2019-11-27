@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/profile_navigation"
+    app:startDestination="@id/profileFragments">
+
+    <fragment
+        android:id="@+id/profileFragments"
+        android:name="com.ian.app.muviepedia.profile.ui.ProfileFragments"
+        android:label="ProfileFragments" >
+        <action
+            android:id="@+id/action_profileFragments_to_movieSavedFragment"
+            app:destination="@id/movieSavedFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity" />
+        <action
+            android:id="@+id/action_profileFragments_to_tvshowSavedFragment"
+            app:destination="@id/tvshowSavedFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieSavedFragment"
+        android:name="com.ian.app.muviepedia.profile.ui.MovieSavedFragment"
+        android:label="MovieSavedFragment" >
+        <action
+            android:id="@+id/action_movieSavedFragment_to_detailSavedMovieFragment"
+            app:destination="@id/detailSavedMovieFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvshowSavedFragment"
+        android:name="com.ian.app.muviepedia.profile.ui.TvshowSavedFragment"
+        android:label="TvshowSavedFragment" >
+        <action
+            android:id="@+id/action_tvshowSavedFragment_to_detailSavedTvShowFragment"
+            app:destination="@id/detailSavedTvShowFragment"
+            app:popEnterAnim="@anim/fade_in_activity"
+            app:popExitAnim="@anim/fade_out_activity" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailSavedMovieFragment"
+        android:name="com.ian.app.muviepedia.profile.ui.detail.DetailSavedMovieFragment"
+        android:label="DetailSavedMovieFragment" >
+        <argument
+            android:name="DetailSavedId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailSavedTvShowFragment"
+        android:name="com.ian.app.muviepedia.profile.ui.detail.DetailSavedTvShowFragment"
+        android:label="DetailSavedTvShowFragment" >
+        <argument
+            android:name="detailSavedID"
+            app:argType="integer" />
+    </fragment>
+</navigation>
