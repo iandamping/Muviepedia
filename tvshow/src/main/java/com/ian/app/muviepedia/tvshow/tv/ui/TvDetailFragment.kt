@@ -106,7 +106,8 @@ class TvDetailFragment : Fragment() {
                 it.context.fullScreen(data?.poster_path)
             }
             ivShare.setOnClickListener {
-                activity?.intentShareImageAndText(tvshowVm.viewModelScope, data?.name!!, data.overview, data.poster_path)
+                activity?.intentShareImageAndText(tvshowVm.viewModelScope, data?.name!!, data.overview, data.poster_path!!
+                )
             }
             ivBookmark.setOnClickListener {
                 if (data != null)
