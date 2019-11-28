@@ -6,6 +6,7 @@ import com.ian.app.muviepedia.data.cleanarch.data.datasource.MovieCacheDataSourc
 import com.ian.app.muviepedia.data.cleanarch.data.datasource.MovieRemoteDataSource
 import com.ian.app.muviepedia.data.cleanarch.datasource.model.movie.MovieLocalUpComingPaginationEntity
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
@@ -13,7 +14,10 @@ import kotlinx.coroutines.launch
  * Github https://github.com/iandamping
  * Indonesia.
  */
-class MoviePaginationUpComingRepository(private val remoteDataSource: MovieRemoteDataSource, private val localDataSource: MovieCacheDataSource, private val scope: CoroutineScope) : PageKeyedDataSource<Int, MovieLocalUpComingPaginationEntity>() {
+class MoviePaginationUpComingRepository(
+    private val remoteDataSource: MovieRemoteDataSource,
+    private val localDataSource: MovieCacheDataSource
+) : PageKeyedDataSource<Int, MovieLocalUpComingPaginationEntity>() {
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
@@ -45,7 +49,7 @@ class MoviePaginationUpComingRepository(private val remoteDataSource: MovieRemot
     }
 
     private fun fetchData(page: Int, callback: (List<MovieLocalUpComingPaginationEntity>) -> Unit) {
-        scope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
                 val firstData = remoteDataSource.getRemotePaginationUpComingMovie(page)
                 checkNotNull(firstData.data) { " ${firstData.message} " }

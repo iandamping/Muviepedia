@@ -46,11 +46,11 @@ class MovieUseCase(private val movieRepository: MovieRepository) {
     fun getRemoteSimilarMovie(movieId: Int): LiveData<ResultToConsume<List<MovieRemoteData>>> =
         movieRepository.getRemoteSimilarMovie(movieId)
 
-    fun getCachePaginationPopularMovie(scope: CoroutineScope): LiveData<PagedList<MovieLocalPopularPaginationData>> =
-        movieRepository.getCachePaginationPopularMovie(scope)
+    fun getCachePaginationPopularMovie(): LiveData<PagedList<MovieLocalPopularPaginationData>> =
+        movieRepository.getCachePaginationPopularMovie()
 
-    fun getCachePaginationUpComingMovie(scope: CoroutineScope): LiveData<PagedList<MovieLocalUpComingPaginationData>> =
-        movieRepository.getCachePaginationUpComingMovie(scope)
+    fun getCachePaginationUpComingMovie(): LiveData<PagedList<MovieLocalUpComingPaginationData>> =
+        movieRepository.getCachePaginationUpComingMovie()
 
     suspend fun setCacheDetailMovie(data: MovieLocalSaveDetailData) {
         movieRepository.setCacheDetailMovie(data)

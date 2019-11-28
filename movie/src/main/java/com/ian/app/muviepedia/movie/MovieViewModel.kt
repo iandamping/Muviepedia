@@ -44,9 +44,9 @@ class MovieViewModel(private val repository: MovieUseCase) : BaseViewModel() {
 
     fun observeSimilarData(movieID: Int) = repository.getRemoteSimilarMovie(movieID)
 
-    fun observePopularPagination() = repository.getCachePaginationPopularMovie(vmScopes)
+    fun observePopularPagination() = repository.getCachePaginationPopularMovie()
 
-    fun observeUpComingPagination() = repository.getCachePaginationUpComingMovie(vmScopes)
+    fun observeUpComingPagination() = repository.getCachePaginationUpComingMovie()
 
     init {
         vmScopes.launch { repository.clearSearchMovie() }

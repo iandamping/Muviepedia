@@ -89,13 +89,13 @@ class TvRepositoryImpl(
         })
     }
 
-    override fun getCachePaginationPopularTv(scope: CoroutineScope): LiveData<PagedList<TvLocalPopularPaginationData>> {
-        val dataSourceFactory = TvPaginationPopularFactory(remoteSource, localSource, scope).map { it.mapToDomain() }
+    override fun getCachePaginationPopularTv(): LiveData<PagedList<TvLocalPopularPaginationData>> {
+        val dataSourceFactory = TvPaginationPopularFactory(remoteSource, localSource).map { it.mapToDomain() }
         return LivePagedListBuilder(dataSourceFactory, TvPaginationPopularFactory.pagedListConfig()).build()
     }
 
-    override fun getCachePaginationTopRatedTv(scope: CoroutineScope): LiveData<PagedList<TvLocalTopRatedPaginationData>> {
-        val dataSourceFactory = TvPaginationTopRatedFactory(remoteSource, localSource, scope).map { it.mapToDomain() }
+    override fun getCachePaginationTopRatedTv(): LiveData<PagedList<TvLocalTopRatedPaginationData>> {
+        val dataSourceFactory = TvPaginationTopRatedFactory(remoteSource, localSource).map { it.mapToDomain() }
         return LivePagedListBuilder(dataSourceFactory, TvPaginationTopRatedFactory.pagedListConfig()).build()
     }
 

@@ -6,6 +6,7 @@ import com.ian.app.muviepedia.data.cleanarch.data.datasource.TvCacheDataSource
 import com.ian.app.muviepedia.data.cleanarch.data.datasource.TvRemoteDataSource
 import com.ian.app.muviepedia.data.cleanarch.datasource.model.tv.TvLocalTopRatedPaginationEntity
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
@@ -13,7 +14,10 @@ import kotlinx.coroutines.launch
  * Github https://github.com/iandamping
  * Indonesia.
  */
-class TvPaginationTopRatedRepository(private val remoteDataSource: TvRemoteDataSource, private val localDataSource: TvCacheDataSource, private val scope: CoroutineScope) : PageKeyedDataSource<Int, TvLocalTopRatedPaginationEntity>() {
+class TvPaginationTopRatedRepository(
+    private val remoteDataSource: TvRemoteDataSource,
+    private val localDataSource: TvCacheDataSource
+) : PageKeyedDataSource<Int, TvLocalTopRatedPaginationEntity>() {
     override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, TvLocalTopRatedPaginationEntity>
@@ -44,7 +48,7 @@ class TvPaginationTopRatedRepository(private val remoteDataSource: TvRemoteDataS
     }
 
     private fun fetchData(page: Int, callback: (List<TvLocalTopRatedPaginationEntity>) -> Unit) {
-        scope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
                 val firstData = remoteDataSource.getRemotePaginationTopRatedTv(page)
                 checkNotNull(firstData.data) { " ${firstData.message} " }

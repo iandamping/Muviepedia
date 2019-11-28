@@ -15,14 +15,12 @@ import kotlinx.coroutines.CoroutineScope
  */
 class TvPaginationPopularFactory(
     private val remoteDataSource: TvRemoteDataSource,
-    private val localDataSource: TvCacheDataSource,
-    private val scope: CoroutineScope
+    private val localDataSource: TvCacheDataSource
 ) : DataSource.Factory<Int, TvLocalPopularPaginationEntity>() {
     override fun create(): DataSource<Int, TvLocalPopularPaginationEntity> {
         return TvPaginationPopularRepository(
             remoteDataSource = remoteDataSource,
-            localDataSource = localDataSource,
-            scope = scope
+            localDataSource = localDataSource
         )
     }
 

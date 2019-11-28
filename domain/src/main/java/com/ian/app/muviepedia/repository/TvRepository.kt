@@ -12,8 +12,6 @@ import com.ian.app.muviepedia.model.tvshow.TvLocalTopRatedData
 import com.ian.app.muviepedia.model.tvshow.TvLocalTopRatedPaginationData
 import com.ian.app.muviepedia.model.tvshow.TvRemoteData
 import com.ian.app.muviepedia.model.tvshow.TvRemoteDetailData
-import kotlinx.coroutines.CoroutineScope
-
 /**
  * Created by Ian Damping on 27,November,2019
  * Github https://github.com/iandamping
@@ -28,8 +26,8 @@ interface TvRepository {
     fun getCacheSearchTv(querry: String): LiveData<ResultToConsume<List<TvLocalSearchData>>>
     fun getRemoteDetailTv(movieId: Int): LiveData<ResultToConsume<TvRemoteDetailData>>
     fun getRemoteSimilarTv(movieId: Int): LiveData<ResultToConsume<List<TvRemoteData>>>
-    fun getCachePaginationPopularTv(scope: CoroutineScope): LiveData<PagedList<TvLocalPopularPaginationData>>
-    fun getCachePaginationTopRatedTv(scope: CoroutineScope): LiveData<PagedList<TvLocalTopRatedPaginationData>>
+    fun getCachePaginationPopularTv(): LiveData<PagedList<TvLocalPopularPaginationData>>
+    fun getCachePaginationTopRatedTv(): LiveData<PagedList<TvLocalTopRatedPaginationData>>
     suspend fun setCacheDetailTv(data: TvLocalSaveDetailData)
     suspend fun deleteAllDetailCache()
     suspend fun deleteSelectedDetailCache(localId: Int)

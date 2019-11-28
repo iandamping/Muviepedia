@@ -92,20 +92,19 @@ class MovieRepositoryImpl(
         }
     }
 
-    override fun getCachePaginationPopularMovie(scope: CoroutineScope): LiveData<PagedList<MovieLocalPopularPaginationData>> {
+    override fun getCachePaginationPopularMovie(): LiveData<PagedList<MovieLocalPopularPaginationData>> {
         val dataSourceFactory =
-            MoviePaginationPopularFactory(remoteSource, localSource, scope).map { it.mapToDomain() }
+            MoviePaginationPopularFactory(remoteSource, localSource).map { it.mapToDomain() }
         return LivePagedListBuilder(
             dataSourceFactory,
             MoviePaginationPopularFactory.pagedListConfig()
         ).build()
     }
 
-    override fun getCachePaginationUpComingMovie(scope: CoroutineScope): LiveData<PagedList<MovieLocalUpComingPaginationData>> {
+    override fun getCachePaginationUpComingMovie(): LiveData<PagedList<MovieLocalUpComingPaginationData>> {
         val dataSourceFactory = MoviePaginationUpComingFactory(
             remoteSource,
-            localSource,
-            scope
+            localSource
         ).map { it.mapToDomain() }
         return LivePagedListBuilder(
             dataSourceFactory,

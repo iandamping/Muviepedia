@@ -45,11 +45,11 @@ class TvShowUseCase(private val repository: TvRepository) {
     fun getRemoteSimilarTv(movieId: Int): LiveData<ResultToConsume<List<TvRemoteData>>> =
         repository.getRemoteSimilarTv(movieId)
 
-    fun getCachePaginationPopularTv(scope: CoroutineScope): LiveData<PagedList<TvLocalPopularPaginationData>> =
-        repository.getCachePaginationPopularTv(scope)
+    fun getCachePaginationPopularTv(): LiveData<PagedList<TvLocalPopularPaginationData>> =
+        repository.getCachePaginationPopularTv()
 
-    fun getCachePaginationTopRatedTv(scope: CoroutineScope): LiveData<PagedList<TvLocalTopRatedPaginationData>> =
-        repository.getCachePaginationTopRatedTv(scope)
+    fun getCachePaginationTopRatedTv(): LiveData<PagedList<TvLocalTopRatedPaginationData>> =
+        repository.getCachePaginationTopRatedTv()
 
     suspend fun setCacheDetailTv(data: TvLocalSaveDetailData) = repository.setCacheDetailTv(data)
     suspend fun deleteAllDetailCache() = repository.deleteAllDetailCache()

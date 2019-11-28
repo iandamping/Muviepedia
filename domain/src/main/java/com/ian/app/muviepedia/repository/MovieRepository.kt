@@ -28,8 +28,8 @@ interface MovieRepository {
     fun getAllSingleDetailMovie(): LiveData<List<MovieLocalSaveDetailData>>
     fun getRemoteDetailMovie(movieId: Int): LiveData<ResultToConsume<MovieRemoteDetailData>>
     fun getRemoteSimilarMovie(movieId: Int): LiveData<ResultToConsume<List<MovieRemoteData>>>
-    fun getCachePaginationPopularMovie(scope: CoroutineScope): LiveData<PagedList<MovieLocalPopularPaginationData>>
-    fun getCachePaginationUpComingMovie(scope: CoroutineScope): LiveData<PagedList<MovieLocalUpComingPaginationData>>
+    fun getCachePaginationPopularMovie(): LiveData<PagedList<MovieLocalPopularPaginationData>>
+    fun getCachePaginationUpComingMovie(): LiveData<PagedList<MovieLocalUpComingPaginationData>>
     suspend fun setCacheDetailMovie(data: MovieLocalSaveDetailData)
     suspend fun deleteAllDetailCache()
     suspend fun deleteSelectedDetailCache(localId: Int)

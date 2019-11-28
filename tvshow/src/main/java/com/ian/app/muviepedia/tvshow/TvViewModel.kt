@@ -47,9 +47,9 @@ class TvViewModel(private val repository: TvShowUseCase) : com.ian.app.muvipedia
 
     fun observeSimilarData(movieID: Int) = repository.getRemoteSimilarTv(movieID)
 
-    fun observePopularTvPagination() = repository.getCachePaginationPopularTv(vmScopes)
+    fun observePopularTvPagination() = repository.getCachePaginationPopularTv()
 
-    fun observeTopRatedPagination() = repository.getCachePaginationTopRatedTv(vmScopes)
+    fun observeTopRatedPagination() = repository.getCachePaginationTopRatedTv()
 
     init {
         vmScopes.launch { repository.clearSearchTv() }

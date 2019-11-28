@@ -6,6 +6,7 @@ import com.ian.app.muviepedia.data.cleanarch.data.datasource.MovieCacheDataSourc
 import com.ian.app.muviepedia.data.cleanarch.data.datasource.MovieRemoteDataSource
 import com.ian.app.muviepedia.data.cleanarch.datasource.model.movie.MovieLocalPopularPaginationEntity
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
@@ -15,8 +16,7 @@ import kotlinx.coroutines.launch
  */
 class MoviePaginationPopularRepository(
     private val remoteDataSource: MovieRemoteDataSource,
-    private val localDataSource: MovieCacheDataSource,
-    private val scope: CoroutineScope
+    private val localDataSource: MovieCacheDataSource
 ) : PageKeyedDataSource<Int, MovieLocalPopularPaginationEntity>() {
     override fun loadInitial(
         params: LoadInitialParams<Int>,
@@ -48,7 +48,7 @@ class MoviePaginationPopularRepository(
     }
 
     private fun fetchData(page: Int, callback: (List<MovieLocalPopularPaginationEntity>) -> Unit) {
-        scope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
                 val firstData = remoteDataSource.getRemotePaginationPopularMovie(page)
                 checkNotNull(firstData.data) { " ${firstData.message} " }
@@ -59,5 +59,6 @@ class MoviePaginationPopularRepository(
                 logE(e.message!!)
             }
         }
+
     }
 }
